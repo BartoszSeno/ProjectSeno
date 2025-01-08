@@ -7,15 +7,16 @@ interface YellowDiv {
   width: number;      // Szerokość diva
   height: number;     // Wysokość diva
   isColliding: boolean; // Czy postać dotyka tego diva
+  name: string;       // nazwa miejsca
 }
 
 const App: React.FC = () => {
  // Stan pozycji postaci
  const [position, setPosition] = useState({ x: 2000, y: 2000 });
  const [yellowDivs, setYellowDivs] = useState<YellowDiv[]>([
-   { id: 1, x: 1800, y: 1500, width: 100, height: 100, isColliding: false },
-   { id: 2, x: 2200, y: 1700, width: 100, height: 100, isColliding: false },
-   { id: 3, x: 2500, y: 2000, width: 100, height: 100, isColliding: false },
+   { id: 1, x: 1800, y: 1500, width: 100, height: 100, isColliding: false, name: "BlackSmith" },
+   { id: 2, x: 2200, y: 1700, width: 100, height: 100, isColliding: false, name: "Hotel" },
+   { id: 3, x: 2500, y: 2000, width: 100, height: 100, isColliding: false, name: "ArmorShop" },
  ]);
 
  const step = 10; // Prędkość poruszania się postaci
@@ -113,6 +114,7 @@ const App: React.FC = () => {
        {/* Żółte divy */}
        {yellowDivs.map((div) => (
          <div
+         className={div.isColliding ? div.name : undefined }
            key={div.id}
            style={{
              width: `${div.width}px`,
