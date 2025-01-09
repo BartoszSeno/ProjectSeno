@@ -27,7 +27,18 @@ const Trees: React.FC<TreesProps> = ({ noEntryOnTree }) => {
             left: `${div.x}px`,
             border: '2px solid black',
           }}
-        />
+          >
+          <img
+            src="https://raw.githubusercontent.com/BartoszSeno/learn/refs/heads/master/trees1.png?token=GHSAT0AAAAAAC46NESJDXTM2FQTA3232JI4Z37XUPA"
+            style={{
+              position: 'absolute',
+              bottom: 0, // Przyklej do dołu diva
+              left: '50%', // Wycentruj względem poziomu
+              transform: 'translateX(-50%) translateY(0%)', // Przesuń w dół poza granice diva
+              height: 'auto', // Zachowanie proporcji
+            }}
+          />
+        </div>
       ))}
     </>
   );

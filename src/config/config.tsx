@@ -30,6 +30,6 @@ export const noEntry: Border[] = [
 ];
 
 export const noEntryOnTree: Border[] = [
-  { id: 1, x: 1000, y: 2000, width: 200, height: 200 },
-  { id: 2, x: 2300, y: 2100, width: 150, height: 150 },
+  { id: 1, x: 1300, y: 2000, width: 70, height: 50 },
+  { id: 2, x: 2700, y: 2100, width: 70, height: 50 },
 ];
