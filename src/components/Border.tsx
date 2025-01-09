@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export interface Border {
   id: number;
@@ -21,11 +21,11 @@ const Borders: React.FC<BordersProps> = ({ noEntry }) => {
           style={{
             width: `${div.width}px`,
             height: `${div.height}px`,
-            backgroundColor: 'red',
-            position: 'absolute',
+            backgroundColor: "red",
+            position: "absolute",
             top: `${div.y}px`,
             left: `${div.x}px`,
-            border: '2px solid black',
+            border: "2px solid black",
           }}
         />
       ))}

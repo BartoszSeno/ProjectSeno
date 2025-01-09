@@ -1,18 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Map from './components/Map.tsx';
-import Player from './components/Player.tsx';
-import Structuress from './components/Structure.tsx';
-import Borders from './components/Border.tsx';
-import Trees from './components/Tree.tsx';
-import { initialPosition, buildings, noEntry, noEntryOnTree } from './config/config.tsx';
+import React, { useState, useEffect, useRef } from "react";
+import Map from "./components/Map.tsx";
+import Player from "./components/Player.tsx";
+import Structuress from "./components/Structure.tsx";
+import Borders from "./components/Border.tsx";
+import Trees from "./components/Tree.tsx";
+import {
+  initialPosition,
+  buildings,
+  noEntry,
+  noEntryOnTree,
+  Interiors,
+} from "./config/config.tsx";
 
-
-const App  = () => {
+const App = () => {
   const [position, setPosition] = useState(initialPosition);
   const [building, setBuilding] = useState(buildings);
-    const [activeStructure, setActiveStructure] = useState<string | null>(null);
-    const isMoving = useRef<boolean>(false);
-    const [isKeyPressed, setIsKeyPressed] = useState(false); // Stan do śledzenia, czy klawisz jest wciśnięty
+  const [activeStructure, setActiveStructure] = useState<string | null>(null);
+  const isMoving = useRef<boolean>(false);
+  const [isKeyPressed, setIsKeyPressed] = useState(false); // Stan do śledzenia, czy klawisz jest wciśnięty
+  const [interior, setInterior] = useState(Interiors);
 
   const step = 10;
   const keysPressed = useRef<Set<string>>(new Set());
@@ -30,7 +36,7 @@ const App  = () => {
   };
 
   const isCollidingWithBorder = (playerX: number, playerY: number): boolean => {
-return noEntry.some(
+    return noEntry.some(
       (div) =>
         playerX + 25 > div.x &&
         playerX - 25 < div.x + div.width &&
@@ -40,7 +46,7 @@ return noEntry.some(
   };
 
   const isCollidingWithTree = (playerX: number, playerY: number): boolean => {
-return noEntryOnTree.some(
+    return noEntryOnTree.some(
       (div) =>
         playerX + 25 > div.x &&
         playerX - 25 < div.x + div.width &&
@@ -64,21 +70,74 @@ return noEntryOnTree.some(
           setActiveStructure(div.name); // Ustawienie aktywnej struktury
           collisionDetected = true;
         }
-        
+
         return { ...div, isColliding }; // Zwróć zaktualizowaną strukturę
       });
     });
-    
+
     // Jeśli nie ma kolizji, ustaw aktywną strukturę na null
     if (!collisionDetected) {
-      setActiveStructure(null);
     }
+  };
+  console.log(interior[0].isColliding);
+
+  const checkInteriorsCollisions = (playerX: number, playerY: number) => {
+    setInterior((prevDivs) =>
+      prevDivs.map((div) => {
+        let isColliding = false;
+
+        if (div.polygon) {
+          // Przelicz punkty zapisane w procentach na rzeczywiste współrzędne
+          const absolutePolygon = div.polygon.map((point) => {
+            const [px, py] = point.split(" ").map((p) => parseFloat(p) / 100);
+            return {
+              x: div.x + px * div.width,
+              y: div.y + py * div.height,
+            };
+          });
+
+          // Sprawdź, czy gracz jest wewnątrz wielokąta
+          isColliding = isPointInPolygon(
+            { x: playerX, y: playerY },
+            absolutePolygon
+          );
+        } else {
+          // Sprawdzanie kolizji dla prostokąta
+          isColliding =
+            playerX + 25 > div.x &&
+            playerX - 25 < div.x + div.width &&
+            playerY + 25 > div.y &&
+            playerY - 25 < div.y + div.height;
+        }
+
+        return { ...div, isColliding }; // Zwróć zaktualizowaną strukturę
+      })
+    );
+  };
+
+  const isPointInPolygon = (
+    point: { x: number; y: number },
+    polygon: { x: number; y: number }[]
+  ) => {
+    let isInside = false;
+    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+      const xi = polygon[i].x,
+        yi = polygon[i].y;
+      const xj = polygon[j].x,
+        yj = polygon[j].y;
+
+      const intersect =
+        yi > point.y !== yj > point.y &&
+        point.x < ((xj - xi) * (point.y - yi)) / (yj - yi) + xi;
+
+      if (intersect) isInside = !isInside;
+    }
+    return isInside;
   };
 
   const updatePosition = () => {
-console.log("test")
-setPosition((prev) => {
-
+    console.log("test");
+    setPosition((prev) => {
       let newX = prev.x;
       let newY = prev.y;
 
@@ -87,19 +146,19 @@ setPosition((prev) => {
 
       let moved = false;
 
-      if (keysPressed.current.has('w') && canMove(prev.x, prev.y - step)) {
+      if (keysPressed.current.has("w") && canMove(prev.x, prev.y - step)) {
         newY = Math.max(prev.y - step, 0); // Góra
         moved = true;
       }
-      if (keysPressed.current.has('s') && canMove(prev.x, prev.y + step)) {
+      if (keysPressed.current.has("s") && canMove(prev.x, prev.y + step)) {
         newY = Math.min(prev.y + step, 4000); // Dół
         moved = true;
       }
-      if (keysPressed.current.has('a') && canMove(prev.x - step, prev.y)) {
+      if (keysPressed.current.has("a") && canMove(prev.x - step, prev.y)) {
         newX = Math.max(prev.x - step, 0); // Lewo
         moved = true;
       }
-      if (keysPressed.current.has('d') && canMove(prev.x + step, prev.y)) {
+      if (keysPressed.current.has("d") && canMove(prev.x + step, prev.y)) {
         newX = Math.min(prev.x + step, 4000); // Prawo
         moved = true;
       }
@@ -107,6 +166,7 @@ setPosition((prev) => {
       // Jeśli gracz się porusza, sprawdzamy kolizję
       if (moved) {
         checkStructureCollisions(newX, newY);
+        checkInteriorsCollisions(newX, newY);
         isMoving.current = true;
       } else {
         isMoving.current = false;
@@ -117,34 +177,38 @@ setPosition((prev) => {
   };
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
     let interval: NodeJS.Timeout;
 
     if (isKeyPressed) {
       interval = setInterval(updatePosition, 16); // Uruchomienie interwału, gdy klawisz jest wciśnięty
-    } 
+    }
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
       clearInterval(interval); // Sprzątanie po zakończeniu komponentu
     };
-  }, [isKeyPressed]); 
+  }, [isKeyPressed]);
 
   return (
     <div
       style={{
-        width: '100vw',
-        height: '100vh',
-        overflow: 'hidden',
-        position: 'relative',
-        border: '2px solid black',
+        width: "100vw",
+        height: "100vh",
+        overflow: "hidden",
+        position: "relative",
+        border: "2px solid black",
       }}
     >
       <Map position={position}>
         <Player position={position} />
-        <Structuress building={building} activeStructure={activeStructure}/>
+        <Structuress
+          building={building}
+          activeStructure={activeStructure}
+          interior={interior}
+        />
         <Borders noEntry={noEntry} />
         <Trees noEntryOnTree={noEntryOnTree} />
       </Map>

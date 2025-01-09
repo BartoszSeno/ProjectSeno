@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export interface Tree {
   id: number;
@@ -21,21 +21,21 @@ const Trees: React.FC<TreesProps> = ({ noEntryOnTree }) => {
           style={{
             width: `${div.width}px`,
             height: `${div.height}px`,
-            backgroundColor: 'green',
-            position: 'absolute',
+            backgroundColor: "green",
+            position: "absolute",
             top: `${div.y}px`,
             left: `${div.x}px`,
-            border: '2px solid black',
+            border: "2px solid black",
           }}
-          >
+        >
           <img
-            src="https://raw.githubusercontent.com/BartoszSeno/learn/refs/heads/master/trees1.png?token=GHSAT0AAAAAAC46NESJDXTM2FQTA3232JI4Z37XUPA"
+            src="https://raw.githubusercontent.com/BartoszSeno/learn/refs/heads/master/trees1.png"
             style={{
-              position: 'absolute',
+              position: "absolute",
               bottom: 0, // Przyklej do dołu diva
-              left: '50%', // Wycentruj względem poziomu
-              transform: 'translateX(-50%) translateY(0%)', // Przesuń w dół poza granice diva
-              height: 'auto', // Zachowanie proporcji
+              left: "50%", // Wycentruj względem poziomu
+              transform: "translateX(-50%) translateY(0%)", // Przesuń w dół poza granice diva
+              height: "auto", // Zachowanie proporcji
             }}
           />
         </div>
