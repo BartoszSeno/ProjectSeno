@@ -5,7 +5,7 @@ import Structuress from "./components/Structure.tsx";
 import Borders from "./components/Border.tsx";
 import Trees from "./components/Tree.tsx";
 import {
-  initialPosition,
+  initialPosition as defaultInitialPosition,
   buildings,
   noEntry,
   noEntryOnTree,
@@ -13,7 +13,13 @@ import {
 } from "./config/config.tsx";
 
 const App = () => {
-  const [position, setPosition] = useState(initialPosition);
+  // Sprawdź localStorage i ustaw pozycję początkową gracza
+  const savedPosition = JSON.parse(
+    localStorage.getItem("playerPosition") || "null"
+  );
+  const [position, setPosition] = useState(
+    savedPosition || defaultInitialPosition
+  );
   const [building, setBuilding] = useState(buildings);
   const [activeStructure, setActiveStructure] = useState<string | null>(null);
   const isMoving = useRef<boolean>(false);
@@ -35,25 +41,20 @@ const App = () => {
     }
   };
 
-  const isCollidingWithBorder = (playerX: number, playerY: number): boolean => {
-    return noEntry.some(
+  const isColliding = (playerX: number, playerY: number, elements: any[]) =>
+    elements.some(
       (div) =>
         playerX + 25 > div.x &&
         playerX - 25 < div.x + div.width &&
         playerY + 25 > div.y &&
         playerY - 25 < div.y + div.height
     );
-  };
 
-  const isCollidingWithTree = (playerX: number, playerY: number): boolean => {
-    return noEntryOnTree.some(
-      (div) =>
-        playerX + 25 > div.x &&
-        playerX - 25 < div.x + div.width &&
-        playerY + 25 > div.y &&
-        playerY - 25 < div.y + div.height
-    );
-  };
+  const isCollidingWithBorder = (playerX: number, playerY: number) =>
+    isColliding(playerX, playerY, noEntry);
+
+  const isCollidingWithTree = (playerX: number, playerY: number) =>
+    isColliding(playerX, playerY, noEntryOnTree);
 
   const checkStructureCollisions = (playerX: number, playerY: number) => {
     let collisionDetected = false;
@@ -168,6 +169,8 @@ const App = () => {
         checkStructureCollisions(newX, newY);
         checkInteriorsCollisions(newX, newY);
         isMoving.current = true;
+        const newPosition = { x: newX, y: newY };
+        localStorage.setItem("playerPosition", JSON.stringify(newPosition));
       } else {
         isMoving.current = false;
       }
