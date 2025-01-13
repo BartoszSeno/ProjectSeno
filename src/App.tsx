@@ -11,6 +11,7 @@ import {
   noEntryOnTree,
   Interiors,
 } from "./config/config.tsx";
+import { BordersWS } from "./config/config.tsx";
 
 const App = () => {
   // Sprawdź localStorage i ustaw pozycję początkową gracza
@@ -55,6 +56,11 @@ const App = () => {
 
   const isCollidingWithTree = (playerX: number, playerY: number) =>
     isColliding(playerX, playerY, noEntryOnTree);
+
+  const allBorders = Interiors.flatMap((interior) => interior.borders || []);
+
+  const isCollidingTest = (playerX: number, playerY: number) =>
+    isColliding(playerX, playerY, allBorders);
 
   const checkStructureCollisions = (playerX: number, playerY: number) => {
     let collisionDetected = false;
@@ -137,13 +143,15 @@ const App = () => {
   };
 
   const updatePosition = () => {
-    console.log("test");
+    console.log(allBorders);
     setPosition((prev) => {
       let newX = prev.x;
       let newY = prev.y;
 
       const canMove = (x: number, y: number) =>
-        !isCollidingWithBorder(x, y) && !isCollidingWithTree(x, y);
+        !isCollidingWithBorder(x, y) &&
+        !isCollidingWithTree(x, y) &&
+        !isCollidingTest(x, y);
 
       let moved = false;
 
@@ -212,7 +220,7 @@ const App = () => {
           activeStructure={activeStructure}
           interior={interior}
         />
-        <Borders noEntry={noEntry} />
+        <Borders allBorders={allBorders} />
         <Trees noEntryOnTree={noEntryOnTree} />
       </Map>
     </div>

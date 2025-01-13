@@ -9,13 +9,13 @@ export interface Border {
 }
 
 interface BordersProps {
-  noEntry: Border[];
+  allBorders: Border[];
 }
 
-const Borders: React.FC<BordersProps> = ({ noEntry }) => {
+const Borders: React.FC<BordersProps> = ({ allBorders }) => {
   return (
     <>
-      {noEntry.map((div) => (
+      {allBorders.map((div) => (
         <div
           key={div.id}
           style={{
@@ -25,7 +25,7 @@ const Borders: React.FC<BordersProps> = ({ noEntry }) => {
             position: "absolute",
             top: `${div.y}px`,
             left: `${div.x}px`,
-            border: "2px solid black",
+            zIndex: 10000,
           }}
         />
       ))}

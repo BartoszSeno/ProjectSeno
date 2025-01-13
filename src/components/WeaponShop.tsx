@@ -45,16 +45,6 @@ const WeaponShop = ({ interior }: { interior: any }) => {
                   maxHeight: "100%", // Opcjonalne ograniczenie wysokości
                 }}
               />
-              <div
-                style={{
-                  position: "absolute",
-                  display: div.isColliding ? "block" : "none",
-                  zIndex: 10, // Specjalny div będzie nad innymi
-                }}
-                onClick={() => console.log("fadsfdsa")}
-              >
-                aaaaaaaaaaaa
-              </div>
             </div>
           </React.Fragment>
         )
