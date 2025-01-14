@@ -82,7 +82,7 @@ function createInteriors(): InteriorStructures[] {
       height: 874,
       isColliding: false,
       name: "BlackSmith",
-      url: "https://raw.githubusercontent.com/BartoszSeno/ClickerZero/refs/heads/main/src/assets/MainImg/WeaponShop.gif",
+      url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopInterior.gif",
       polygon: [
         "0% 0%",
         "42% 0%",
@@ -91,22 +91,17 @@ function createInteriors(): InteriorStructures[] {
         "45% 10.5%",
         "100% 10.5%",
         "100% 84.2%",
-        "44.5% 84%",
-        "44.5% 66.5%",
-        "42.3% 66.5%",
-        "42.2% 100%",
-        "0% 100%",
+        "42% 84%",
+        "42% 100%",
+        "0 100%",
       ],
       borders: [
         { id: 1, x: baseX + 0, y: baseY + 0, width: 40, height: 874 }, // sciana duża lewo lewo
-        { id: 2, x: baseX + 0, y: baseY + 0, width: 570, height: 210 }, // sciana duza lewo góra
-        { id: 3, x: baseX + 40, y: baseY + 210, width: 55, height: 165 }, //lada lewo
-        { id: 4, x: baseX + 90, y: baseY + 285, width: 365, height: 90 }, // lada srodek
-        { id: 5, x: baseX + 0, y: baseY + 834, width: 345, height: 40 }, //podłoga lewo dół lewo
-        { id: 6, x: baseX + 440, y: baseY + 834, width: 135, height: 40 }, //podłoga lewo dół prawo
-        { id: 7, x: baseX + 535, y: baseY + 549, width: 40, height: 300 }, //sciana dół prawo prawo
-        { id: 8, x: baseX + 600, y: baseY + 549, width: 40, height: 185 },
-        { id: 9, x: baseX + 600, y: baseY + 694, width: 760, height: 40 }, // podłoga prawo dół
+        { id: 2, x: baseX + 0, y: baseY + 0, width: 570, height: 375 }, // sciana duza lewo góra
+        { id: 5, x: baseX + 0, y: baseY + 857, width: 345, height: 20 }, //podłoga lewo dół lewo
+        { id: 6, x: baseX + 440, y: baseY + 857, width: 135, height: 20 }, //podłoga lewo dół prawo
+        { id: 7, x: baseX + 535, y: baseY + 719, width: 40, height: 150 }, //sciana dół prawo
+        { id: 9, x: baseX + 535, y: baseY + 720, width: 810, height: 20 }, // podłoga prawo dół
         { id: 10, x: baseX + 535, y: baseY + 90, width: 800, height: 255 }, //sciana duża góra
         { id: 11, x: baseX + 1320, y: baseY + 90, width: 40, height: 645 }, //sciana prawo prawo
         { id: 12, x: baseX + 535, y: baseY + 345, width: 110, height: 115 }, //sciana srodek

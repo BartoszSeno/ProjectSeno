@@ -15,7 +15,7 @@ const Player: React.FC<PlayerProps> = ({ position }) => {
         top: `${position.y}px`,
         left: `${position.x}px`,
         transform: "translate(-50%, -50%)",
-        zIndex: `${position.y}`,
+        zIndex: 1000,
       }}
     />
   );
