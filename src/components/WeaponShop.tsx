@@ -35,15 +35,19 @@ const WeaponShop = ({ interior }: { interior: any }) => {
               src={
                 div.isColliding
                   ? div.url
-                  : "https://raw.githubusercontent.com/BartoszSeno/learn/refs/heads/master/WeaponShop.gif"
+                  : "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopExterior.png"
               }
               alt="WeaponShop"
               style={{
                 display: "block", // Usuwa odstępy wynikające z inline
-                top: `${div.y}px`,
-                left: `${div.x}px`,
-                width: `${div.width}px`,
-                height: `${div.height}px`,
+                top: div.isColliding ? `${div.y}px` : `${div.y - 338}px`,
+                left: div.isColliding ? `${div.x}px` : `${div.x - 30}px`,
+                width: div.isColliding
+                  ? `${div.width}px`
+                  : `${div.width + 460}px`,
+                height: div.isColliding
+                  ? `${div.height}px`
+                  : `${div.height + 344}px`,
                 position: "absolute", // Ustawienie pozycji
                 zIndex: div.isColliding ? 100 : 1000, // Niższy z-index dla pierwszego obrazka
               }}
