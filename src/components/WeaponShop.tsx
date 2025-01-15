@@ -19,7 +19,7 @@ const WeaponShop = ({ interior }: { interior: any }) => {
             <div
               style={{
                 clipPath:
-                  "polygon(0% 22%,  42% 22%, 42% 37%, 100% 38%, 100% 84.2%, 42% 84%,  42% 100%, 0 100%)",
+                  "polygon(2% 42%, 32% 42%, 32% 53%, 77% 53%, 77% 87%, 32% 87%,  32% 99%, 2% 99%)",
 
                 position: "relative",
                 width: `${div.width}px`,
@@ -28,6 +28,7 @@ const WeaponShop = ({ interior }: { interior: any }) => {
                 left: `${div.x}px`,
                 border: "2px solid black",
                 zIndex: 200, // Specjalny div będzie nad innymi
+                opacity: 0.5,
               }}
             ></div>
             {/* Pierwszy obrazek z wnętrzem*/}
@@ -40,14 +41,10 @@ const WeaponShop = ({ interior }: { interior: any }) => {
               alt="WeaponShop"
               style={{
                 display: "block", // Usuwa odstępy wynikające z inline
-                top: div.isColliding ? `${div.y}px` : `${div.y - 338}px`,
-                left: div.isColliding ? `${div.x}px` : `${div.x - 30}px`,
-                width: div.isColliding
-                  ? `${div.width}px`
-                  : `${div.width + 460}px`,
-                height: div.isColliding
-                  ? `${div.height}px`
-                  : `${div.height + 344}px`,
+                top: `${div.y}px`,
+                left: `${div.x}px`,
+                width: `${div.width}px`,
+                height: `${div.height}px`,
                 position: "absolute", // Ustawienie pozycji
                 zIndex: div.isColliding ? 100 : 1000, // Niższy z-index dla pierwszego obrazka
               }}
@@ -57,7 +54,7 @@ const WeaponShop = ({ interior }: { interior: any }) => {
             <img
               src={
                 div.isColliding
-                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopWallNoShade.png"
+                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopWallNoShade2.png"
                   : undefined
               }
               alt="WeaponShop"
@@ -75,7 +72,7 @@ const WeaponShop = ({ interior }: { interior: any }) => {
             <img
               src={
                 div.isColliding
-                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopWallWithShade.png"
+                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopWallWithShade2.png"
                   : undefined
               }
               alt="WeaponShop"

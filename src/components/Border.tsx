@@ -21,7 +21,6 @@ const Borders: React.FC<BordersProps> = ({ allBorders }) => {
           style={{
             width: `${div.width}px`,
             height: `${div.height}px`,
-            backgroundColor: "red",
             position: "absolute",
             top: `${div.y}px`,
             left: `${div.x}px`,

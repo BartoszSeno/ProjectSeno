@@ -78,36 +78,39 @@ function createInteriors(): InteriorStructures[] {
       id: 1,
       x: baseX,
       y: baseY,
-      width: 1360,
-      height: 874,
+      width: 1820,
+      height: 1218,
       isColliding: false,
       name: "BlackSmith",
-      url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopInterior.gif",
+      url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopInterior2.gif",
       polygon: [
-        "0% 22%",
-        "42% 22%",
-        "42% 37%",
-        "100% 38%",
-        "100% 84.2%",
-        "42% 84%",
-        "42% 100%",
-        "0 100%",
+        "2% 42%",
+        "32% 42%",
+        "32% 53%",
+        "77% 53%",
+        "77% 87%",
+        "32% 87%",
+        "32% 99%",
+        "2% 99%",
       ],
       borders: [
-        { id: 1, x: baseX + 0, y: baseY + 190, width: 40, height: 674 }, // sciana duża lewo lewo
-        { id: 2, x: baseX + 0, y: baseY + 190, width: 570, height: 185 }, // sciana duza lewo góra
-        { id: 5, x: baseX + 0, y: baseY + 857, width: 345, height: 20 }, //podłoga lewo dół lewo
-        { id: 6, x: baseX + 440, y: baseY + 857, width: 135, height: 20 }, //podłoga lewo dół prawo
-        { id: 7, x: baseX + 535, y: baseY + 719, width: 40, height: 150 }, //sciana dół prawo
-        { id: 9, x: baseX + 535, y: baseY + 720, width: 810, height: 20 }, // podłoga prawo dół
-        { id: 10, x: baseX + 535, y: baseY + 325, width: 800, height: 25 }, //sciana duża góra
-        { id: 11, x: baseX + 1320, y: baseY + 330, width: 40, height: 405 }, //sciana prawo prawo
-        { id: 12, x: baseX + 535, y: baseY + 345, width: 110, height: 115 }, //sciana srodek
-        { id: 13, x: baseX + 40, y: baseY + 795, width: 135, height: 65 }, //safka
-        { id: 14, x: baseX + 470, y: baseY + 795, width: 65, height: 65 }, //box i beczka
-        { id: 15, x: baseX + 600, y: baseY + 655, width: 135, height: 65 }, //2 boxy
-        { id: 16, x: baseX + 1150, y: baseY + 675, width: 175, height: 65 }, // pułka z bronią
-        { id: 17, x: baseX + 1210, y: baseY + 330, width: 125, height: 55 }, // box pod scianą
+        { id: 1, x: baseX + 20, y: baseY + 510, width: 40, height: 700 }, // sciana duża lewo lewo
+        { id: 2, x: baseX + 20, y: baseY + 510, width: 570, height: 185 }, // sciana duza lewo góra
+        { id: 5, x: baseX + 20, y: baseY + 1195, width: 350, height: 20 }, //podłoga lewo dół lewo
+        { id: 6, x: baseX + 470, y: baseY + 1195, width: 130, height: 20 }, //podłoga lewo dół prawo
+        { id: 7, x: baseX + 559, y: baseY + 1055, width: 40, height: 150 }, //sciana dół prawo
+        { id: 9, x: baseX + 560, y: baseY + 1050, width: 850, height: 20 }, // podłoga prawo dół
+        { id: 10, x: baseX + 585, y: baseY + 645, width: 820, height: 25 }, //sciana duża góra
+        { id: 11, x: baseX + 1370, y: baseY + 650, width: 40, height: 405 }, //sciana prawo prawo
+        { id: 12, x: baseX + 570, y: baseY + 675, width: 110, height: 115 }, //sciana srodek
+        { id: 13, x: baseX + 60, y: baseY + 1140, width: 135, height: 65 }, //safka
+        { id: 14, x: baseX + 490, y: baseY + 1140, width: 65, height: 65 }, //box i beczka
+        { id: 16, x: baseX + 1200, y: baseY + 995, width: 175, height: 65 }, // pułka z bronią
+        { id: 17, x: baseX + 1260, y: baseY + 660, width: 125, height: 55 }, // box pod scianą
+        //
+        { id: 18, x: baseX + 570, y: baseY + 1060, width: 230, height: 115 }, // namiot 1
+        { id: 19, x: baseX + 780, y: baseY + 1075, width: 100, height: 60 }, // namiot 1.2
+        { id: 20, x: baseX + 1400, y: baseY + 845, width: 145, height: 200 }, // namiot 2
       ],
     },
   ];
@@ -116,8 +119,8 @@ function createInteriors(): InteriorStructures[] {
 export const Interiors = createInteriors();
 
 export const noEntry: Border[] = [
-  { id: 1, x: 1000, y: 1800, width: 200, height: 200 },
-  { id: 2, x: 2300, y: 2100, width: 150, height: 150 },
+  //{ id: 1, x: 1000, y: 1800, width: 200, height: 200 },
+  //{ id: 2, x: 2300, y: 2100, width: 150, height: 150 },
 ];
 
 export const noEntryOnTree: Border[] = [
