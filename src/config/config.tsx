@@ -70,7 +70,7 @@ export const buildings: Structures[] = [
 ];
 
 function createInteriors(): InteriorStructures[] {
-  const baseX = 1360;
+  const baseX = 1560;
   const baseY = 900;
 
   return [
@@ -84,27 +84,30 @@ function createInteriors(): InteriorStructures[] {
       name: "BlackSmith",
       url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopInterior.gif",
       polygon: [
-        "0% 0%",
-        "42% 0%",
-        "42% 29%",
-        "45% 29%",
-        "45% 10.5%",
-        "100% 10.5%",
+        "0% 22%",
+        "42% 22%",
+        "42% 37%",
+        "100% 38%",
         "100% 84.2%",
         "42% 84%",
         "42% 100%",
         "0 100%",
       ],
       borders: [
-        { id: 1, x: baseX + 0, y: baseY + 0, width: 40, height: 874 }, // sciana duża lewo lewo
-        { id: 2, x: baseX + 0, y: baseY + 0, width: 570, height: 375 }, // sciana duza lewo góra
+        { id: 1, x: baseX + 0, y: baseY + 190, width: 40, height: 674 }, // sciana duża lewo lewo
+        { id: 2, x: baseX + 0, y: baseY + 190, width: 570, height: 185 }, // sciana duza lewo góra
         { id: 5, x: baseX + 0, y: baseY + 857, width: 345, height: 20 }, //podłoga lewo dół lewo
         { id: 6, x: baseX + 440, y: baseY + 857, width: 135, height: 20 }, //podłoga lewo dół prawo
         { id: 7, x: baseX + 535, y: baseY + 719, width: 40, height: 150 }, //sciana dół prawo
         { id: 9, x: baseX + 535, y: baseY + 720, width: 810, height: 20 }, // podłoga prawo dół
-        { id: 10, x: baseX + 535, y: baseY + 90, width: 800, height: 255 }, //sciana duża góra
-        { id: 11, x: baseX + 1320, y: baseY + 90, width: 40, height: 645 }, //sciana prawo prawo
+        { id: 10, x: baseX + 535, y: baseY + 325, width: 800, height: 25 }, //sciana duża góra
+        { id: 11, x: baseX + 1320, y: baseY + 330, width: 40, height: 405 }, //sciana prawo prawo
         { id: 12, x: baseX + 535, y: baseY + 345, width: 110, height: 115 }, //sciana srodek
+        { id: 13, x: baseX + 40, y: baseY + 795, width: 135, height: 65 }, //safka
+        { id: 14, x: baseX + 470, y: baseY + 795, width: 65, height: 65 }, //box i beczka
+        { id: 15, x: baseX + 600, y: baseY + 655, width: 135, height: 65 }, //2 boxy
+        { id: 16, x: baseX + 1150, y: baseY + 675, width: 175, height: 65 }, // pułka z bronią
+        { id: 17, x: baseX + 1210, y: baseY + 330, width: 125, height: 55 }, // box pod scianą
       ],
     },
   ];

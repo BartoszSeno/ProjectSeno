@@ -209,17 +209,19 @@ const App = () => {
         width: "100vw",
         height: "100vh",
         overflow: "hidden",
-        position: "relative",
+        position: "relative", // Tworzy kontekst warstw dla całej mapy
         border: "2px solid black",
+        zIndex: 0,
       }}
     >
       <Map position={position}>
-        <Player position={position} />
         <Structuress
           building={building}
           activeStructure={activeStructure}
           interior={interior}
         />
+        <Player position={position} />
+        {/* Inne elementy */}
         <Borders allBorders={allBorders} />
         <Trees noEntryOnTree={noEntryOnTree} />
       </Map>
