@@ -19,14 +19,35 @@ const Structuress = ({
   building,
   activeStructure,
   interior,
+  mainWeaponData,
+  setMainWeaponData,
+  count,
+  setCount,
+  FullInv,
 }: {
   building: any;
   activeStructure: string | null;
   interior: any;
+  mainWeaponData: any;
+  setMainWeaponData: any;
+  count: any;
+  setCount: any;
+  FullInv: any;
 }) => {
+  const [SelectedOption] = useState<string>("");
+
   return (
     <>
-      <WeaponShop interior={interior} />
+      <WeaponShop
+        interior={interior}
+        mainWeaponData={mainWeaponData}
+        setMainWeaponData={setMainWeaponData}
+        count={count}
+        setCount={setCount}
+        SelectedOption={SelectedOption}
+        FullInv={FullInv}
+        activeStructure={activeStructure}
+      />
     </>
   );
 };

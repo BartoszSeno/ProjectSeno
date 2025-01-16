@@ -1,0 +1,490 @@
+.UpgradeDmgStats {
+  background-repeat: no-repeat;
+  background-size: 10px;
+  background-position: 30% 70%;
+  height: 40px;
+  width: 100%;
+  z-index: 1000;
+  display: none;
+}
+.UpgradeDefStats {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 10px;
+  background-position: 100% 0%;
+  height: 40px;
+  width: 60px;
+  z-index: 1000;
+  display: none;
+}
+
+.itemsForPurchasable:hover > .UpgradeDmgStats {
+  display: flex;
+}
+.RAPitemsForPurchasable:hover > .UpgradeDmgStats {
+  background-position: 90% 80%;
+  display: flex;
+}
+
+.itemsForPurchasableH:hover > .UpgradeDefStats,
+.itemsForPurchasableA:hover > .UpgradeDefStats,
+.itemsForPurchasableS:hover > .UpgradeDefStats {
+  display: flex;
+}
+
+#ShowStatsWeapon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-image: url(https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/MainImg/any/babble.png);
+  background-repeat: no-repeat;
+  height: 370px;
+  width: 350px;
+  z-index: -1;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -410px;
+  margin-top: 320px;
+  transform: scale(1.3);
+  text-indent: 30px;
+}
+.WeaponInfo {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -60px;
+  margin-left: 30px;
+  font-size: 20px;
+  width: 280px;
+  height: 200px;
+}
+
+.weaponImgShow {
+  position: absolute;
+  height: 110px;
+  width: 110px;
+  margin-top: 46px;
+  margin-left: 16px;
+  background-repeat: no-repeat;
+  background-size: 35px;
+  transform: rotate(45deg);
+  background-position: center;
+}
+
+#ShowStatsWeapon button {
+  position: absolute;
+  margin-top: 40px;
+  height: 60px;
+  margin-left: 3px;
+  width: 200px;
+  font-size: 35px;
+  font-family: "Alagard";
+  background-color: #cb5d48; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove button border */
+  outline: none; /* Remove button outline */
+  cursor: pointer; /* Add cursor pointer on hover */
+  border-radius: 5px; /* Button border radius to create a smooth shape */
+  transition: background-color 0.2s ease; /* Add transition for smooth hover effect */
+}
+#ShowStatsWeapon button:hover {
+  background-color: #a84119; /* Change button background color on hover */
+}
+
+/*========================ARMOR========================*/
+
+#ShowStatsArmor {
+  background-image: url(https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/MainImg/stats/armorshow.png);
+  background-repeat: no-repeat;
+  height: 274px;
+  width: 504px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 20px;
+}
+
+.ArmorImgShow {
+  height: 88px;
+  width: 88px;
+  margin-top: 44px;
+  margin-left: 45px;
+  background-repeat: no-repeat;
+  background-size: 70px;
+  background-position: center;
+}
+
+.ArmorName {
+  width: 300px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  font-size: 40px;
+  margin-left: 20px;
+  margin-top: 35px;
+}
+
+.ArmorDef {
+  width: 200px;
+  height: 70px;
+  margin-top: 10px;
+  font-size: 30px;
+  margin-left: 60px;
+}
+
+#ShowStatsArmor button {
+  margin-top: -100px;
+  height: 50px;
+  width: 195px;
+  margin-left: 210px;
+  font-size: 35px;
+  font-family: "Alagard";
+  border: 1px solid rgba(0, 0, 0, 0.267);
+  background-color: #cb5d48; /* Button background color */
+  color: #fff; /* Button text color */
+  outline: none; /* Remove button outline */
+  cursor: pointer; /* Add cursor pointer on hover */
+  border-radius: 5px; /* Button border radius to create a smooth shape */
+  transition: background-color 0.2s ease; /* Add transition for smooth hover effect */
+}
+#ShowStatsArmor button:hover {
+  background-color: #a84119; /* Change button background color on hover */
+}
+
+.cost {
+  position: absolute;
+  font-size: 32px;
+  margin-top: 100px;
+  margin-left: 153px;
+}
+
+#weapon-shop-container {
+  height: 900px;
+  width: 1400px;
+  display: flex;
+  background-repeat: no-repeat;
+  cursor: auto;
+  flex-direction: column;
+  margin-top: 320px;
+  clip-path: polygon(
+    0 0,
+    42% 0,
+    42% 28%,
+    45% 28%,
+    45% 10%,
+    100% 10%,
+    100% 85%,
+    44.5% 85%,
+    44.5% 67%,
+    42.5% 67%,
+    42.5% 100%,
+    0 100%
+  );
+}
+
+.itemsForPurchasable {
+  width: 80px;
+  height: 0px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  margin-left: 40px;
+}
+
+.itemsForPurchasable img {
+  transform: rotate(90deg);
+  position: relative;
+  height: 85px;
+  transition: 0.1s;
+}
+
+.WeaponWall {
+  height: 90px;
+  width: 450px;
+  margin-top: 45px;
+  margin-left: 70px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.WeaponWall2 {
+  position: relative;
+  height: 90px;
+  width: 630px;
+  margin-top: 25px;
+  margin-left: 700px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#WeaponN0 {
+  margin-top: -10px;
+}
+#WeaponN1 {
+  margin-top: 20px;
+}
+#WeaponN3 {
+  margin-top: 0px;
+}
+#WeaponN4 {
+  margin-top: 10px;
+}
+#WeaponN4 {
+  margin-top: 30px;
+}
+
+.RedAndPurple {
+  height: 100px;
+  width: 380px;
+  margin-top: 115px;
+  margin-left: 826px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  transform: scale(1.2);
+}
+
+#Weapon0 {
+  margin-top: 2px;
+  height: 100px;
+}
+#Weapon1 {
+  width: 78px;
+  height: 100px;
+  margin-top: 25px;
+}
+
+.RAPitemsForPurchasable {
+  width: 80px;
+  height: 0px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  margin-left: 40px;
+}
+
+.RAPitemsForPurchasable img {
+  transform: rotate(90deg);
+  position: relative;
+  height: 100px;
+  transition: 0.35s;
+}
+
+.RAPitemsForPurchasable img:hover,
+.itemsForPurchasable img:hover {
+  cursor: pointer;
+  transition: 0.08s;
+  transform: scale(1.1) rotate(90deg);
+}
+
+.itemsForPurchasableS img:hover,
+.itemsForPurchasableA img:hover,
+.itemsForPurchasableH img:hover {
+  cursor: pointer;
+  transition: 0.08s;
+  transform: scale(1.1);
+}
+
+/* ARMOR SHOP */
+
+#armor-shop-container {
+  background-image: url(https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/MainImg/AShop.png);
+  background-repeat: no-repeat;
+  cursor: auto;
+  height: 700px;
+  width: 1000px;
+}
+
+.helmet-Conteiner {
+  position: absolute;
+  height: 70px;
+  width: 300px;
+  margin-top: 307px;
+  margin-left: 500px;
+  display: flex;
+}
+
+.itemsForPurchasableH {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  margin-left: 5px;
+}
+
+.itemsForPurchasableH img {
+  height: 50px;
+  transition: 0.08s;
+}
+/*Armor*/
+.armor-Conteiner {
+  position: absolute;
+  width: 540px;
+  margin-top: 380px;
+  margin-left: 35px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.itemsForPurchasableA {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  margin-right: 120px;
+  margin-bottom: 27px;
+}
+
+.itemsForPurchasableA img {
+  height: 65px;
+  transition: 0.08s;
+}
+
+/*SHOES*/
+
+.shoes-Conteiner {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  height: 175px;
+  width: 250px;
+  margin-top: 23px;
+  margin-left: 633px;
+}
+
+.itemsForPurchasableS {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  background-color: transparent;
+  justify-content: center;
+  align-items: end;
+  border: none;
+  margin-left: 7px;
+}
+
+.itemsForPurchasableS img {
+  height: 40px;
+  transition: 0.08s;
+}
+
+#MotelContainer {
+  background-image: url(https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/MainImg/Motel.png);
+  height: 681px;
+  width: 918px;
+  background-repeat: no-repeat;
+  cursor: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SleepButton {
+  height: 40px;
+  width: 120px;
+  margin-right: 200px;
+  margin-top: 100px;
+}
+
+.BST {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  margin-top: 402px;
+  color: white;
+  text-shadow: -3px 2px 0px rgba(0, 0, 0, 1), 2px 2px 0px rgba(0, 0, 0, 1),
+    -3px -2px 0px rgba(0, 0, 0, 1), 2px -2px 0px rgba(0, 0, 0, 1);
+}
+
+.MT {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 365px;
+  margin-left: -30px;
+  font-size: 25px;
+  width: 20px;
+  color: red;
+  text-shadow: -3px 2px 0px rgba(0, 0, 0, 1), 2px 2px 0px rgba(0, 0, 0, 1),
+    -2px -2px 0px rgba(0, 0, 0, 1), 2px -2px 0px rgba(0, 0, 0, 1);
+}
+
+.AST {
+  margin-left: 135px;
+  margin-top: 300px;
+  width: 135px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 22px;
+  color: #c0c0c0;
+  text-shadow: -3px 2px 0px rgba(0, 0, 0, 1), 2px 2px 0px rgba(0, 0, 0, 1),
+    -2px -2px 0px rgba(0, 0, 0, 1), 2px -2px 0px rgba(0, 0, 0, 1);
+}
+
+.AT {
+  width: 100px;
+  font-size: 30px;
+  margin: 0;
+}
+.ST {
+  margin-top: -10px;
+  width: 100px;
+  display: flex;
+  margin-top: -8px;
+  justify-content: end;
+}
+
+.MWT {
+  margin-left: 200px;
+  margin-top: 401px;
+  width: 160px;
+  height: 43px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 22px;
+  color: goldenrod;
+  text-shadow: -3px 2px 0px rgba(0, 0, 0, 1), 2px 2px 0px rgba(0, 0, 0, 1),
+    -2px -2px 0px rgba(0, 0, 0, 1), 2px -2px 0px rgba(0, 0, 0, 1);
+}
+
+.WT {
+  margin: 0;
+  font-size: 28px;
+}
+
+.WST {
+  width: 130px;
+  display: flex;
+  justify-content: end;
+  margin: 0;
+  margin-top: -10px;
+  font-size: 20px;
+}
+
+.greenC {
+  color: #5fdd5f;
+}
+.blueC {
+  color: #4299e1;
+}
+.yellowC {
+  color: #d1a916;
+}
+.redC {
+  color: #f56565;
+}
+.purpleC {
+  color: purple;
+}

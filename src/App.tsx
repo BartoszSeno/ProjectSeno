@@ -21,6 +21,7 @@ import { ArmorImageAndNameAndCost } from "./data/Armor.tsx";
 import { HelmetImageAndNameAndCost } from "./data/Helmet.tsx";
 import { FishArray } from "./data/fish.tsx";
 import MainEq from "./components/Equipment/index.tsx";
+import WeaponShop from "./components/Shop/WeaponShop/WShop.tsx";
 
 const App = () => {
   // Sprawdź localStorage i ustaw pozycję początkową gracza
@@ -217,7 +218,7 @@ const App = () => {
 
   // FULL NUMBER WHICH SAVES THE COUNT NUMBER OF MAIN POINTS 'count'
   const [count, setCount] = useState<number>(() =>
-    Number(localStorage.getItem("count") || 0)
+    Number(localStorage.getItem("count") || 100)
   );
   // ARRAY OF THE ENTIRE ShieldAndDagger
   const [ShieldAndDaggerData, setShieldAndDaggerData] = useState<any>(
@@ -615,6 +616,10 @@ const App = () => {
     }, 10);
   }
 
+  const clearLocalStorage = () => {
+    localStorage.clear();
+  };
+
   return (
     <div
       style={{
@@ -631,8 +636,28 @@ const App = () => {
           building={building}
           activeStructure={activeStructure}
           interior={interior}
+          mainWeaponData={mainWeaponData}
+          setMainWeaponData={setMainWeaponData}
+          count={count}
+          setCount={setCount}
+          FullInv={FullInv}
         />
         <Player position={position} />
+        <button
+          onClick={clearLocalStorage}
+          style={{
+            width: "50px",
+            height: "50px",
+            backgroundColor: "blue",
+            position: "absolute",
+            top: `${position.y}px`,
+            left: `${position.x}px`,
+            transform: "translate(-50%, -50%)",
+            zIndex: 200,
+          }}
+        >
+          {count}
+        </button>
         {/* Inne elementy */}
         <Borders allBorders={allBorders} />
         <Trees noEntryOnTree={noEntryOnTree} />
@@ -694,6 +719,7 @@ const App = () => {
           setFishData={setFishData}
           setValueCatch={setValueCatch}
           position={position}
+          count={count}
         />
       </Map>
     </div>

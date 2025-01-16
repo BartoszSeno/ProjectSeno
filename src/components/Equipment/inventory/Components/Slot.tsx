@@ -1,5 +1,6 @@
 import React, { ReactNode, useState } from "react";
 import { FishArray } from "../../../../data/fish.tsx";
+
 const ItemSlot = (props: {
   slot: any;
   data: {
@@ -10,35 +11,37 @@ const ItemSlot = (props: {
   catchCount: any;
 }) => {
   return (
-    <div
-      id={`item-slot-${props.slot}`}
-      className={`item-slot`}
-      data-slot={props.slot}
-      data-type={`item`}
-    >
-      <div className="content">
-        <div
-          className="img"
-          style={{
-            backgroundImage: `url("${props.data.image}")`,
-            backgroundSize: props.data.type === "Fish" ? "65px" : "",
-          }}
-        />
-      </div>
+    <>
       <div
-        className="FishCount"
-        style={{
-          display:
-            props.data.catchCount === 1
-              ? "none"
-              : props.data.type === "Fish"
-              ? "flex"
-              : "none",
-        }}
+        id={`item-slot-${props.slot}`}
+        className={`item-slot`}
+        data-slot={props.slot}
+        data-type={`item`}
       >
-        {props.data.catchCount}
+        <div className="content">
+          <div
+            className="img"
+            style={{
+              backgroundImage: `url("${props.data.image}")`,
+              backgroundSize: props.data.type === "Fish" ? "65px" : "",
+            }}
+          />
+        </div>
+        <div
+          className="FishCount"
+          style={{
+            display:
+              props.data.catchCount === 1
+                ? "none"
+                : props.data.type === "Fish"
+                ? "flex"
+                : "none",
+          }}
+        >
+          {props.data.catchCount}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

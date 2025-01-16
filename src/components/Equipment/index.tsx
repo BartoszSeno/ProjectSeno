@@ -71,6 +71,7 @@ const MainEq = ({
   setfishId,
   setValueCatch,
   position,
+  count,
 }: {
   SellFishByCat: boolean;
   mainWeaponData: any;
@@ -128,6 +129,7 @@ const MainEq = ({
   setfishId: any;
   setValueCatch: any;
   position: any;
+  count: number;
 }) => {
   //MAIN WEAPON
   //===========================================================================
@@ -565,6 +567,7 @@ const MainEq = ({
               UpgradedNamesShoes={UpgradedNamesShoes}
               setUpgradedDefShoes={setUpgradedDefShoes}
               FishData={FishData}
+              count={count}
             />
           </div>
           <div

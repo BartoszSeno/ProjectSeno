@@ -53,6 +53,7 @@ const Inventory = ({
   UpgradedNamesShoes,
   setUpgradedDefShoes,
   FishData,
+  count,
 }: {
   props: any;
   mainWeaponData: any;
@@ -93,6 +94,7 @@ const Inventory = ({
   UpgradedNamesShoes: any;
   setUpgradedDefShoes: any;
   FishData: any;
+  count: number;
 }) => {
   const allItemsFromArray = [
     ...mainWeaponData,
@@ -663,7 +665,8 @@ const Inventory = ({
         </div>
         <div className="InventoryStats">
           <div className="Silver">
-            <div className="SilverCoin"></div> 0
+            <div className="SilverCoin"></div>
+            {count}
           </div>
         </div>
       </div>

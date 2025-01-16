@@ -70,7 +70,7 @@ export const buildings: Structures[] = [
 ];
 
 function createInteriors(): InteriorStructures[] {
-  const baseX = 1560;
+  const baseX = 1540;
   const baseY = 900;
 
   return [

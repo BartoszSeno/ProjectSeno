@@ -1,6 +1,25 @@
 import React, { useEffect, useState } from "react";
+import WeaponShop1 from "./Shop/WeaponShop/WShop.tsx";
 
-const WeaponShop = ({ interior }: { interior: any }) => {
+const WeaponShop = ({
+  interior,
+  activeStructure,
+  mainWeaponData,
+  setMainWeaponData,
+  count,
+  setCount,
+  FullInv,
+  SelectedOption,
+}: {
+  interior: any;
+  activeStructure: string | null;
+  mainWeaponData: any;
+  setMainWeaponData: any;
+  count: any;
+  setCount: any;
+  FullInv: any;
+  SelectedOption: any;
+}) => {
   return (
     <>
       {interior.map(
@@ -87,6 +106,26 @@ const WeaponShop = ({ interior }: { interior: any }) => {
               }}
               draggable="false"
             />
+            <div
+              style={{
+                position: "absolute", // Ustawienie pozycji
+                top: `${div.y}px`,
+                left: `${div.x}px`,
+                width: `${div.width}px`,
+                height: `${div.height}px`,
+                zIndex: 1000, // Wyższy z-index dla drugiego obrazka
+                display: div.isColliding ? "block" : "none",
+              }}
+            >
+              <WeaponShop1
+                mainWeaponData={mainWeaponData}
+                setMainWeaponData={setMainWeaponData}
+                count={count}
+                setCount={setCount}
+                SelectedOption={SelectedOption}
+                FullInv={FullInv}
+              />
+            </div>
           </React.Fragment>
         )
       )}
