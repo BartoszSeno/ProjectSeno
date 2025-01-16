@@ -1,0 +1,170 @@
+.MainEqContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  height: 700px;
+  width: 1000px;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, -120%);
+  pointer-events: none;
+  z-index: 99;
+}
+.inventoryTitle,
+.EqTitle {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  height: 50px;
+  width: 395px;
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.EqTitle {
+  width: 310px;
+  margin-left: -1px;
+  margin-top: -312px;
+}
+
+#option-container {
+  display: flex;
+  margin-left: 150px;
+  width: 455px;
+  height: 626px;
+  background-image: url(https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/MainImg/invenory/Inventory.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position-y: -12px;
+  pointer-events: all;
+}
+#EqCharacters {
+  background-image: url(https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/MainImg/invenory/eq.png);
+  background-repeat: no-repeat;
+  display: flex;
+  width: 370px;
+  height: 403px;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  pointer-events: all;
+}
+
+.selectedItem {
+  display: flex;
+  width: 100px !important;
+  height: 65px;
+  justify-content: center;
+  align-items: center;
+}
+
+.items-box {
+  display: flex;
+  width: 66px;
+  height: 64px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.equipmentImgeq {
+  height: 50px;
+}
+
+.weaponPosition {
+  margin-top: -200px;
+}
+/* =============================================*/
+.greenB {
+  border: 3.5px solid #48bb78;
+  -webkit-box-shadow: 0px 0px 10px 1px #48bb78;
+  -moz-box-shadow: 0px 0px 10px 1px #48bb78;
+  box-shadow: 0px 0px 10px 1px #48bb78;
+  background-color: #967853;
+}
+.blueB {
+  border: 3.5px solid #4299e1;
+  -webkit-box-shadow: 0px 0px 10px 1px #4299e1;
+  -moz-box-shadow: 0px 0px 10px 1px #4299e1;
+  box-shadow: 0px 0px 10px 1px #4299e1;
+  background-color: #967853;
+}
+.yellowB {
+  border: 3.5px solid #ecc94b;
+  -webkit-box-shadow: 0px 0px 10px 1px #ecc94b;
+  -moz-box-shadow: 0px 0px 10px 1px #ecc94b;
+  box-shadow: 0px 0px 10px 1px #ecc94b;
+  background-color: #967853;
+}
+.redB {
+  border: 3.5px solid #f56565;
+  -webkit-box-shadow: 0px 0px 10px 1px #f56565;
+  -moz-box-shadow: 0px 0px 10px 1px #f56565;
+  box-shadow: 0px 0px 10px 1px #f56565;
+  background-color: #967853;
+}
+.purpleB {
+  border: 3.5px solid purple;
+  -webkit-box-shadow: 0px 0px 10px 1px purple;
+  -moz-box-shadow: 0px 0px 10px 1px purple;
+  box-shadow: 0px 0px 10px 1px purple;
+  background-color: #967853;
+}
+
+.Helmet,
+.Armor,
+.Gloves,
+.Shoes,
+.MainWeapon,
+.SubWeapon {
+  position: absolute;
+}
+
+.Helmet {
+  margin-top: -116.5px;
+  margin-left: -153px;
+}
+
+.Armor {
+  margin-top: -116.5px;
+  margin-left: 80.5px;
+}
+
+.Shoes {
+  margin-top: 34px;
+  margin-left: -153px;
+}
+
+.Gloves {
+  margin-top: 34px;
+  margin-left: 80.5px;
+}
+
+.MainWeapon {
+  margin-top: 108px;
+  margin-left: -75px;
+}
+
+.SubWeapon {
+  margin-top: 108px;
+  margin-left: 3px;
+}
+
+.CloseEq {
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  margin-top: -315px;
+  margin-left: 262px;
+  cursor: pointer;
+}
+
+.CloseInv {
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+  margin-top: 19px;
+  margin-left: 374px;
+}
