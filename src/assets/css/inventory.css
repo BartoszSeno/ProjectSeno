@@ -35,7 +35,6 @@ span {
 }
 
 .item-slot {
-  display: inline-block;
   height: 75px;
   width: 78px;
   box-sizing: border-box;
@@ -57,14 +56,12 @@ span {
   position: absolute;
   cursor: grab;
   background-image: none;
+  transform: translate(-50%, -50%);
 }
 
 .item-slot.being-dragged .content {
   background: rgba(255, 255, 255, 0.4);
-  margin-left: -695px;
-  margin-top: -120px;
-  left: 50%;
-  transform: translate(-50%, 0%);
+  margin-left: -200px;
 }
 
 .item-slot .content {

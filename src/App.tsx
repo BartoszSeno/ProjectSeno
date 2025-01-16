@@ -693,6 +693,7 @@ const App = () => {
           FishData={FishData}
           setFishData={setFishData}
           setValueCatch={setValueCatch}
+          position={position}
         />
       </Map>
     </div>

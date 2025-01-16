@@ -70,6 +70,7 @@ const MainEq = ({
   setFishData,
   setfishId,
   setValueCatch,
+  position,
 }: {
   SellFishByCat: boolean;
   mainWeaponData: any;
@@ -126,6 +127,7 @@ const MainEq = ({
   setFishData: any;
   setfishId: any;
   setValueCatch: any;
+  position: any;
 }) => {
   //MAIN WEAPON
   //===========================================================================
@@ -486,6 +488,8 @@ const MainEq = ({
         <div
           className="MainEqContainer"
           style={{
+            top: `${position.y}px`,
+            left: `${position.x}px`,
             display: OpenAndCloseEqinEnchant
               ? "flex"
               : openInvAndEq && Inv
