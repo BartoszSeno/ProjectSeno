@@ -40,9 +40,7 @@ const RedAndPurpleMainWeaponShop = ({
 
   const changeSelectedItems = () => {
     const randomIndexes: number[] = [];
-    const eventsToGenerate = Math.floor(Math.random() * 3); // Liczba od 0 do 2
-
-    while (randomIndexes.length < eventsToGenerate) {
+    while (randomIndexes.length < 2) {
       const randomIndex =
         Math.floor(Math.random() * (mainWeaponData.length - 43)) + 43;
 

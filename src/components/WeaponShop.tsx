@@ -48,6 +48,7 @@ const WeaponShop = ({
                 border: "2px solid black",
                 zIndex: 200, // Specjalny div będzie nad innymi
                 opacity: 0.5,
+                pointerEvents: "none",
               }}
             ></div>
             {/* Pierwszy obrazek z wnętrzem*/}
@@ -66,6 +67,7 @@ const WeaponShop = ({
                 height: `${div.height}px`,
                 position: "absolute", // Ustawienie pozycji
                 zIndex: div.isColliding ? 100 : 1000, // Niższy z-index dla pierwszego obrazka
+                pointerEvents: "none",
               }}
               draggable="false"
             />
@@ -84,6 +86,7 @@ const WeaponShop = ({
                 width: `${div.width}px`,
                 height: `${div.height}px`,
                 zIndex: 1000, // Wyższy z-index dla drugiego obrazka
+                pointerEvents: "none",
               }}
               draggable="false"
             />
@@ -103,6 +106,7 @@ const WeaponShop = ({
                 width: `${div.width}px`,
                 height: `${div.height}px`,
                 zIndex: 1000, // Wyższy z-index dla drugiego obrazka
+                pointerEvents: "none",
               }}
               draggable="false"
             />
@@ -113,8 +117,9 @@ const WeaponShop = ({
                 left: `${div.x}px`,
                 width: `${div.width}px`,
                 height: `${div.height}px`,
-                zIndex: 1000, // Wyższy z-index dla drugiego obrazka
+                zIndex: 100, // Wyższy z-index dla drugiego obrazka
                 display: div.isColliding ? "block" : "none",
+                pointerEvents: "auto",
               }}
             >
               <WeaponShop1
