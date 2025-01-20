@@ -82,14 +82,18 @@ function createInteriors(): InteriorStructures[] {
       height: 1218,
       isColliding: false,
       name: "BlackSmith",
-      url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopInterior2.gif",
+      url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopInterior3.gif",
       polygon: [
         "2% 42%",
         "32% 42%",
         "32% 53%",
-        "77% 53%",
-        "77% 87%",
-        "32% 87%",
+        "71% 53%",
+        "71% 42%",
+        "98% 42%",
+        "98% 95%",
+        "71% 95%",
+        "71% 85%",
+        "31% 85%",
         "32% 99%",
         "2% 99%",
       ],
@@ -98,19 +102,23 @@ function createInteriors(): InteriorStructures[] {
         { id: 2, x: baseX + 20, y: baseY + 510, width: 570, height: 185 }, // sciana duza lewo góra
         { id: 5, x: baseX + 20, y: baseY + 1195, width: 350, height: 20 }, //podłoga lewo dół lewo
         { id: 6, x: baseX + 470, y: baseY + 1195, width: 130, height: 20 }, //podłoga lewo dół prawo
-        { id: 7, x: baseX + 559, y: baseY + 1055, width: 40, height: 150 }, //sciana dół prawo
-        { id: 9, x: baseX + 560, y: baseY + 1050, width: 850, height: 20 }, // podłoga prawo dół
-        { id: 10, x: baseX + 585, y: baseY + 645, width: 820, height: 25 }, //sciana duża góra
-        { id: 11, x: baseX + 1370, y: baseY + 650, width: 40, height: 405 }, //sciana prawo prawo
+        { id: 7, x: baseX + 559, y: baseY + 1045, width: 40, height: 150 }, //sciana dół prawo
+        { id: 9, x: baseX + 560, y: baseY + 1020, width: 730, height: 20 }, // podłoga prawo dół
+        { id: 10, x: baseX + 585, y: baseY + 645, width: 600, height: 25 }, //sciana duża góra
+        { id: 11, x: baseX + 1260, y: baseY + 1025, width: 40, height: 135 }, //sciana prawo prawo
         { id: 12, x: baseX + 570, y: baseY + 675, width: 110, height: 115 }, //sciana srodek
         { id: 13, x: baseX + 60, y: baseY + 1140, width: 135, height: 65 }, //safka
         { id: 14, x: baseX + 490, y: baseY + 1140, width: 65, height: 65 }, //box i beczka
-        { id: 16, x: baseX + 1200, y: baseY + 995, width: 175, height: 65 }, // pułka z bronią
-        { id: 17, x: baseX + 1260, y: baseY + 660, width: 125, height: 55 }, // box pod scianą
+        { id: 16, x: baseX + 1080, y: baseY + 970, width: 175, height: 65 }, // pułka z bronią
+        { id: 17, x: baseX + 1070, y: baseY + 660, width: 125, height: 55 }, // box pod scianą
+        { id: 18, x: baseX + 1270, y: baseY + 1135, width: 520, height: 25 }, // podłoga lewo
+        { id: 19, x: baseX + 1270, y: baseY + 500, width: 520, height: 25 }, // sciana duza lewo
+        { id: 20, x: baseX + 1180, y: baseY + 500, width: 120, height: 240 }, // sciana lewo / lewo
+        { id: 21, x: baseX + 1760, y: baseY + 500, width: 40, height: 660 }, // sciana prawo / lewo
+
         //
-        { id: 18, x: baseX + 570, y: baseY + 1060, width: 230, height: 115 }, // namiot 1
-        { id: 19, x: baseX + 780, y: baseY + 1075, width: 100, height: 60 }, // namiot 1.2
-        { id: 20, x: baseX + 1400, y: baseY + 845, width: 145, height: 200 }, // namiot 2
+        { id: 22, x: baseX + 570, y: baseY + 1030, width: 230, height: 115 }, // namiot 1
+        { id: 23, x: baseX + 780, y: baseY + 1045, width: 100, height: 60 }, // namiot 1.2
       ],
     },
   ];

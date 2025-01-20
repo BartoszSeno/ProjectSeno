@@ -159,26 +159,12 @@
 
 #weapon-shop-container {
   height: 900px;
-  width: 1400px;
+  width: auto;
   display: flex;
   background-repeat: no-repeat;
   cursor: auto;
   flex-direction: column;
   margin-top: 320px;
-  clip-path: polygon(
-    0 0,
-    42% 0,
-    42% 28%,
-    45% 28%,
-    45% 10%,
-    100% 10%,
-    100% 85%,
-    44.5% 85%,
-    44.5% 67%,
-    42.5% 67%,
-    42.5% 100%,
-    0 100%
-  );
 }
 
 .itemsForPurchasable {
@@ -201,20 +187,19 @@
   height: 90px;
   width: 450px;
   margin-top: 45px;
-  margin-left: 70px;
+  margin-left: 90px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 .WeaponWall2 {
   position: relative;
-  height: 90px;
-  width: 630px;
-  margin-top: 25px;
+  height: 100px;
+  width: 470px;
+  margin-top: 10px;
   margin-left: 700px;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
 }
 #WeaponN0 {
   margin-top: -10px;
@@ -233,12 +218,12 @@
 }
 
 .RedAndPurple {
-  height: 100px;
-  width: 380px;
-  margin-top: 115px;
-  margin-left: 826px;
+  height: 350px;
+  width: 180px;
+  margin-top: 20px;
+  margin-left: 1506px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   transform: scale(1.2);
 }

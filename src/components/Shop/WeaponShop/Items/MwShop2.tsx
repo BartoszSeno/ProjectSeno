@@ -109,7 +109,7 @@ const MainWeaponShopTwo = ({
       {Array.isArray(selectedItemsN) &&
         selectedItemsN
           .filter((data: any) => data.id > 1)
-          .slice(0, 5)
+          .slice(1, 4)
           .map((data: any, index: any) => {
             if (data.tier !== "purple" && data.tier !== "red") {
               return (

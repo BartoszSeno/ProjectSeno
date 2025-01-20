@@ -38,7 +38,7 @@ const WeaponShop = ({
             <div
               style={{
                 clipPath:
-                  "polygon(2% 42%, 32% 42%, 32% 53%, 77% 53%, 77% 87%, 32% 87%,  32% 99%, 2% 99%)",
+                  "polygon(2% 42%, 32% 42%, 32% 53%, 71% 53%, 71% 42%, 98% 42%,  98% 95%, 71% 95%, 71% 85%, 31% 85%, 32% 99%,2% 99%)",
 
                 position: "relative",
                 width: `${div.width}px`,
@@ -55,7 +55,7 @@ const WeaponShop = ({
               src={
                 div.isColliding
                   ? div.url
-                  : "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopExterior.png"
+                  : "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopExterior3.png"
               }
               alt="WeaponShop"
               style={{
@@ -73,7 +73,7 @@ const WeaponShop = ({
             <img
               src={
                 div.isColliding
-                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopWallNoShade2.png"
+                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopWallNoShade3.png"
                   : undefined
               }
               alt="WeaponShop"
@@ -91,7 +91,7 @@ const WeaponShop = ({
             <img
               src={
                 div.isColliding
-                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopWallWithShade2.png"
+                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopWallWithShade3.png"
                   : undefined
               }
               alt="WeaponShop"
