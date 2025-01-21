@@ -152,9 +152,9 @@ const RedAndPurpleMainWeaponShop = ({
                 ? "none"
                 : "",
             position: "absolute",
-            marginLeft: NoR === "ShowStatsWeaponRare" ? "-59px" : "",
-            marginTop: NoR === "ShowStatsWeaponRare" ? "-296.5px" : "",
-            transform: NoR === "ShowStatsWeaponRare" ? "scale(0.835)" : "",
+            marginLeft: NoR === "ShowStatsWeaponRare" ? "-1480px" : "",
+            marginTop: NoR === "ShowStatsWeaponRare" ? "-286px" : "",
+            transform: NoR === "ShowStatsWeaponRare" ? "scale(0.833)" : "",
           }}
         >
           <ShowWeapon

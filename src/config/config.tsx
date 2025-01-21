@@ -82,7 +82,7 @@ function createInteriors(): InteriorStructures[] {
       height: 1218,
       isColliding: false,
       name: "BlackSmith",
-      url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopInterior3.gif",
+      url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopInterior3_1.gif",
       polygon: [
         "2% 42%",
         "32% 42%",
@@ -119,8 +119,8 @@ function createInteriors(): InteriorStructures[] {
         //
         { id: 22, x: baseX + 570, y: baseY + 1030, width: 230, height: 115 }, // namiot 1
         { id: 23, x: baseX + 780, y: baseY + 1045, width: 100, height: 60 }, // namiot 1.2
-        { id: 24, x: baseX + 1480, y: baseY + 595, width: 220, height: 120 }, // rare1
-        { id: 25, x: baseX + 1480, y: baseY + 835, width: 220, height: 120 }, // rare2
+        { id: 24, x: baseX + 1500, y: baseY + 575, width: 183, height: 115 }, // rare1
+        { id: 25, x: baseX + 1500, y: baseY + 795, width: 183, height: 115 }, // rare2
       ],
     },
   ];

@@ -154,8 +154,8 @@ const MainWeaponShopTwo = ({
                 ? "none"
                 : "",
             position: "absolute",
-            marginLeft: NoR === "ShowStatsWeaponW2" ? "-597px" : "",
-            marginTop: NoR === "ShowStatsWeaponW2" ? "-160px" : "",
+            marginLeft: NoR === "ShowStatsWeaponW2" ? "-458px" : "",
+            marginTop: NoR === "ShowStatsWeaponW2" ? "-228px" : "",
           }}
         >
           <ShowWeapon

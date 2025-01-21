@@ -50,7 +50,6 @@
   margin-left: -410px;
   margin-top: 320px;
   text-indent: 30px;
-  background-color: red;
 }
 .WeaponInfo {
   display: flex;
@@ -221,10 +220,10 @@
 }
 
 .RedAndPurple {
-  height: 300px;
+  height: 360px;
   width: 245px;
-  margin-top: 70px;
-  margin-left: 1466px;
+  margin-top: 51px;
+  margin-left: 1471px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -232,17 +231,14 @@
 }
 
 .RAPitemsForPurchasable {
-  width: 250px;
-  height: 125px;
+  width: 150px;
+  height: 60px;
   padding: 0;
   display: flex;
   justify-content: center;
   background-color: transparent;
   cursor: pointer;
   border: none;
-  background-image: url(https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/thropy.png);
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 .RAPitemsForPurchasable img {
