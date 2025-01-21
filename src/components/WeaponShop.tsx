@@ -117,7 +117,7 @@ const WeaponShop = ({
                 left: `${div.x}px`,
                 width: `${div.width}px`,
                 height: `${div.height}px`,
-                zIndex: 100, // Wyższy z-index dla drugiego obrazka
+                zIndex: 1000, // Wyższy z-index dla drugiego obrazka
                 display: div.isColliding ? "block" : "none",
                 pointerEvents: "auto",
               }}
