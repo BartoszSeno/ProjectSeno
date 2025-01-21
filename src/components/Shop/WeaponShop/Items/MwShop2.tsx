@@ -166,6 +166,7 @@ const MainWeaponShopTwo = ({
             MainWeaponDmg={MainWeaponDmg}
             handleClick={handleClick}
             NoR={NoR}
+            setNoR={setNoR}
             FullInv={FullInv}
           />
         </div>

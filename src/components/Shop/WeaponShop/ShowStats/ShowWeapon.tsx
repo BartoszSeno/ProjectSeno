@@ -8,6 +8,7 @@ const ShowWeapon = ({
   MainWeaponDmg,
   handleClick,
   NoR,
+  setNoR,
   FullInv,
 }: {
   mainWeaponData: any;
@@ -17,6 +18,7 @@ const ShowWeapon = ({
   MainWeaponDmg: any;
   handleClick: any;
   NoR: any;
+  setNoR: any;
   FullInv: any;
 }) => {
   return (
@@ -67,6 +69,26 @@ const ShowWeapon = ({
             }
           >
             Purchase
+          </button>
+          <button
+            className="ChatBoxClose"
+            style={{
+              border: "2px solid black",
+              height: "42px",
+              width: "42px",
+              marginLeft: "290px",
+              marginTop: "-325px",
+              display: "flex", // Ustawienie flexboxa
+              justifyContent: "center", // Wyśrodkowanie w poziomie
+              alignItems: "center", // Wyśrodkowanie w pionie
+              paddingTop: "0px", // Dostosowanie odległości tekstu od góry
+              backgroundColor: "#b31d12",
+            }}
+            onClick={(e) => {
+              setNoR(null);
+            }}
+          >
+            x
           </button>
         </div>
       )}

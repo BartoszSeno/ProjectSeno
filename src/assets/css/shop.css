@@ -83,11 +83,11 @@
   font-family: "Alagard";
   background-color: #cb5d48; /* Button background color */
   color: #fff; /* Button text color */
-  border: none; /* Remove button border */
   outline: none; /* Remove button outline */
   cursor: pointer; /* Add cursor pointer on hover */
   border-radius: 5px; /* Button border radius to create a smooth shape */
   transition: background-color 0.2s ease; /* Add transition for smooth hover effect */
+  border: "2px solid black";
 }
 #ShowStatsWeapon button:hover {
   background-color: #a84119; /* Change button background color on hover */

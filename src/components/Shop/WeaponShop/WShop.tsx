@@ -38,7 +38,6 @@ const WeaponShop1 = ({
           style={{ display: ShopIsOpen ? "flex" : "none" }}
           onClick={(e) => {
             e.stopPropagation();
-            setShopIsOpen(true);
           }}
         >
           <span className="WeaponWall">
