@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import WeaponShop1 from "./Shop/WeaponShop/WShop.tsx";
 
 const BlackSmith = ({
-  interior,
+  BlackSmithInterior,
   activeStructure,
   mainWeaponData,
   setMainWeaponData,
@@ -11,7 +11,7 @@ const BlackSmith = ({
   FullInv,
   SelectedOption,
 }: {
-  interior: any;
+  BlackSmithInterior: any;
   activeStructure: string | null;
   mainWeaponData: any;
   setMainWeaponData: any;
@@ -22,7 +22,7 @@ const BlackSmith = ({
 }) => {
   return (
     <>
-      {interior.map(
+      {BlackSmithInterior.map(
         (div: {
           url: string;
           id: React.Key | null | undefined;
@@ -38,9 +38,9 @@ const BlackSmith = ({
             <div
               style={{
                 clipPath:
-                  "polygon(2% 42%, 32% 42%, 32% 53%, 71% 53%, 71% 42%, 98% 42%,  98% 95%, 71% 95%, 71% 85%, 31% 85%, 32% 99%,2% 99%)",
+                  "polygon(12% 45%, 44% 45%, 44% 33%, 63% 33%, 63% 45%, 88% 45%, 88% 89%, 43% 89%, 43% 95%, 43% 97%,12% 97%)",
 
-                position: "relative",
+                position: "absolute",
                 width: `${div.width}px`,
                 height: `${div.height}px`,
                 top: `${div.y}px`,
@@ -56,7 +56,7 @@ const BlackSmith = ({
               src={
                 div.isColliding
                   ? div.url
-                  : "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopExterior3.png"
+                  : "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/blackSmithExterior.png"
               }
               alt="WeaponShop"
               style={{
@@ -75,7 +75,7 @@ const BlackSmith = ({
             <img
               src={
                 div.isColliding
-                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopWallNoShade3.png"
+                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/blackSmithWallNoShadow.png"
                   : undefined
               }
               alt="WeaponShop"
@@ -94,7 +94,7 @@ const BlackSmith = ({
             <img
               src={
                 div.isColliding
-                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopWallWithShade3.png"
+                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/blackSmithWallWithShadow.png"
                   : undefined
               }
               alt="WeaponShop"

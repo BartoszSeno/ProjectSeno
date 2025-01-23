@@ -10,6 +10,7 @@ import {
   noEntry,
   noEntryOnTree,
   Interiors,
+  BlackSmithInteriors,
 } from "./config/config.tsx";
 import { BordersWS } from "./config/config.tsx";
 
@@ -36,6 +37,8 @@ const App = () => {
   const isMoving = useRef<boolean>(false);
   const [isKeyPressed, setIsKeyPressed] = useState(false); // Stan do śledzenia, czy klawisz jest wciśnięty
   const [interior, setInterior] = useState(Interiors);
+  const [BlackSmithInterior, setBlackSmithInterior] =
+    useState(BlackSmithInteriors);
 
   const step = 10;
   const keysPressed = useRef<Set<string>>(new Set());
@@ -96,10 +99,52 @@ const App = () => {
     if (!collisionDetected) {
     }
   };
-  console.log(interior[0].isColliding);
 
   const checkInteriorsCollisions = (playerX: number, playerY: number) => {
     setInterior((prevDivs) =>
+      prevDivs.map((div) => {
+        let isColliding = false;
+
+        if (div.polygon) {
+          // Przelicz punkty zapisane w procentach na rzeczywiste współrzędne
+          const absolutePolygon = div.polygon.map((point) => {
+            const [px, py] = point.split(" ").map((p) => parseFloat(p) / 100);
+            return {
+              x: div.x + px * div.width,
+              y: div.y + py * div.height,
+            };
+          });
+
+          // Sprawdź, czy gracz jest wewnątrz wielokąta
+          isColliding = isPointInPolygon(
+            { x: playerX, y: playerY },
+            absolutePolygon
+          );
+        } else {
+          // Sprawdzanie kolizji dla prostokąta
+          isColliding =
+            playerX + 25 > div.x &&
+            playerX - 25 < div.x + div.width &&
+            playerY + 25 > div.y &&
+            playerY - 25 < div.y + div.height;
+        }
+
+        return { ...div, isColliding }; // Zwróć zaktualizowaną strukturę
+      })
+    );
+  };
+
+  // BlackSmith TEst
+
+  const allBordersBS = BlackSmithInteriors.flatMap(
+    (BlackSmithinterior) => BlackSmithinterior.borders || []
+  );
+
+  const isCollidingBS = (playerX: number, playerY: number) =>
+    isColliding(playerX, playerY, allBordersBS);
+
+  const checkBSInteriorsCollisions = (playerX: number, playerY: number) => {
+    setBlackSmithInterior((prevDivs) =>
       prevDivs.map((div) => {
         let isColliding = false;
 
@@ -161,7 +206,8 @@ const App = () => {
       const canMove = (x: number, y: number) =>
         !isCollidingWithBorder(x, y) &&
         !isCollidingWithTree(x, y) &&
-        !isCollidingTest(x, y);
+        !isCollidingTest(x, y) &&
+        !isCollidingBS(x, y);
 
       let moved = false;
 
@@ -186,6 +232,7 @@ const App = () => {
       if (moved) {
         checkStructureCollisions(newX, newY);
         checkInteriorsCollisions(newX, newY);
+        checkBSInteriorsCollisions(newX, newY);
         isMoving.current = true;
         const newPosition = { x: newX, y: newY };
         localStorage.setItem("playerPosition", JSON.stringify(newPosition));
@@ -636,6 +683,7 @@ const App = () => {
           building={building}
           activeStructure={activeStructure}
           interior={interior}
+          BlackSmithInterior={BlackSmithInterior}
           mainWeaponData={mainWeaponData}
           setMainWeaponData={setMainWeaponData}
           count={count}
@@ -659,7 +707,7 @@ const App = () => {
           {count}
         </button>
         {/* Inne elementy */}
-        <Borders allBorders={allBorders} />
+        <Borders allBordersBS={allBordersBS} />
         <Trees noEntryOnTree={noEntryOnTree} />
         <MainEq
           SellFishByCat={SellFishByCat}

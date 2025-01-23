@@ -25,6 +25,7 @@ const Structuress = ({
   count,
   setCount,
   FullInv,
+  BlackSmithInterior,
 }: {
   building: any;
   activeStructure: string | null;
@@ -34,6 +35,7 @@ const Structuress = ({
   count: any;
   setCount: any;
   FullInv: any;
+  BlackSmithInterior: any;
 }) => {
   const [SelectedOption] = useState<string>("");
 
@@ -50,7 +52,7 @@ const Structuress = ({
         activeStructure={activeStructure}
       />
       <BlackSmith
-        interior={interior}
+        BlackSmithInterior={BlackSmithInterior}
         mainWeaponData={mainWeaponData}
         setMainWeaponData={setMainWeaponData}
         count={count}

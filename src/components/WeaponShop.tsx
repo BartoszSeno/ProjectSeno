@@ -49,6 +49,7 @@ const WeaponShop = ({
                 zIndex: 200, // Specjalny div będzie nad innymi
                 opacity: 0.5,
                 pointerEvents: "none",
+                backgroundColor: "yellow",
               }}
             ></div>
             {/* Pierwszy obrazek z wnętrzem*/}
