@@ -187,9 +187,9 @@ function BlackSmith(): InteriorStructures[] {
         { id: 11, x: baseX + 1570, y: baseY + 540, width: 50, height: 550 }, // sciana prawo / lewo
 
         //
-        { id: 13, x: baseX + 1230, y: baseY + 940, width: 380, height: 150 }, // sciana prawo / lewo
+        { id: 13, x: baseX + 1230, y: baseY + 970, width: 380, height: 120 }, // sciana prawo / lewo
         { id: 14, x: baseX + 800, y: baseY + 830, width: 130, height: 250 }, // sciana prawo / lewo
-        { id: 15, x: baseX + 390, y: baseY + 740, width: 215, height: 85 }, // sciana prawo / lewo
+        { id: 15, x: baseX + 390, y: baseY + 755, width: 215, height: 85 }, // sciana prawo / lewo
         { id: 16, x: baseX + 550, y: baseY + 540, width: 215, height: 85 }, // sciana prawo / lewo
 
         //ouside

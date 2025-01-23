@@ -75,7 +75,7 @@ const BlackSmith = ({
             <img
               src={
                 div.isColliding
-                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/blackSmithWallNoShadow.png"
+                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/blackSmithWallNoShadow2.png"
                   : undefined
               }
               alt="WeaponShop"
