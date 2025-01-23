@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import WeaponShop from "./WeaponShop.tsx";
+import BlackSmith from "./BlackSmith.tsx";
 
 export interface Structures {
   id: number;
@@ -39,6 +40,16 @@ const Structuress = ({
   return (
     <>
       <WeaponShop
+        interior={interior}
+        mainWeaponData={mainWeaponData}
+        setMainWeaponData={setMainWeaponData}
+        count={count}
+        setCount={setCount}
+        SelectedOption={SelectedOption}
+        FullInv={FullInv}
+        activeStructure={activeStructure}
+      />
+      <BlackSmith
         interior={interior}
         mainWeaponData={mainWeaponData}
         setMainWeaponData={setMainWeaponData}
