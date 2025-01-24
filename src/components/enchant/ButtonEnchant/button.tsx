@@ -527,7 +527,17 @@ const ButtonForEnchant = ({
           }
         }}
       >
-        Enchant
+        <div
+          style={{
+            color: "#221c26",
+            marginTop: "-70px",
+            marginLeft: "110px",
+            fontSize: "40px",
+            fontFamily: "Alagard",
+          }}
+        >
+          Upgrade
+        </div>
       </button>
     </>
   );

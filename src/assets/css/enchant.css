@@ -26,10 +26,11 @@
   justify-content: center;
   align-items: center;
 }
+
 .putItemThere {
   position: absolute;
-  margin-top: 360px;
-  margin-left: -560px;
+  margin-top: -210px;
+  margin-left: -10px;
   height: 85px;
   width: 190px;
 }
@@ -38,7 +39,6 @@
   position: absolute;
   height: 131px;
   width: 130px;
-  margin-left: 170px;
   margin-top: 185px;
 }
 
@@ -80,8 +80,8 @@
   height: 300px;
   width: 290px;
   font-size: 30px;
-  margin-left: 1205px;
-  margin-top: -380px;
+  margin-left: 815px;
+  margin-top: -665px;
 }
 .UpgradeDmg {
   position: absolute;
@@ -137,6 +137,11 @@
 
 .enchantButton {
   position: absolute;
-  margin-left: -550px;
-  margin-top: 200px;
+  margin-left: -10px;
+  padding: 100px 200px 130px 200px;
+  margin-top: -700px;
+  cursor: pointer;
+  border: none;
+  border-radius: none;
+  background-color: transparent;
 }

@@ -411,8 +411,8 @@ const BlackSmith = ({
             <span
               style={{
                 position: "absolute", // Ustawienie pozycji
-                top: `${div.y}px`,
-                left: `${div.x + 300}px`,
+                top: `${div.y + 584}px`,
+                left: `${div.x + 213}px`,
                 width: `${div.width}px`,
                 height: `${div.height}px`,
                 zIndex: 1000, // Wyższy z-index dla drugiego obrazka

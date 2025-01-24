@@ -45,6 +45,34 @@ const PutItemHere = ({
       >
         <img
           className="mainWeaponImg"
+          style={{
+            transform:
+              itsMainWeapon === true
+                ? "rotate(90deg)"
+                : itsArmor === true
+                ? "rotate(90deg)"
+                : itsShieldAndDagger === true
+                ? "rotate(90deg)"
+                : itsGloves === true
+                ? "rotate(-35deg)"
+                : "",
+            height:
+              itsMainWeapon === true
+                ? "90px"
+                : itsArmor === true
+                ? "50px"
+                : itsShieldAndDagger === true
+                ? "50px"
+                : itsGloves === true
+                ? "50px"
+                : itsShoes === true
+                ? "50px"
+                : itsHelmet === true
+                ? "54px"
+                : "",
+            marginTop:
+              itsShoes === true ? "-20px" : itsHelmet === true ? "-20px" : "",
+          }}
           src={
             itsMainWeapon
               ? savedImage

@@ -25,9 +25,9 @@ const Borders: React.FC<BordersProps> = ({ allBordersBS }) => {
             top: `${div.y}px`,
             left: `${div.x}px`,
             zIndex: 10000,
-            border: "2px solid black",
+            border: "2px solid red",
             opacity: 0.5,
-            backgroundColor: "red",
+            // backgroundColor: "red",
           }}
         />
       ))}
