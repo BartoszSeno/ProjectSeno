@@ -408,7 +408,18 @@ const BlackSmith = ({
               }}
               draggable="false"
             />
-            <span>
+            <span
+              style={{
+                position: "absolute", // Ustawienie pozycji
+                top: `${div.y}px`,
+                left: `${div.x + 300}px`,
+                width: `${div.width}px`,
+                height: `${div.height}px`,
+                zIndex: 1000, // Wyższy z-index dla drugiego obrazka
+                display: div.isColliding ? "block" : "none",
+                pointerEvents: "auto",
+              }}
+            >
               <Enchant
                 UpgradedDmgMainWeapon={UpgradedDmgMainWeapon}
                 setUpgradedDmgMainWeapon={setUpgradedDmgMainWeapon}

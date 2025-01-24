@@ -152,8 +152,8 @@ function BlackSmith(): InteriorStructures[] {
       id: 1,
       x: baseX,
       y: baseY,
-      width: 1820,
-      height: 1218,
+      width: 1569,
+      height: 1281,
       isColliding: false,
       name: "BlackSmith",
       url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/blackSmithInterior.png",
@@ -171,37 +171,37 @@ function BlackSmith(): InteriorStructures[] {
         "12% 97%",
       ],
       borders: [
-        { id: 1, x: baseX + 200, y: baseY + 540, width: 45, height: 650 }, // sciana duża lewo lewo
-        { id: 2, x: baseX + 200, y: baseY + 540, width: 570, height: 40 }, // sciana duza lewo góra
-        { id: 3, x: baseX + 200, y: baseY + 1175, width: 160, height: 20 }, //podłoga lewo dół lewo
-        { id: 4, x: baseX + 650, y: baseY + 1175, width: 160, height: 20 }, //podłoga lewo dół prawo
-        { id: 5, x: baseX + 760, y: baseY + 830, width: 50, height: 360 }, //sciana dół prawo
-        { id: 6, x: baseX + 760, y: baseY + 1070, width: 310, height: 20 }, // podłoga prawo dół
-        { id: 7, x: baseX + 760, y: baseY + 390, width: 50, height: 335 }, //sciana duża góra
-        { id: 26, x: baseX + 760, y: baseY + 390, width: 420, height: 45 }, //sciana duża góra
-        { id: 27, x: baseX + 760, y: baseY + 390, width: 80, height: 270 }, //sciana duża góra
-        { id: 28, x: baseX + 1130, y: baseY + 390, width: 50, height: 120 }, //sciana duża góra
-        { id: 8, x: baseX + 1000, y: baseY + 505, width: 180, height: 200 }, //sciana srodek
-        { id: 9, x: baseX + 1180, y: baseY + 1070, width: 440, height: 25 }, // podłoga lewo
-        { id: 10, x: baseX + 1065, y: baseY + 540, width: 550, height: 220 }, // sciana duza lewo
-        { id: 11, x: baseX + 1570, y: baseY + 540, width: 50, height: 550 }, // sciana prawo / lewo
+        { id: 1, x: baseX + 170, y: baseY + 560, width: 45, height: 695 }, // sciana duża lewo lewo
+        { id: 2, x: baseX + 170, y: baseY + 540, width: 540, height: 40 }, // sciana duza lewo góra
+        { id: 3, x: baseX + 170, y: baseY + 1235, width: 135, height: 20 }, //podłoga lewo dół lewo
+        { id: 4, x: baseX + 560, y: baseY + 1235, width: 135, height: 20 }, //podłoga lewo dół prawo
+        { id: 5, x: baseX + 655, y: baseY + 870, width: 50, height: 385 }, //sciana dół prawo
+        { id: 6, x: baseX + 680, y: baseY + 1130, width: 242, height: 20 }, // podłoga prawo dół
+        { id: 7, x: baseX + 655, y: baseY + 405, width: 40, height: 355 }, //sciana duża góra
+        { id: 26, x: baseX + 655, y: baseY + 390, width: 350, height: 60 }, //sciana duża góra
+        { id: 27, x: baseX + 680, y: baseY + 390, width: 40, height: 305 }, //sciana duża góra
+        { id: 28, x: baseX + 975, y: baseY + 390, width: 40, height: 190 }, //sciana duża góra
+        { id: 8, x: baseX + 860, y: baseY + 525, width: 150, height: 210 }, //sciana srodek
+        { id: 9, x: baseX + 1015, y: baseY + 1125, width: 400, height: 25 }, // podłoga lewo
+        { id: 10, x: baseX + 915, y: baseY + 570, width: 550, height: 220 }, // sciana duza lewo
+        { id: 11, x: baseX + 1350, y: baseY + 570, width: 40, height: 580 }, // sciana prawo / lewo
 
         //
-        { id: 13, x: baseX + 1230, y: baseY + 970, width: 380, height: 120 }, // sciana prawo / lewo
-        { id: 14, x: baseX + 800, y: baseY + 830, width: 130, height: 250 }, // sciana prawo / lewo
-        { id: 15, x: baseX + 390, y: baseY + 755, width: 215, height: 85 }, // sciana prawo / lewo
-        { id: 16, x: baseX + 550, y: baseY + 540, width: 215, height: 85 }, // sciana prawo / lewo
+        { id: 13, x: baseX + 1060, y: baseY + 1030, width: 380, height: 120 }, // sciana prawo / lewo
+        { id: 14, x: baseX + 690, y: baseY + 870, width: 110, height: 250 }, // sciana prawo / lewo
+        { id: 15, x: baseX + 335, y: baseY + 800, width: 187, height: 65 }, // sciana prawo / lewo
+        { id: 16, x: baseX + 470, y: baseY + 570, width: 215, height: 85 }, // sciana prawo / lewo
 
         //ouside
-        { id: 17, x: baseX + 970, y: baseY + 1120, width: 35, height: 25 }, // sciana prawo / lewo
-        { id: 18, x: baseX + 1250, y: baseY + 1120, width: 35, height: 25 }, // sciana prawo / lewo
-        { id: 19, x: baseX + 1535, y: baseY + 1120, width: 35, height: 25 }, // sciana prawo / lewo
-        { id: 20, x: baseX + 1595, y: baseY + 1040, width: 60, height: 90 }, // sciana prawo / lewo
-        { id: 21, x: baseX + 1595, y: baseY + 540, width: 210, height: 540 }, // sciana prawo / lewo
-        { id: 22, x: baseX + 900, y: baseY + 1120, width: 35, height: 25 }, // sciana prawo / lewo
-        { id: 23, x: baseX + 850, y: baseY + 1160, width: 35, height: 25 }, // sciana prawo / lewo
-        { id: 24, x: baseX + 0, y: baseY + 760, width: 240, height: 400 }, // sciana prawo / lewo
-        { id: 25, x: baseX + 80, y: baseY + 1160, width: 50, height: 60 }, // sciana prawo / lewo
+        { id: 17, x: baseX + 835, y: baseY + 1180, width: 30, height: 25 }, // słupek 1
+        { id: 18, x: baseX + 1078, y: baseY + 1180, width: 30, height: 25 }, // słupek 2
+        { id: 19, x: baseX + 1320, y: baseY + 1180, width: 30, height: 25 }, // słupek 3
+        { id: 20, x: baseX + 1365, y: baseY + 1090, width: 60, height: 90 }, // beczka
+        { id: 21, x: baseX + 1355, y: baseY + 540, width: 200, height: 540 }, // butka prawo
+        { id: 22, x: baseX + 780, y: baseY + 1180, width: 35, height: 25 }, // log
+        { id: 23, x: baseX + 725, y: baseY + 1220, width: 35, height: 25 }, // log
+        { id: 24, x: baseX + 0, y: baseY + 770, width: 200, height: 400 }, // butka lewo
+        { id: 25, x: baseX + 60, y: baseY + 1160, width: 50, height: 120 }, // wood cuter
       ],
     },
   ];

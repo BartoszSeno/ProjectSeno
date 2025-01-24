@@ -1,11 +1,10 @@
 #enchant-container {
-  height: 680px;
-  width: 920px;
+  height: 650px;
+  width: 444px;
   flex-wrap: wrap;
   align-items: center;
   display: flex;
   justify-content: center;
-  background-image: url(https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/MainImg/enchant.png);
   position: relative;
   background-repeat: no-repeat;
   z-index: 100;
