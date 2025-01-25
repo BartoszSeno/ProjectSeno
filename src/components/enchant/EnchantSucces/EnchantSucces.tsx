@@ -581,6 +581,7 @@ const EnchantSucces = ({
                   color: "green",
                 }}
               >
+                &nbsp;
                 {CurrentValueUpgrade >= 15
                   ? null
                   : itsMainWeapon
@@ -599,7 +600,13 @@ const EnchantSucces = ({
                   ? savedDefShield || selectedItemDataDagger.defLvl0
                   : ""}
               </div>
-              <p>&nbsp; &rarr; &nbsp;</p>
+              <p>
+                {CurrentValueUpgrade >= 15 ? null : (
+                  <span
+                    dangerouslySetInnerHTML={{ __html: "&nbsp; → &nbsp" }}
+                  />
+                )}
+              </p>
               <div
                 className="UpgradeStats"
                 style={{
