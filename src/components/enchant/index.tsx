@@ -252,6 +252,12 @@ const Enchant = ({
             setUpgradedDmgShieldAndDagger={setUpgradedDmgShieldAndDagger}
             UpgradedDmgShieldAndDagger={UpgradedDmgShieldAndDagger}
             Close={Close}
+            mainWeaponData={mainWeaponData}
+            ShieldAndDaggerData={ShieldAndDaggerData}
+            ShoesData={ShoesData}
+            GlovesData={GlovesData}
+            HelmetData={HelmetData}
+            ArmorData={ArmorData}
           />
         </div>
       </div>

@@ -264,7 +264,7 @@ const App = () => {
 
   // FULL NUMBER WHICH SAVES THE COUNT NUMBER OF MAIN POINTS 'count'
   const [count, setCount] = useState<number>(() =>
-    Number(localStorage.getItem("count") || 100)
+    Number(localStorage.getItem("count") || 100000)
   );
   // ARRAY OF THE ENTIRE ShieldAndDagger
   const [ShieldAndDaggerData, setShieldAndDaggerData] = useState<any>(

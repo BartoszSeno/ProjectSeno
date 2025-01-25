@@ -32,7 +32,7 @@ export const ShoesImageAndNameAndCost = [
     name: "Spris",
     defLvl0: 1,
     cost: 1,
-    isBought: false,
+    isBought: true,
     isVisible: true,
     isEquip: false,
     type: "Shoes",

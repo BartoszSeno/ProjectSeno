@@ -228,7 +228,7 @@ export const ArmorImageAndNameAndCost = [
     name: "Eniles",
     defLvl0: 1,
     cost: 1,
-    isBought: false,
+    isBought: true,
     isVisible: true,
     isEquip: false,
     type: "Armor",

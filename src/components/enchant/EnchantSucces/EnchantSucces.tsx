@@ -8,6 +8,12 @@ import { ShoesImageAndNameAndCost } from "../../../data/Shoes.tsx";
 import { GlovesImageAndNameAndCost } from "../../../data/Gloves.tsx";
 import { ShieldAndDaggerImageAndNameAndCost } from "../../../data/SubWeapon.tsx";
 import React from "react";
+import { getSavedDmgMain } from "../../enchant/index.tsx";
+import { getSavedDmgShieldAndDagger } from "../../enchant/index.tsx";
+import { getSavedDefShoes } from "../../enchant/index.tsx";
+import { getSavedDefGloves } from "../../enchant/index.tsx";
+import { getSavedDefHelmet } from "../../enchant/index.tsx";
+import { getSavedDefArmor } from "../../enchant/index.tsx";
 
 const EnchantSucces = ({
   upgradedValue,
@@ -47,6 +53,12 @@ const EnchantSucces = ({
   setUpgradedDmgShieldAndDagger,
   UpgradedDmgShieldAndDagger,
   Close,
+  mainWeaponData,
+  ShieldAndDaggerData,
+  ShoesData,
+  GlovesData,
+  HelmetData,
+  ArmorData,
 }: {
   upgradedValue: any;
   selectedItemIndex: any;
@@ -85,6 +97,12 @@ const EnchantSucces = ({
   setUpgradedDmgShieldAndDagger: any;
   UpgradedDmgShieldAndDagger: any;
   Close: any;
+  mainWeaponData: any;
+  ShieldAndDaggerData: any;
+  ShoesData: any;
+  GlovesData: any;
+  HelmetData: any;
+  ArmorData: any;
 }) => {
   const [CurrentValueUpgrade, setCurrentValueUpgrade] = useState<number>(0);
   // Declare state to save upgraded item name, initialized with an empty string
@@ -349,7 +367,121 @@ const EnchantSucces = ({
   });
 
   const UpgradeImage =
-    "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/showWeaponStats.png";
+    "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/showWeaponStats2.png";
+
+  // Sword
+  const selectedItemIdForEnchantSword = localStorage.getItem(
+    "selectedItemIdForEnchant"
+  );
+  const itemIndexSword = Number(selectedItemIdForEnchantSword);
+  const selectedItemDataSword = mainWeaponData.find(
+    (data: any) => data.id === itemIndexSword
+  );
+  const itemSavedDmgSword = `selectedItemDmgForEnchant_${selectedItemDataSword.name}`;
+  const savedDmgSword = getSavedDmgMain(itemSavedDmgSword);
+
+  // dagger
+  //----------------------------------------------------------------------------------------
+  const selectedItemIdForEnchantDager = localStorage.getItem(
+    "selectedShieldAndDaggerItemIdForEnchant"
+  );
+
+  const itemIndexDager = Number(selectedItemIdForEnchantDager);
+  const selectedItemDataDagger = ShieldAndDaggerData.find(
+    (data: any) => data.id === itemIndexDager
+  );
+
+  const itemSavedDmgDager = `selectedItemDmgForEnchant_${
+    selectedItemDataDagger?.name || ""
+  }`;
+
+  const savedDmgDager = getSavedDmgShieldAndDagger(itemSavedDmgDager);
+
+  // shield
+  //----------------------------------------------------------------------------------------
+  const selectedItemIdForEnchantShield = localStorage.getItem(
+    "selectedShieldAndDaggerItemIdForEnchant"
+  );
+
+  const itemIndexShield = Number(selectedItemIdForEnchantShield);
+  const selectedItemDataShield = ShieldAndDaggerData.find(
+    (data: any) => data.id === itemIndexShield
+  );
+
+  const itemSavedDmgShield = `selectedItemDefForEnchant_${
+    selectedItemDataShield?.name || ""
+  }`;
+
+  const savedDefShield = getSavedDmgShieldAndDagger(itemSavedDmgShield);
+
+  // shoes
+  //----------------------------------------------------------------------------------------
+  const selectedItemIdForEnchantShoes = localStorage.getItem(
+    "selectedShoesItemIdForEnchant"
+  );
+
+  const itemIndexShoes = Number(selectedItemIdForEnchantShoes);
+  const selectedItemDataShoes = ShoesData.find(
+    (data: any) => data.id === itemIndexShoes
+  );
+
+  const itemSavedDmgShoes = `selectedItemDefForEnchant_${
+    selectedItemDataShoes?.name || ""
+  }`;
+
+  const savedDefShoes = getSavedDefShoes(itemSavedDmgShoes);
+
+  // gloves
+  //----------------------------------------------------------------------------------------
+
+  const selectedItemIdForEnchantGloves = localStorage.getItem(
+    "selectedGlovesItemIdForEnchant"
+  );
+
+  const itemIndexGloves = Number(selectedItemIdForEnchantGloves);
+  const selectedItemDataGloves = GlovesData.find(
+    (data: any) => data.id === itemIndexGloves
+  );
+
+  const itemSavedDmgGloves = `selectedItemDefForEnchant_${
+    selectedItemDataGloves?.name || ""
+  }`;
+
+  const savedDefGloves = getSavedDefGloves(itemSavedDmgGloves);
+
+  // helmet
+  //----------------------------------------------------------------------------------------
+  const selectedItemIdForEnchantHelmet = localStorage.getItem(
+    "selectedHelmetItemIdForEnchant"
+  );
+
+  const itemIndexHelmet = Number(selectedItemIdForEnchantHelmet);
+  const selectedItemDataHelmet = HelmetData.find(
+    (data: any) => data.id === itemIndexHelmet
+  );
+
+  const itemSavedDmgHelmet = `selectedItemDefForEnchant_${
+    selectedItemDataHelmet?.name || ""
+  }`;
+
+  const savedDefHelmet = getSavedDefHelmet(itemSavedDmgHelmet);
+
+  // armor
+  //----------------------------------------------------------------------------------------
+  const selectedItemIdForEnchantArmor = localStorage.getItem(
+    "selectedArmorItemIdForEnchant"
+  );
+
+  const itemIndexArmor = Number(selectedItemIdForEnchantArmor);
+  const selectedItemDataArmor = ArmorData.find(
+    (data: any) => data.id === itemIndexArmor
+  );
+
+  const itemSavedDmgArmor = `selectedItemDefForEnchant_${
+    selectedItemDataArmor?.name || ""
+  }`;
+
+  const savedDefArmor = getSavedDefArmor(itemSavedDmgArmor);
 
   return (
     <>
@@ -377,23 +509,6 @@ const EnchantSucces = ({
             })`,
           }}
         >
-          <span className="UpgradeName">
-            {CurrentValueUpgrade >= 15
-              ? null
-              : itsMainWeapon
-              ? UpgradedName
-              : itsArmor
-              ? UpgradedArmorName
-              : itsHelmet
-              ? UpgradedHelmetName
-              : itsShoes
-              ? UpgradedShoesName
-              : itsGloves
-              ? UpgradedGlovesName
-              : itsShieldAndDagger
-              ? UpgradedShieldAndDaggerName
-              : ""}
-          </span>
           <div
             className="UpgradeImgs"
             style={{
@@ -414,11 +529,32 @@ const EnchantSucces = ({
                   ? savedShieldAndDaggerImage
                   : "https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/images/default.png"
               })`,
-              backgroundSize: itsMainWeapon ? "30px" : "",
+              backgroundSize: itsMainWeapon
+                ? "30px"
+                : savedShieldAndDaggerImage
+                ? "60px"
+                : "",
               transform: itsMainWeapon ? "rotate(45deg)" : "",
             }}
           />
           <span className="UpgradeDmg">
+            <span className="UpgradeName">
+              {CurrentValueUpgrade >= 15
+                ? null
+                : itsMainWeapon
+                ? UpgradedName
+                : itsArmor
+                ? UpgradedArmorName
+                : itsHelmet
+                ? UpgradedHelmetName
+                : itsShoes
+                ? UpgradedShoesName
+                : itsGloves
+                ? UpgradedGlovesName
+                : itsShieldAndDagger
+                ? UpgradedShieldAndDaggerName
+                : ""}
+            </span>
             <span className="UpgradeDmgTitle">
               {CurrentValueUpgrade >= 15
                 ? null
@@ -439,6 +575,57 @@ const EnchantSucces = ({
                 : itsShieldAndDagger === selectedShieldAndDaggerItemIndex < 15
                 ? "Def: "
                 : ""}
+              <div
+                className="ActualStats"
+                style={{
+                  color: "green",
+                }}
+              >
+                {CurrentValueUpgrade >= 15
+                  ? null
+                  : itsMainWeapon
+                  ? savedDmgSword || selectedItemDataSword.dmgLvl0
+                  : itsArmor
+                  ? savedDefArmor || selectedItemDataArmor.defLvl0
+                  : itsHelmet
+                  ? savedDefHelmet || selectedItemDataHelmet.defLvl0
+                  : itsShoes
+                  ? savedDefShoes || selectedItemDataShoes.defLvl0
+                  : itsGloves
+                  ? savedDefGloves || selectedItemDataGloves.defLvl0
+                  : itsShieldAndDagger
+                  ? savedDmgDager || selectedItemDataDagger.dmgLvl0
+                  : itsShieldAndDagger
+                  ? savedDefShield || selectedItemDataDagger.defLvl0
+                  : ""}
+              </div>
+              <p>&nbsp; &rarr; &nbsp;</p>
+              <div
+                className="UpgradeStats"
+                style={{
+                  color: "red",
+                }}
+              >
+                {CurrentValueUpgrade >= 15
+                  ? null
+                  : itsMainWeapon
+                  ? UpgradedDmgMainWeapon
+                  : itsArmor
+                  ? UpgradedDefArmor
+                  : itsHelmet
+                  ? UpgradedDefHelmet
+                  : itsShoes
+                  ? UpgradedDefShoes
+                  : itsGloves
+                  ? UpgradedDefGloves
+                  : itsShieldAndDagger ===
+                      selectedShieldAndDaggerItemIndex > 15 &&
+                    selectedShieldAndDaggerItemIndex != 0
+                  ? UpgradedDmgShieldAndDagger
+                  : itsShieldAndDagger === selectedShieldAndDaggerItemIndex < 15
+                  ? UpgradedDefShieldAndDagger
+                  : ""}
+              </div>
             </span>
           </span>
         </div>

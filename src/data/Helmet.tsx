@@ -59,7 +59,7 @@ export const HelmetImageAndNameAndCost = [
     name: "Lmet",
     defLvl0: 1,
     cost: 1,
-    isBought: false,
+    isBought: true,
     isVisible: true,
     isEquip: false,
     type: "helmet",

@@ -86,25 +86,29 @@
   position: absolute;
   display: flex;
   align-items: center;
-  margin-top: 180px;
-  width: 230px;
-  margin-left: 30px;
+  font-size: 22px;
+  width: 160px;
+  height: 270px;
+  margin-top: 45px;
+  margin-left: 41px;
 }
 
 .UpgradeDmgTitle {
   display: flex;
+  align-items: center;
   font-size: 20px;
-  width: 70px;
-  height: 24px;
-  font-size: 30px;
-  margin-top: -5px;
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  margin-top: -120px;
+  padding: 0px 0px 0px 20px;
 }
 .UpgradeImgs {
   display: flex;
   height: 90px;
   width: 90px;
   margin-top: 53px;
-  margin-left: 26px;
+  margin-left: 216px;
   background-size: 70px;
   background-repeat: no-repeat;
   background-position: center;
@@ -112,10 +116,14 @@
 }
 
 .UpgradeName {
+  margin-bottom: 200px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  margin-bottom: 10px;
-  margin-left: 30px;
-  margin-top: 160px;
+  text-align: center;
 }
 .enchantBox2 {
   display: flex;
