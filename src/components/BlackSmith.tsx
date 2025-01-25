@@ -389,6 +389,7 @@ const BlackSmith = ({
                 height: `${div.height}px`,
                 zIndex: 1000, // Wyższy z-index dla drugiego obrazka
                 pointerEvents: "none",
+                display: div.isColliding ? "block" : "none",
               }}
               draggable="false"
             />
@@ -409,6 +410,7 @@ const BlackSmith = ({
                 height: `${div.height}px`,
                 zIndex: 1000, // Wyższy z-index dla drugiego obrazka
                 pointerEvents: "none",
+                display: div.isColliding ? "block" : "none",
               }}
               draggable="false"
             />
