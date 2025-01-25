@@ -145,7 +145,7 @@ export const BordersWS = Interiors.flatMap(
 
 function BlackSmith(): InteriorStructures[] {
   const baseX = 40;
-  const baseY = 0;
+  const baseY = 1000;
 
   return [
     {
@@ -156,7 +156,7 @@ function BlackSmith(): InteriorStructures[] {
       height: 1281,
       isColliding: false,
       name: "BlackSmith",
-      url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/blackSmithInterior.png",
+      url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/blackSmithInterior2.png",
       polygon: [
         "12% 45%",
         "44% 45%",

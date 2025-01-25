@@ -74,14 +74,13 @@
 .infoEnchant {
   display: flex;
   flex-direction: column;
-  background-image: url(https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/MainImg/stats/enchantshow.png);
   background-repeat: no-repeat;
   position: absolute;
-  height: 300px;
-  width: 290px;
+  height: 360px;
+  width: 360px;
   font-size: 30px;
-  margin-left: 815px;
-  margin-top: -665px;
+  margin-left: 804px;
+  margin-top: -648px;
 }
 .UpgradeDmg {
   position: absolute;

@@ -349,7 +349,7 @@ const EnchantSucces = ({
   });
 
   const UpgradeImage =
-    "https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/MainImg/stats/enchantshow.png";
+    "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/showWeaponStats.png";
 
   return (
     <>
