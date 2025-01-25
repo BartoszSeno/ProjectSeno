@@ -72,7 +72,6 @@ const MainEq = ({
   setValueCatch,
   position,
   count,
-  Close,
   setClose,
 }: {
   SellFishByCat: boolean;
@@ -132,7 +131,6 @@ const MainEq = ({
   setValueCatch: any;
   position: any;
   count: number;
-  Close: any;
   setClose: any;
 }) => {
   //MAIN WEAPON
@@ -537,21 +535,12 @@ const MainEq = ({
               }}
             ></div>
             <Inventory
-              props={""}
               mainWeaponData={mainWeaponData}
-              GetIdPerClickMW={GetIdPerClickMW}
               HelmetData={HelmetData}
-              GetIdPerClickH={GetIdPerClickH}
               ArmorData={ArmorData}
-              GetIdPerClickA={GetIdPerClickA}
               ShoesData={ShoesData}
-              GetIdPerClickS={GetIdPerClickS}
               GlovesData={GlovesData}
-              GetIdPerClickG={GetIdPerClickG}
               ShieldAndDaggerData={ShieldAndDaggerData}
-              GetIdPerClickSW={GetIdPerClickSW}
-              setGlovesData={setGlovesData}
-              setMainWeaponData={setMainWeaponData}
               handleContextMenu={handleContextMenu}
               setFullInv={setFullInv}
               HandleItemClick={HandleItemClick}
@@ -579,7 +568,6 @@ const MainEq = ({
               setUpgradedDefShoes={setUpgradedDefShoes}
               FishData={FishData}
               count={count}
-              Close={Close}
               setClose={setClose}
             />
           </div>

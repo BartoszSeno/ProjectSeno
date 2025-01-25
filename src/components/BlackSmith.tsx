@@ -57,7 +57,6 @@ const BlackSmith = ({
   selectedShieldAndDaggerItemIndex,
 
   selectedItemIndex,
-  setOpenAndCloseEqinEnchant,
   Close,
   setClose,
 }: {
@@ -114,7 +113,6 @@ const BlackSmith = ({
   selectedShieldAndDaggerItemIndex: any;
 
   selectedItemIndex: any;
-  setOpenAndCloseEqinEnchant: any;
   Close: any;
   setClose: any;
 }) => {
@@ -486,7 +484,6 @@ const BlackSmith = ({
                 upgradedValue={upgradedValue}
                 selectedItemIndex={selectedItemIndex}
                 savedShoesImage={savedShoesImage}
-                setOpenAndCloseEqinEnchant={setOpenAndCloseEqinEnchant}
                 Close={Close}
                 setClose={setClose}
               />

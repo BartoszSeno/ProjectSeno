@@ -735,7 +735,6 @@ const App = () => {
           itsShieldAndDagger={itsShieldAndDagger}
           selectedShieldAndDaggerItemIndex={selectedShieldAndDaggerItemIndex}
           selectedItemIndex={selectedItemIndex}
-          setOpenAndCloseEqinEnchant={setOpenAndCloseEqinEnchant}
           Close={Close}
           setClose={setClose}
         />
@@ -817,7 +816,6 @@ const App = () => {
           setValueCatch={setValueCatch}
           position={position}
           count={count}
-          Close={Close}
           setClose={setClose}
         />
       </Map>

@@ -14,21 +14,12 @@ import { ShoesImageAndNameAndCost } from "../../../data/Shoes.tsx";
 import { FishArray } from "../../../data/fish";
 
 const Inventory = ({
-  props,
   mainWeaponData,
-  GetIdPerClickMW,
   HelmetData,
-  GetIdPerClickH,
   ArmorData,
-  GetIdPerClickA,
   ShoesData,
-  GetIdPerClickS,
   GlovesData,
-  GetIdPerClickG,
   ShieldAndDaggerData,
-  GetIdPerClickSW,
-  setGlovesData,
-  setMainWeaponData,
   handleContextMenu,
   setFullInv,
   HandleItemClick,
@@ -54,24 +45,14 @@ const Inventory = ({
   setUpgradedDefShoes,
   FishData,
   count,
-  Close,
   setClose,
 }: {
-  props: any;
   mainWeaponData: any;
-  GetIdPerClickMW: any;
   HelmetData: any;
-  GetIdPerClickH: any;
   ArmorData: any;
-  GetIdPerClickA: any;
   ShoesData: any;
-  GetIdPerClickS: any;
   GlovesData: any;
-  GetIdPerClickG: any;
   ShieldAndDaggerData: any;
-  GetIdPerClickSW: any;
-  setGlovesData: any;
-  setMainWeaponData: any;
   handleContextMenu: any;
   setFullInv: any;
   HandleItemClick: any;
@@ -97,7 +78,6 @@ const Inventory = ({
   setUpgradedDefShoes: any;
   FishData: any;
   count: number;
-  Close: any;
   setClose: any;
 }) => {
   const allItemsFromArray = [

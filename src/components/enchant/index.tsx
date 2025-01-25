@@ -68,7 +68,6 @@ const Enchant = ({
 
   selectedItemIndex,
   savedShoesImage,
-  setOpenAndCloseEqinEnchant,
   Close,
   setClose,
 }: {
@@ -132,7 +131,6 @@ const Enchant = ({
 
   selectedItemIndex: any;
   savedShoesImage: any;
-  setOpenAndCloseEqinEnchant: any;
   Close: any;
   setClose: any;
 }) => {
@@ -213,7 +211,6 @@ const Enchant = ({
             savedShieldAndDaggerImage={savedShieldAndDaggerImage}
             itsShieldAndDagger={itsShieldAndDagger}
             OpenCloseEqinEnchant={OpenCloseEqinEnchant}
-            setOpenAndCloseEqinEnchant={setOpenAndCloseEqinEnchant}
             setClose={setClose}
             Close={Close}
           />

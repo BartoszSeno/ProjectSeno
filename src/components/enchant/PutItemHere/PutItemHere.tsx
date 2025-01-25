@@ -17,7 +17,6 @@ const PutItemHere = ({
   savedShieldAndDaggerImage,
   itsShieldAndDagger,
   OpenCloseEqinEnchant,
-  setOpenAndCloseEqinEnchant,
   setClose,
   Close,
 }: {
@@ -37,7 +36,6 @@ const PutItemHere = ({
   savedShieldAndDaggerImage: any;
   itsShieldAndDagger: any;
   OpenCloseEqinEnchant: any;
-  setOpenAndCloseEqinEnchant: any;
   setClose: any;
   Close: any;
 }) => {

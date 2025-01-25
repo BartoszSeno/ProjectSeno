@@ -61,7 +61,6 @@ const Structuress = ({
   UpgradedDmgShieldAndDagger,
 
   OpenCloseEqinEnchant,
-  setOpenAndCloseEqinEnchant,
 
   //2
   itsMainWeapon,
@@ -123,7 +122,6 @@ const Structuress = ({
   UpgradedDmgShieldAndDagger: any;
 
   OpenCloseEqinEnchant: any;
-  setOpenAndCloseEqinEnchant: any;
 
   //2
   itsMainWeapon: any;
@@ -202,7 +200,6 @@ const Structuress = ({
         itsShieldAndDagger={itsShieldAndDagger}
         selectedShieldAndDaggerItemIndex={selectedShieldAndDaggerItemIndex}
         selectedItemIndex={selectedItemIndex}
-        setOpenAndCloseEqinEnchant={setOpenAndCloseEqinEnchant}
         Close={Close}
         setClose={setClose}
       />
