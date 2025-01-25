@@ -57,6 +57,9 @@ const BlackSmith = ({
   selectedShieldAndDaggerItemIndex,
 
   selectedItemIndex,
+  setOpenAndCloseEqinEnchant,
+  Close,
+  setClose,
 }: {
   BlackSmithInterior: any;
   //enchant
@@ -111,6 +114,9 @@ const BlackSmith = ({
   selectedShieldAndDaggerItemIndex: any;
 
   selectedItemIndex: any;
+  setOpenAndCloseEqinEnchant: any;
+  Close: any;
+  setClose: any;
 }) => {
   //======================================================================
   //========================= FOR ENCHANT ================================
@@ -480,6 +486,9 @@ const BlackSmith = ({
                 upgradedValue={upgradedValue}
                 selectedItemIndex={selectedItemIndex}
                 savedShoesImage={savedShoesImage}
+                setOpenAndCloseEqinEnchant={setOpenAndCloseEqinEnchant}
+                Close={Close}
+                setClose={setClose}
               />
             </span>
           </React.Fragment>

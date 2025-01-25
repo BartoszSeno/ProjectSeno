@@ -54,6 +54,8 @@ const Inventory = ({
   setUpgradedDefShoes,
   FishData,
   count,
+  Close,
+  setClose,
 }: {
   props: any;
   mainWeaponData: any;
@@ -95,6 +97,8 @@ const Inventory = ({
   setUpgradedDefShoes: any;
   FishData: any;
   count: number;
+  Close: any;
+  setClose: any;
 }) => {
   const allItemsFromArray = [
     ...mainWeaponData,
@@ -609,6 +613,7 @@ const Inventory = ({
             return (
               <span
                 onContextMenu={(e) => {
+                  setClose(true);
                   if (OpenAndCloseEqinEnchant === true) {
                     if (item.type === "weapon") {
                       HandleItemClick(mainWeaponData, item.id);

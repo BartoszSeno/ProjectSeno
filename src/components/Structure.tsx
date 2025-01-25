@@ -61,6 +61,7 @@ const Structuress = ({
   UpgradedDmgShieldAndDagger,
 
   OpenCloseEqinEnchant,
+  setOpenAndCloseEqinEnchant,
 
   //2
   itsMainWeapon,
@@ -75,6 +76,8 @@ const Structuress = ({
   itsShieldAndDagger,
   selectedShieldAndDaggerItemIndex,
   selectedItemIndex,
+  Close,
+  setClose,
 }: {
   building: any;
   activeStructure: string | null;
@@ -120,6 +123,7 @@ const Structuress = ({
   UpgradedDmgShieldAndDagger: any;
 
   OpenCloseEqinEnchant: any;
+  setOpenAndCloseEqinEnchant: any;
 
   //2
   itsMainWeapon: any;
@@ -134,6 +138,8 @@ const Structuress = ({
   itsShieldAndDagger: any;
   selectedShieldAndDaggerItemIndex: any;
   selectedItemIndex: any;
+  Close: any;
+  setClose: any;
 }) => {
   const [SelectedOption] = useState<string>("");
 
@@ -196,6 +202,9 @@ const Structuress = ({
         itsShieldAndDagger={itsShieldAndDagger}
         selectedShieldAndDaggerItemIndex={selectedShieldAndDaggerItemIndex}
         selectedItemIndex={selectedItemIndex}
+        setOpenAndCloseEqinEnchant={setOpenAndCloseEqinEnchant}
+        Close={Close}
+        setClose={setClose}
       />
     </>
   );

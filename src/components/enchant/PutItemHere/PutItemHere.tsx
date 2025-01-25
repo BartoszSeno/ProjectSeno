@@ -17,6 +17,9 @@ const PutItemHere = ({
   savedShieldAndDaggerImage,
   itsShieldAndDagger,
   OpenCloseEqinEnchant,
+  setOpenAndCloseEqinEnchant,
+  setClose,
+  Close,
 }: {
   savedImage: any;
   savedName: any;
@@ -34,6 +37,9 @@ const PutItemHere = ({
   savedShieldAndDaggerImage: any;
   itsShieldAndDagger: any;
   OpenCloseEqinEnchant: any;
+  setOpenAndCloseEqinEnchant: any;
+  setClose: any;
+  Close: any;
 }) => {
   return (
     <>
@@ -42,10 +48,16 @@ const PutItemHere = ({
         onClick={() => {
           OpenCloseEqinEnchant();
         }}
+        onContextMenu={(e) => {
+          e.preventDefault();
+          setClose(false);
+          console.log("test");
+        }}
       >
         <img
           className="mainWeaponImg"
           style={{
+            display: Close ? "block" : "none",
             transform:
               itsMainWeapon === true
                 ? "rotate(90deg)"

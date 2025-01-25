@@ -198,7 +198,6 @@ const App = () => {
   };
 
   const updatePosition = () => {
-    console.log(allBorders);
     setPosition((prev) => {
       let newX = prev.x;
       let newY = prev.y;
@@ -534,6 +533,7 @@ const App = () => {
     useState<boolean>(false);
   function OpenCloseEqinEnchant() {
     setOpenAndCloseEqinEnchant(!OpenAndCloseEqinEnchant);
+    console.log(OpenAndCloseEqinEnchant);
   }
 
   //=========================CHARACTER======================
@@ -666,6 +666,8 @@ const App = () => {
   const clearLocalStorage = () => {
     localStorage.clear();
   };
+  //=================================================================================
+  const [Close, setClose] = useState(false);
 
   return (
     <div
@@ -733,6 +735,9 @@ const App = () => {
           itsShieldAndDagger={itsShieldAndDagger}
           selectedShieldAndDaggerItemIndex={selectedShieldAndDaggerItemIndex}
           selectedItemIndex={selectedItemIndex}
+          setOpenAndCloseEqinEnchant={setOpenAndCloseEqinEnchant}
+          Close={Close}
+          setClose={setClose}
         />
         <Player position={position} />
         <button
@@ -812,6 +817,8 @@ const App = () => {
           setValueCatch={setValueCatch}
           position={position}
           count={count}
+          Close={Close}
+          setClose={setClose}
         />
       </Map>
     </div>

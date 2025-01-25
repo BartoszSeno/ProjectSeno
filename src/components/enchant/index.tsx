@@ -68,6 +68,9 @@ const Enchant = ({
 
   selectedItemIndex,
   savedShoesImage,
+  setOpenAndCloseEqinEnchant,
+  Close,
+  setClose,
 }: {
   mainWeaponData: any;
   setUpgradedNamesMainWeapon: any;
@@ -129,6 +132,9 @@ const Enchant = ({
 
   selectedItemIndex: any;
   savedShoesImage: any;
+  setOpenAndCloseEqinEnchant: any;
+  Close: any;
+  setClose: any;
 }) => {
   // Remove saved item image and name from local storage on component mount
   useEffect(() => {
@@ -207,6 +213,9 @@ const Enchant = ({
             savedShieldAndDaggerImage={savedShieldAndDaggerImage}
             itsShieldAndDagger={itsShieldAndDagger}
             OpenCloseEqinEnchant={OpenCloseEqinEnchant}
+            setOpenAndCloseEqinEnchant={setOpenAndCloseEqinEnchant}
+            setClose={setClose}
+            Close={Close}
           />
           <EnchantSucces
             upgradedValue={upgradedValue}
@@ -245,6 +254,7 @@ const Enchant = ({
             itsShieldAndDagger={itsShieldAndDagger}
             setUpgradedDmgShieldAndDagger={setUpgradedDmgShieldAndDagger}
             UpgradedDmgShieldAndDagger={UpgradedDmgShieldAndDagger}
+            Close={Close}
           />
         </div>
       </div>

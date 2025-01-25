@@ -72,6 +72,8 @@ const MainEq = ({
   setValueCatch,
   position,
   count,
+  Close,
+  setClose,
 }: {
   SellFishByCat: boolean;
   mainWeaponData: any;
@@ -130,6 +132,8 @@ const MainEq = ({
   setValueCatch: any;
   position: any;
   count: number;
+  Close: any;
+  setClose: any;
 }) => {
   //MAIN WEAPON
   //===========================================================================
@@ -470,6 +474,13 @@ const MainEq = ({
         setitsShoes(false);
         setitsGloves(false);
       }
+    } else {
+      setitsMainWeapon(false);
+      setitsArmor(false);
+      setitsHelmet(false);
+      setitsShoes(false);
+      setitsGloves(false);
+      setitsShieldAndDagger(false);
     }
   };
 
@@ -568,6 +579,8 @@ const MainEq = ({
               setUpgradedDefShoes={setUpgradedDefShoes}
               FishData={FishData}
               count={count}
+              Close={Close}
+              setClose={setClose}
             />
           </div>
           <div

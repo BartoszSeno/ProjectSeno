@@ -46,6 +46,7 @@ const EnchantSucces = ({
   itsShieldAndDagger,
   setUpgradedDmgShieldAndDagger,
   UpgradedDmgShieldAndDagger,
+  Close,
 }: {
   upgradedValue: any;
   selectedItemIndex: any;
@@ -83,6 +84,7 @@ const EnchantSucces = ({
   itsShieldAndDagger: any;
   setUpgradedDmgShieldAndDagger: any;
   UpgradedDmgShieldAndDagger: any;
+  Close: any;
 }) => {
   const [CurrentValueUpgrade, setCurrentValueUpgrade] = useState<number>(0);
   // Declare state to save upgraded item name, initialized with an empty string
@@ -346,10 +348,35 @@ const EnchantSucces = ({
     }
   });
 
+  const UpgradeImage =
+    "https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/MainImg/stats/enchantshow.png";
+
   return (
     <>
       <>
-        <div className="infoEnchant">
+        <div
+          className="infoEnchant"
+          style={{
+            display: Close ? "block" : "none",
+            backgroundImage: `url(${
+              CurrentValueUpgrade >= 15
+                ? null
+                : itsMainWeapon
+                ? UpgradeImage
+                : itsArmor
+                ? UpgradeImage
+                : itsHelmet
+                ? UpgradeImage
+                : itsShoes
+                ? UpgradeImage
+                : itsGloves
+                ? UpgradeImage
+                : itsShieldAndDagger
+                ? UpgradeImage
+                : "https://raw.githubusercontent.com/BartoszSeno/ClickerZero/main/src/assets/images/default.png"
+            })`,
+          }}
+        >
           <span className="UpgradeName">
             {CurrentValueUpgrade >= 15
               ? null
