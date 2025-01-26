@@ -18,7 +18,9 @@ const Player: React.FC<PlayerProps> = ({ position, movment }) => {
         transform: "translate(-50%, -50%)",
         zIndex: 200,
       }}
-    />
+    >
+      <img src={movment} alt="Player" />
+    </div>
   );
 };
 

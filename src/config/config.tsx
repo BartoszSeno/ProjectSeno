@@ -44,7 +44,12 @@ export const keysToColors: Record<
   { pressed: string; released: string }
 > = {
   w: { pressed: "red", released: "pink" },
-  a: { pressed: "green", released: "lightgreen" },
+  a: {
+    pressed:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/leftWalk.gif",
+    released:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/leftIdle.gif",
+  },
   s: { pressed: "black", released: "lightblue" },
   d: { pressed: "yellow", released: "white" },
   aw: { pressed: "brown", released: "tan" },
