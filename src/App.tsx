@@ -11,6 +11,7 @@ import {
   noEntryOnTree,
   Interiors,
   BlackSmithInteriors,
+  keysToColors,
 } from "./config/config.tsx";
 import { BordersWS } from "./config/config.tsx";
 
@@ -35,23 +36,61 @@ const App = () => {
   const [building, setBuilding] = useState(buildings);
   const [activeStructure, setActiveStructure] = useState<string | null>(null);
   const isMoving = useRef<boolean>(false);
-  const [isKeyPressed, setIsKeyPressed] = useState(false); // Stan do śledzenia, czy klawisz jest wciśnięty
+  // const [isKeyPressed, setIsKeyPressed] = useState(false); // Stan do śledzenia, czy klawisz jest wciśnięty
   const [interior, setInterior] = useState(Interiors);
   const [BlackSmithInterior, setBlackSmithInterior] =
     useState(BlackSmithInteriors);
 
+  const [backgroundColor, setBackgroundColor] = useState("blue");
+  const [isKeyPressed, setIsKeyPressed] = useState(false);
+  const keysPressed = useRef(new Set<string>());
+  const lastCombination = useRef("");
+
   const step = 10;
-  const keysPressed = useRef<Set<string>>(new Set());
+
+  const updateBackgroundColor = () => {
+    const keysArray = Array.from(keysPressed.current).sort(); // Sortujemy klawisze
+    const combination = keysArray.join("");
+
+    if (keysToColors[combination]) {
+      // Ustawiamy kolor dla kombinacji
+      setBackgroundColor(keysToColors[combination].pressed);
+      lastCombination.current = combination; // Zapisujemy kombinację
+    } else if (keysArray.length === 1 && keysToColors[keysArray[0]]) {
+      // Ustawiamy kolor dla pojedynczego klawisza
+      setBackgroundColor(keysToColors[keysArray[0]].pressed);
+      lastCombination.current = keysArray[0]; // Zapisujemy klawisz
+    }
+  };
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    keysPressed.current.add(event.key.toLowerCase());
-    setIsKeyPressed(true); // Ustawiamy stan na true, gdy klawisz jest wciśnięty
+    const key = event.key.toLowerCase();
+    if (keysToColors[key] && !keysPressed.current.has(key)) {
+      keysPressed.current.add(key);
+      setIsKeyPressed(true);
+      updateBackgroundColor();
+    }
   };
 
   const handleKeyUp = (event: KeyboardEvent) => {
-    keysPressed.current.delete(event.key.toLowerCase());
-    if (keysPressed.current.size === 0) {
-      setIsKeyPressed(false); // Ustawiamy stan na false, gdy żaden klawisz nie jest wciśnięty
+    const key = event.key.toLowerCase();
+    if (keysToColors[key]) {
+      keysPressed.current.delete(key); // Usuwamy klawisz
+
+      const keysArray = Array.from(keysPressed.current).sort();
+      const combination = keysArray.join("");
+
+      if (keysToColors[combination]) {
+        // Jeśli nadal istnieje kombinacja klawiszy
+        setBackgroundColor(keysToColors[combination].pressed);
+      } else if (keysArray.length === 0 && lastCombination.current) {
+        // Jeśli brak wciśniętych klawiszy, ustawiamy kolor `released` ostatniej kombinacji
+        setBackgroundColor(
+          keysToColors[lastCombination.current]?.released || "blue"
+        );
+        lastCombination.current = ""; // Resetujemy ostatnią kombinację
+        setIsKeyPressed(false);
+      }
     }
   };
 
@@ -249,13 +288,13 @@ const App = () => {
     let interval: NodeJS.Timeout;
 
     if (isKeyPressed) {
-      interval = setInterval(updatePosition, 16); // Uruchomienie interwału, gdy klawisz jest wciśnięty
+      interval = setInterval(updatePosition, 16);
     }
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
-      clearInterval(interval); // Sprzątanie po zakończeniu komponentu
+      clearInterval(interval);
     };
   }, [isKeyPressed]);
 
@@ -669,6 +708,8 @@ const App = () => {
   //=================================================================================
   const [Close, setClose] = useState(false);
 
+  console.log(backgroundColor);
+
   return (
     <div
       style={{
@@ -738,13 +779,13 @@ const App = () => {
           Close={Close}
           setClose={setClose}
         />
-        <Player position={position} />
+        <Player position={position} colo={backgroundColor} />
         <button
           onClick={clearLocalStorage}
           style={{
             width: "50px",
             height: "50px",
-            backgroundColor: "blue",
+            backgroundColor: "transparent",
             position: "absolute",
             top: `${position.y}px`,
             left: `${position.x}px`,

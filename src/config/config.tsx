@@ -39,6 +39,20 @@ export interface InteriorStructures {
   borders?: Border[]; // Opcjonalna tablica granic dla wnętrza
 }
 
+export const keysToColors: Record<
+  string,
+  { pressed: string; released: string }
+> = {
+  w: { pressed: "red", released: "pink" },
+  a: { pressed: "green", released: "lightgreen" },
+  s: { pressed: "black", released: "lightblue" },
+  d: { pressed: "yellow", released: "white" },
+  aw: { pressed: "brown", released: "tan" },
+  dw: { pressed: "purple", released: "violet" },
+  ds: { pressed: "orange", released: "coral" },
+  as: { pressed: "teal", released: "lightseagreen" },
+};
+
 export const buildings: Structures[] = [
   {
     id: 1,
@@ -145,7 +159,7 @@ export const BordersWS = Interiors.flatMap(
 
 function BlackSmith(): InteriorStructures[] {
   const baseX = 40;
-  const baseY = 1000;
+  const baseY = 100;
 
   return [
     {
