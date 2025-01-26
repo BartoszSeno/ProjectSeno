@@ -779,7 +779,7 @@ const App = () => {
           Close={Close}
           setClose={setClose}
         />
-        <Player position={position} colo={backgroundColor} />
+        <Player position={position} movment={backgroundColor} />
         <button
           onClick={clearLocalStorage}
           style={{
