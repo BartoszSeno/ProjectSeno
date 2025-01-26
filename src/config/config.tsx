@@ -43,19 +43,54 @@ export const keysToColors: Record<
   string,
   { pressed: string; released: string }
 > = {
-  w: { pressed: "red", released: "pink" },
+  w: {
+    pressed:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Walk/UpWalk.gif",
+    released:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Idle/UpIdle.gif",
+  },
   a: {
     pressed:
-      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/leftWalk.gif",
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Walk/leftWalk.gif",
     released:
-      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/leftIdle.gif",
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Idle/leftIdle.gif",
   },
-  s: { pressed: "black", released: "lightblue" },
-  d: { pressed: "yellow", released: "white" },
-  aw: { pressed: "brown", released: "tan" },
-  dw: { pressed: "purple", released: "violet" },
-  ds: { pressed: "orange", released: "coral" },
-  as: { pressed: "teal", released: "lightseagreen" },
+  s: {
+    pressed:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Walk/DownWalk.gif",
+    released:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Idle/DownIdle.gif",
+  },
+  d: {
+    pressed:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Walk/RightWalk.gif",
+    released:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Idle/RightIdle.gif",
+  },
+  aw: {
+    pressed:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Walk/LeftUpWalk.gif",
+    released:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Idle/LeftUpIdle.gif",
+  },
+  dw: {
+    pressed:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Walk/RightUpWalk.gif",
+    released:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Idle/RightUpIdle.gif",
+  },
+  ds: {
+    pressed:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Walk/RightDownWalk.gif",
+    released:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Idle/RightDownIdle.gif",
+  },
+  as: {
+    pressed:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Walk/leftDownWalk.gif",
+    released:
+      "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Idle/leftDownIdle.gif",
+  },
 };
 
 export const buildings: Structures[] = [
