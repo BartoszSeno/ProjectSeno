@@ -45,21 +45,22 @@ const App = () => {
   const [isKeyPressed, setIsKeyPressed] = useState(false);
   const keysPressed = useRef(new Set<string>());
   const lastCombination = useRef("");
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const step = 10;
 
   const updateBackgroundColor = () => {
-    const keysArray = Array.from(keysPressed.current).sort(); // Sortujemy klawisze
+    const keysArray = Array.from(keysPressed.current).sort();
     const combination = keysArray.join("");
 
     if (keysToColors[combination]) {
-      // Ustawiamy kolor dla kombinacji
       setBackgroundColor(keysToColors[combination].pressed);
-      lastCombination.current = combination; // Zapisujemy kombinację
+      lastCombination.current = combination;
     } else if (keysArray.length === 1 && keysToColors[keysArray[0]]) {
-      // Ustawiamy kolor dla pojedynczego klawisza
       setBackgroundColor(keysToColors[keysArray[0]].pressed);
-      lastCombination.current = keysArray[0]; // Zapisujemy klawisz
+      lastCombination.current = keysArray[0];
+    } else if (keysArray.length === 0) {
+      lastCombination.current = "";
     }
   };
 
@@ -68,6 +69,13 @@ const App = () => {
     if (keysToColors[key] && !keysPressed.current.has(key)) {
       keysPressed.current.add(key);
       setIsKeyPressed(true);
+
+      // Anulujemy poprzedni timeout, jeśli istnieje
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+
       updateBackgroundColor();
     }
   };
@@ -75,22 +83,26 @@ const App = () => {
   const handleKeyUp = (event: KeyboardEvent) => {
     const key = event.key.toLowerCase();
     if (keysToColors[key]) {
-      keysPressed.current.delete(key); // Usuwamy klawisz
+      keysPressed.current.delete(key);
 
-      const keysArray = Array.from(keysPressed.current).sort();
-      const combination = keysArray.join("");
+      // Utrzymujemy kombinację przez 2 sekundy
+      timeoutRef.current = setTimeout(() => {
+        const keysArray = Array.from(keysPressed.current).sort();
+        const combination = keysArray.join("");
 
-      if (keysToColors[combination]) {
-        // Jeśli nadal istnieje kombinacja klawiszy
-        setBackgroundColor(keysToColors[combination].pressed);
-      } else if (keysArray.length === 0 && lastCombination.current) {
-        // Jeśli brak wciśniętych klawiszy, ustawiamy kolor `released` ostatniej kombinacji
-        setBackgroundColor(
-          keysToColors[lastCombination.current]?.released || "blue"
-        );
-        lastCombination.current = ""; // Resetujemy ostatnią kombinację
-        setIsKeyPressed(false);
-      }
+        if (keysToColors[combination]) {
+          // Jeśli nadal istnieje kombinacja
+          setBackgroundColor(keysToColors[combination].pressed);
+          lastCombination.current = combination;
+        } else {
+          // Jeśli brak klawiszy, ustawiamy kolor `released`
+          setBackgroundColor(
+            keysToColors[lastCombination.current]?.released || "blue"
+          );
+          lastCombination.current = "";
+          setIsKeyPressed(false);
+        }
+      }, 100); // 2 sekundy
     }
   };
 
@@ -99,8 +111,8 @@ const App = () => {
       (div) =>
         playerX + 25 > div.x &&
         playerX - 25 < div.x + div.width &&
-        playerY + 25 > div.y &&
-        playerY - 25 < div.y + div.height
+        playerY + 50 > div.y &&
+        playerY + 20 < div.y + div.height
     );
 
   const isCollidingWithBorder = (playerX: number, playerY: number) =>
@@ -121,8 +133,8 @@ const App = () => {
         const isColliding =
           playerX + 25 > div.x &&
           playerX - 25 < div.x + div.width &&
-          playerY + 25 > div.y &&
-          playerY - 25 < div.y + div.height;
+          playerY + 50 > div.y &&
+          playerY + 20 < div.y + div.height;
 
         // Jeśli kolizja, zaktualizuj isColliding i ustaw aktywną strukturę
         if (isColliding && !collisionDetected) {
@@ -164,8 +176,8 @@ const App = () => {
           isColliding =
             playerX + 25 > div.x &&
             playerX - 25 < div.x + div.width &&
-            playerY + 25 > div.y &&
-            playerY - 25 < div.y + div.height;
+            playerY + 50 > div.y &&
+            playerY + 20 < div.y + div.height;
         }
 
         return { ...div, isColliding }; // Zwróć zaktualizowaną strukturę
@@ -207,8 +219,8 @@ const App = () => {
           isColliding =
             playerX + 25 > div.x &&
             playerX - 25 < div.x + div.width &&
-            playerY + 25 > div.y &&
-            playerY - 25 < div.y + div.height;
+            playerY + 50 > div.y &&
+            playerY + 20 < div.y + div.height;
         }
 
         return { ...div, isColliding }; // Zwróć zaktualizowaną strukturę
@@ -295,6 +307,7 @@ const App = () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
       clearInterval(interval);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, [isKeyPressed]);
 
@@ -780,21 +793,7 @@ const App = () => {
           setClose={setClose}
         />
         <Player position={position} movment={backgroundColor} />
-        <button
-          onClick={clearLocalStorage}
-          style={{
-            width: "50px",
-            height: "50px",
-            backgroundColor: "transparent",
-            position: "absolute",
-            top: `${position.y}px`,
-            left: `${position.x}px`,
-            transform: "translate(-50%, -50%)",
-            zIndex: 200,
-          }}
-        >
-          {count}
-        </button>
+
         {/* Inne elementy */}
         <Borders allBordersBS={allBordersBS} />
         <Trees noEntryOnTree={noEntryOnTree} />

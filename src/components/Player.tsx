@@ -9,18 +9,18 @@ const Player: React.FC<PlayerProps> = ({ position, movment }) => {
   return (
     <div
       style={{
-        width: "50px",
-        height: "50px",
-        backgroundColor: movment,
+        width: "99px",
+        height: "111px",
+        // backgroundColor: "blue",
         position: "absolute",
         top: `${position.y}px`,
         left: `${position.x}px`,
         transform: "translate(-50%, -50%)",
         zIndex: 200,
+        backgroundImage: `url(${movment})`,
+        backgroundSize: "cover",
       }}
-    >
-      <img src={movment} alt="Player" />
-    </div>
+    ></div>
   );
 };
 

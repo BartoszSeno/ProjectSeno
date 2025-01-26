@@ -142,14 +142,14 @@ function createInteriors(): InteriorStructures[] {
         "32% 42%",
         "32% 53%",
         "71% 53%",
-        "71% 42%",
-        "98% 42%",
-        "98% 95%",
-        "71% 95%",
-        "71% 85%",
-        "31% 85%",
-        "32% 99%",
-        "2% 99%",
+        "71% 40%",
+        "98% 40%",
+        "98% 93%",
+        "71% 93%",
+        "71% 83%",
+        "31% 83%",
+        "32% 97%",
+        "2% 97%",
       ],
       borders: [
         { id: 1, x: baseX + 20, y: baseY + 510, width: 40, height: 700 }, // sciana duża lewo lewo
@@ -212,17 +212,17 @@ function BlackSmith(): InteriorStructures[] {
       name: "BlackSmith",
       url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/BlackSmith/blackSmithInterior2.png",
       polygon: [
-        "12% 45%",
-        "44% 45%",
+        "12% 43%",
+        "44% 43%",
         "44% 33%",
         "63% 33%",
         "63% 45%",
         "88% 45%",
-        "88% 89%",
-        "43% 89%",
+        "88% 88%",
+        "43% 88%",
         "43% 95%",
-        "43% 97%",
-        "12% 97%",
+        "43% 96%",
+        "12% 96%",
       ],
       borders: [
         { id: 1, x: baseX + 170, y: baseY + 560, width: 45, height: 695 }, // sciana duża lewo lewo
@@ -241,9 +241,9 @@ function BlackSmith(): InteriorStructures[] {
         { id: 11, x: baseX + 1350, y: baseY + 570, width: 40, height: 580 }, // sciana prawo / lewo
 
         //
-        { id: 13, x: baseX + 1060, y: baseY + 1030, width: 380, height: 120 }, // sciana prawo / lewo
+        { id: 13, x: baseX + 1060, y: baseY + 1020, width: 380, height: 120 }, // sciana prawo / lewo
         { id: 14, x: baseX + 690, y: baseY + 870, width: 110, height: 250 }, // sciana prawo / lewo
-        { id: 15, x: baseX + 335, y: baseY + 800, width: 187, height: 65 }, // sciana prawo / lewo
+        { id: 15, x: baseX + 335, y: baseY + 790, width: 187, height: 65 }, // sciana prawo / lewo
         { id: 16, x: baseX + 470, y: baseY + 570, width: 215, height: 85 }, // sciana prawo / lewo
 
         //ouside
