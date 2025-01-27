@@ -77,6 +77,7 @@ const Structuress = ({
   selectedItemIndex,
   Close,
   setClose,
+  position,
 }: {
   building: any;
   activeStructure: string | null;
@@ -138,6 +139,7 @@ const Structuress = ({
   selectedItemIndex: any;
   Close: any;
   setClose: any;
+  position: any;
 }) => {
   const [SelectedOption] = useState<string>("");
 
@@ -152,6 +154,7 @@ const Structuress = ({
         SelectedOption={SelectedOption}
         FullInv={FullInv}
         activeStructure={activeStructure}
+        position={position}
       />
       <BlackSmith
         BlackSmithInterior={BlackSmithInterior}
@@ -202,6 +205,7 @@ const Structuress = ({
         selectedItemIndex={selectedItemIndex}
         Close={Close}
         setClose={setClose}
+        position={position}
       />
     </>
   );

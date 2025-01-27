@@ -10,6 +10,7 @@ const WeaponShop = ({
   setCount,
   FullInv,
   SelectedOption,
+  position,
 }: {
   interior: any;
   activeStructure: string | null;
@@ -19,6 +20,7 @@ const WeaponShop = ({
   setCount: any;
   FullInv: any;
   SelectedOption: any;
+  position: any;
 }) => {
   return (
     <>
@@ -46,7 +48,7 @@ const WeaponShop = ({
                 top: `${div.y}px`,
                 left: `${div.x}px`,
                 border: "2px solid black",
-                zIndex: 200, // Specjalny div będzie nad innymi
+                zIndex: `${position.y} `, // Specjalny div będzie nad innymi
                 opacity: 0.5,
                 pointerEvents: "none",
               }}
@@ -85,7 +87,7 @@ const WeaponShop = ({
                 left: `${div.x}px`,
                 width: `${div.width}px`,
                 height: `${div.height}px`,
-                zIndex: 1000, // Wyższy z-index dla drugiego obrazka
+                zIndex: `${position.y + 100} `, // Wyższy z-index dla drugiego obrazka
                 pointerEvents: "none",
                 display: div.isColliding ? "block" : "none",
               }}
@@ -106,7 +108,7 @@ const WeaponShop = ({
                 left: `${div.x}px`,
                 width: `${div.width}px`,
                 height: `${div.height}px`,
-                zIndex: 1000, // Wyższy z-index dla drugiego obrazka
+                zIndex: `${position.y + 100}`, // Wyższy z-index dla drugiego obrazka
                 pointerEvents: "none",
                 display: div.isColliding ? "block" : "none",
               }}

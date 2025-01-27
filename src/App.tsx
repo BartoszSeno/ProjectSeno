@@ -311,6 +311,11 @@ const App = () => {
     };
   }, [isKeyPressed]);
 
+  useEffect(() => {
+    const img = new Image();
+    img.src = backgroundColor; // Preload obrazu
+  }, [backgroundColor]);
+
   //=============================================
   //=============================================
 
@@ -721,8 +726,6 @@ const App = () => {
   //=================================================================================
   const [Close, setClose] = useState(false);
 
-  console.log(backgroundColor);
-
   return (
     <div
       style={{
@@ -791,6 +794,7 @@ const App = () => {
           selectedItemIndex={selectedItemIndex}
           Close={Close}
           setClose={setClose}
+          position={position}
         />
         <Player position={position} movment={backgroundColor} />
 

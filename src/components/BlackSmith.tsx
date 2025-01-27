@@ -59,6 +59,7 @@ const BlackSmith = ({
   selectedItemIndex,
   Close,
   setClose,
+  position,
 }: {
   BlackSmithInterior: any;
   //enchant
@@ -115,6 +116,7 @@ const BlackSmith = ({
   selectedItemIndex: any;
   Close: any;
   setClose: any;
+  position: any;
 }) => {
   //======================================================================
   //========================= FOR ENCHANT ================================
@@ -387,7 +389,7 @@ const BlackSmith = ({
                 left: `${div.x}px`,
                 width: `${div.width}px`,
                 height: `${div.height}px`,
-                zIndex: 1000, // Wyższy z-index dla drugiego obrazka
+                zIndex: `${position.y + 100} `, // Wyższy z-index dla drugiego obrazka
                 pointerEvents: "none",
                 display: div.isColliding ? "block" : "none",
               }}
@@ -408,7 +410,7 @@ const BlackSmith = ({
                 left: `${div.x}px`,
                 width: `${div.width}px`,
                 height: `${div.height}px`,
-                zIndex: 1000, // Wyższy z-index dla drugiego obrazka
+                zIndex: `${position.y + 100} `, // Wyższy z-index dla drugiego obrazka
                 pointerEvents: "none",
                 display: div.isColliding ? "block" : "none",
               }}
