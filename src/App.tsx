@@ -24,15 +24,11 @@ import { HelmetImageAndNameAndCost } from "./data/Helmet.tsx";
 import { FishArray } from "./data/fish.tsx";
 import MainEq from "./components/Equipment/index.tsx";
 import WeaponShop from "./components/Shop/WeaponShop/WShop.tsx";
+import Monster from "./components/Monster.tsx";
 
 const App = () => {
   // Sprawdź localStorage i ustaw pozycję początkową gracza
-  const savedPosition = JSON.parse(
-    localStorage.getItem("playerPosition") || "null"
-  );
-  const [position, setPosition] = useState(
-    savedPosition || defaultInitialPosition
-  );
+  const monsterPosition = { x: 2000, y: 2000 };
   const [building, setBuilding] = useState(buildings);
   const [activeStructure, setActiveStructure] = useState<string | null>(null);
   const isMoving = useRef<boolean>(false);
@@ -41,6 +37,12 @@ const App = () => {
   const [BlackSmithInterior, setBlackSmithInterior] =
     useState(BlackSmithInteriors);
 
+  const savedPosition = JSON.parse(
+    localStorage.getItem("playerPosition") || "null"
+  );
+  const [position, setPosition] = useState(
+    savedPosition || defaultInitialPosition
+  );
   const [backgroundColor, setBackgroundColor] = useState("blue");
   const [isKeyPressed, setIsKeyPressed] = useState(false);
   const keysPressed = useRef(new Set<string>());
@@ -797,7 +799,7 @@ const App = () => {
           position={position}
         />
         <Player position={position} movment={backgroundColor} />
-
+        <Monster position={position} monsterPosition={monsterPosition} />
         {/* Inne elementy */}
         <Borders allBordersBS={allBordersBS} />
         <Trees noEntryOnTree={noEntryOnTree} />
