@@ -5,11 +5,15 @@ const Monster = ({
   monsterPosition,
   setIsPlayerAttacking,
   setPlayerAttack,
+  currentHP,
+  setCurrentHP,
 }: {
   position: { x: number; y: number };
   monsterPosition: { x: number; y: number };
   setIsPlayerAttacking: any;
   setPlayerAttack: any;
+  currentHP: any;
+  setCurrentHP: any;
 }) => {
   const [color, setColor] = useState("grey"); // Domyślny kolor
   const [isWithinTolerance, setIsWithinTolerance] = useState(false); // Czy gracz jest w tolerancji

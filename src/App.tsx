@@ -14,7 +14,7 @@ import {
   keysToColors,
 } from "./config/config.tsx";
 import { BordersWS } from "./config/config.tsx";
-
+import HealthBar from "./components/hpBar.tsx";
 import { ShieldAndDaggerImageAndNameAndCost } from "./data/SubWeapon.tsx";
 import { GlovesImageAndNameAndCost } from "./data/Gloves.tsx";
 import { ShoesImageAndNameAndCost } from "./data/Shoes.tsx";
@@ -815,6 +815,8 @@ const App = () => {
           monsterPosition={monsterPosition}
           setIsPlayerAttacking={setIsPlayerAttacking}
           setPlayerAttack={setPlayerAttack}
+          currentHP={currentHP}
+          setCurrentHP={setCurrentHP}
         />
         {/* Inne elementy */}
         <Borders allBordersBS={allBordersBS} />
@@ -879,6 +881,11 @@ const App = () => {
           position={position}
           count={count}
           setClose={setClose}
+        />
+        <HealthBar
+          currentHP={currentHP}
+          maxHP={maxHP}
+          setCurrentHP={setCurrentHP}
         />
       </Map>
     </div>
