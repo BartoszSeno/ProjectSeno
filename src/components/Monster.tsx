@@ -20,7 +20,7 @@ const Monster = ({
   const [isAttackActivated, setIsAttackActivated] = useState(false); // Czy atak został aktywowany kliknięciem
   const [hp, setHp] = useState(10); // Punkty życia potwora
   const [attackInterval, setAttackInterval] = useState(1); // Interwał atakowania w sekundach
-  const [isMonsterAlive, serIsMonsterAlive] = useState<boolean>(true);
+  const [isMonsterAlive, setIsMonsterAlive] = useState<boolean>(true);
 
   const tolerance = 200; // Tolerancja dla detekcji osi
 
@@ -83,25 +83,46 @@ const Monster = ({
 
   // Zadawanie obrażeń co określony interwał czasu, gdy gracz jest w tolerancji i atak jest aktywny
   useEffect(() => {
-    let damageInterval: NodeJS.Timeout | null = null;
+    let monsterDamageInterval: NodeJS.Timeout | null = null;
+    let playerDamageInterval: NodeJS.Timeout | null = null;
 
+    // Sprawdzamy, czy gracz jest w tolerancji i atak jest aktywowany
     if (isWithinTolerance && isAttackActivated && hp > 0) {
-      damageInterval = setInterval(() => {
+      monsterDamageInterval = setInterval(() => {
         setHp((prevHp) => {
           const newHp = Math.max(prevHp - 1, 0);
           if (newHp === 0) {
-            console.log("monster has killed"); // Wyświetlanie komunikatu w konsoli
-            serIsMonsterAlive(false);
+            console.log("monster has killed");
+            setIsMonsterAlive(false);
+            // Tu możesz dodać, że potwór zginął
           }
           return newHp;
         });
-      }, attackInterval * 1000); // Czas w milisekundach
+      }, attackInterval * 1000); // Co atakInterval sekund
+
+      // Atak potwora na gracza
+      playerDamageInterval = setInterval(() => {
+        setCurrentHP((prevHP) => {
+          const newHP = prevHP - 10; // Potwór zadaje 10 obrażeń na sekundę
+          if (newHP <= 0) {
+            console.log("Player has died");
+            // Tu możesz dodać, że gracz zginął
+          }
+          return newHP;
+        });
+      }, 1000); // Co sekundę atak potwora na gracza
+    } else {
+      // Gdy gracz nie jest w tolerancji lub atak nie jest aktywowany
+      if (monsterDamageInterval) clearInterval(monsterDamageInterval);
+      if (playerDamageInterval) clearInterval(playerDamageInterval);
     }
 
+    // Czyszczenie interwałów przy zakończeniu
     return () => {
-      if (damageInterval) clearInterval(damageInterval); // Czyszczenie interwału
+      if (monsterDamageInterval) clearInterval(monsterDamageInterval);
+      if (playerDamageInterval) clearInterval(playerDamageInterval);
     };
-  }, [isWithinTolerance, isAttackActivated, hp, attackInterval]);
+  }, [isWithinTolerance, isAttackActivated, attackInterval, hp, currentHP]);
 
   // Funkcja wywoływana po kliknięciu
   const handleClick = () => {
