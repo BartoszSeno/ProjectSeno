@@ -3,9 +3,16 @@ import React from "react";
 interface PlayerProps {
   position: { x: number; y: number };
   movment: string;
+  IsPlayerAttacking: boolean;
+  PlayerAttack: string;
 }
 
-const Player: React.FC<PlayerProps> = ({ position, movment }) => {
+const Player: React.FC<PlayerProps> = ({
+  position,
+  movment,
+  IsPlayerAttacking,
+  PlayerAttack,
+}) => {
   return (
     <div
       style={{
@@ -16,7 +23,7 @@ const Player: React.FC<PlayerProps> = ({ position, movment }) => {
         left: `${position.x}px`,
         transform: "translate(-50%, -50%)",
         zIndex: `${position.y}`, // Wyższy indeks dla nadrzędnego diva
-        backgroundImage: `url(${movment})`,
+        backgroundImage: `url(${IsPlayerAttacking ? PlayerAttack : movment})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
         transition: "background-image 0.3s ease",

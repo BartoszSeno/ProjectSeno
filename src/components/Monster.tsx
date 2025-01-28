@@ -1,42 +1,147 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-type MonsterProps = {
-  position: { x: number; y: number }; // Pozycja gracza
-  monsterPosition: { x: number; y: number }; // Pozycja potwora
-};
-
-const Monster: React.FC<MonsterProps> = ({ position, monsterPosition }) => {
+const Monster = ({
+  position,
+  monsterPosition,
+  setIsPlayerAttacking,
+  setPlayerAttack,
+}: {
+  position: { x: number; y: number };
+  monsterPosition: { x: number; y: number };
+  setIsPlayerAttacking: any;
+  setPlayerAttack: any;
+}) => {
   const [color, setColor] = useState("grey"); // Domyślny kolor
+  const [isWithinTolerance, setIsWithinTolerance] = useState(false); // Czy gracz jest w tolerancji
+  const [isAttackActivated, setIsAttackActivated] = useState(false); // Czy atak został aktywowany kliknięciem
+  const [hp, setHp] = useState(10); // Punkty życia potwora
+  const [attackInterval, setAttackInterval] = useState(1); // Interwał atakowania w sekundach
+  const [isMonsterAlive, serIsMonsterAlive] = useState<boolean>(true);
 
   const tolerance = 200; // Tolerancja dla detekcji osi
 
-  const handleClick = () => {
+  // Obserwowanie pozycji gracza w stosunku do potwora
+  useEffect(() => {
     const dx = monsterPosition.x - position.x;
     const dy = monsterPosition.y - position.y;
 
-    // Sprawdzenie, czy gracz znajduje się w obrębie tolerancji
-    if (Math.abs(dx) <= tolerance && Math.abs(dy) <= tolerance) {
-      // Jeżeli gracz nie jest blisko osi, sprawdzamy czy jest w rogu
+    const withinTolerance =
+      Math.abs(dx) <= tolerance && Math.abs(dy) <= tolerance;
+
+    setIsWithinTolerance(withinTolerance);
+
+    // Jeśli gracz wyjdzie poza tolerancję, resetujemy atak
+    if (!withinTolerance) {
+      setPlayerAttack(""); // Usunięcie ataku
+      setIsAttackActivated(false); // Reset aktywacji ataku
+      setIsPlayerAttacking(false); // Resetujemy atak gracza
+    } else if (withinTolerance && isAttackActivated) {
+      // Automatyczna zmiana ataku, gdy gracz zmienia pozycję w tolerancji i atak jest aktywowany
       if (position.x < monsterPosition.x && position.y < monsterPosition.y) {
         setColor("red"); // Lewy górny róg
+        setPlayerAttack(
+          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightDownAttack.gif"
+        );
       } else if (
         position.x > monsterPosition.x &&
         position.y < monsterPosition.y
       ) {
         setColor("green"); // Prawy górny róg
+        setPlayerAttack(
+          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/leftDownAttack.gif"
+        );
       } else if (
         position.x < monsterPosition.x &&
         position.y > monsterPosition.y
       ) {
         setColor("purple"); // Lewy dolny róg
+        setPlayerAttack(
+          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightUpAttack.gif"
+        );
       } else if (
         position.x > monsterPosition.x &&
         position.y > monsterPosition.y
       ) {
         setColor("orange"); // Prawy dolny róg
+        setPlayerAttack(
+          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/LeftUpAttack.gif"
+        );
+      }
+    }
+  }, [
+    position,
+    monsterPosition,
+    tolerance,
+    setPlayerAttack,
+    setIsPlayerAttacking,
+    isAttackActivated,
+  ]);
+
+  // Zadawanie obrażeń co określony interwał czasu, gdy gracz jest w tolerancji i atak jest aktywny
+  useEffect(() => {
+    let damageInterval: NodeJS.Timeout | null = null;
+
+    if (isWithinTolerance && isAttackActivated && hp > 0) {
+      damageInterval = setInterval(() => {
+        setHp((prevHp) => {
+          const newHp = Math.max(prevHp - 1, 0);
+          if (newHp === 0) {
+            console.log("monster has killed"); // Wyświetlanie komunikatu w konsoli
+            serIsMonsterAlive(false);
+          }
+          return newHp;
+        });
+      }, attackInterval * 1000); // Czas w milisekundach
+    }
+
+    return () => {
+      if (damageInterval) clearInterval(damageInterval); // Czyszczenie interwału
+    };
+  }, [isWithinTolerance, isAttackActivated, hp, attackInterval]);
+
+  // Funkcja wywoływana po kliknięciu
+  const handleClick = () => {
+    if (isWithinTolerance) {
+      setIsAttackActivated(true); // Aktywujemy atak po kliknięciu
+      setIsPlayerAttacking(true); // Atak ustawiony na true po kliknięciu
+
+      // Ustawienie koloru i animacji ataku
+      if (position.x < monsterPosition.x && position.y < monsterPosition.y) {
+        setColor("red"); // Lewy górny róg
+        setPlayerAttack(
+          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightDownAttack.gif"
+        );
+      } else if (
+        position.x > monsterPosition.x &&
+        position.y < monsterPosition.y
+      ) {
+        setColor("green"); // Prawy górny róg
+        setPlayerAttack(
+          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/leftDownAttack.gif"
+        );
+      } else if (
+        position.x < monsterPosition.x &&
+        position.y > monsterPosition.y
+      ) {
+        setColor("purple"); // Lewy dolny róg
+        setPlayerAttack(
+          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightUpAttack.gif"
+        );
+      } else if (
+        position.x > monsterPosition.x &&
+        position.y > monsterPosition.y
+      ) {
+        setColor("orange"); // Prawy dolny róg
+        setPlayerAttack(
+          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/LeftUpAttack.gif"
+        );
       }
     }
   };
+
+  // Obliczanie szerokości zielonej i czerwonej części paska życia
+  const greenWidth = (hp / 10) * 100; // Szerokość zielonej części (w %)
+  const redWidth = 100 - greenWidth; // Szerokość czerwonej części (w %)
 
   return (
     <div
@@ -57,20 +162,59 @@ const Monster: React.FC<MonsterProps> = ({ position, monsterPosition }) => {
           borderRadius: "8px",
         }}
       ></div>
-      {/* Główny div z kolorowaniem */}
+
       <div
-        onClick={handleClick}
         style={{
-          width: "50px",
-          height: "50px",
-          backgroundColor: color,
           position: "absolute",
           top: "50%",
           left: "50%",
+          display: `${isMonsterAlive ? "flex" : "none"}`,
           transform: "translate(-50%, -50%)",
-          cursor: "pointer",
         }}
-      ></div>
+      >
+        {/* Pasek życia */}
+        <div
+          style={{
+            width: "80px", // Szerokość paska życia
+            height: "6px", // Wysokość paska życia
+            marginBottom: "80px", // Odstęp od głównego diva
+            display: "flex",
+          }}
+        >
+          {/* Zielona część paska */}
+          <div
+            style={{
+              width: `${greenWidth}%`,
+              height: "100%",
+              backgroundColor: "green",
+              transition: "width 0.5s ease", // Animacja zmniejszania paska
+            }}
+          ></div>
+          {/* Czerwona część paska */}
+          <div
+            style={{
+              width: `${redWidth}%`,
+              height: "100%",
+              backgroundColor: "red",
+              transition: "width 0.5s ease", // Animacja zwiększania czerwonej części
+            }}
+          ></div>
+        </div>
+        {/* Główny div z kolorowaniem */}
+        <div
+          onClick={handleClick}
+          style={{
+            width: "50px",
+            height: "50px",
+            backgroundColor: color,
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            cursor: isWithinTolerance ? "pointer" : "not-allowed",
+          }}
+        ></div>
+      </div>
     </div>
   );
 };

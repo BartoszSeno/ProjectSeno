@@ -37,6 +37,12 @@ const App = () => {
   const [BlackSmithInterior, setBlackSmithInterior] =
     useState(BlackSmithInteriors);
 
+  const [isPlayerAttacking, setIsPlayerAttacking] = useState<boolean | any>(
+    false
+  );
+
+  const [PlayerAttack, setPlayerAttack] = useState<string>("");
+
   const savedPosition = JSON.parse(
     localStorage.getItem("playerPosition") || "null"
   );
@@ -798,8 +804,18 @@ const App = () => {
           setClose={setClose}
           position={position}
         />
-        <Player position={position} movment={backgroundColor} />
-        <Monster position={position} monsterPosition={monsterPosition} />
+        <Player
+          position={position}
+          movment={backgroundColor}
+          IsPlayerAttacking={isPlayerAttacking}
+          PlayerAttack={PlayerAttack}
+        />
+        <Monster
+          position={position}
+          monsterPosition={monsterPosition}
+          setIsPlayerAttacking={setIsPlayerAttacking}
+          setPlayerAttack={setPlayerAttack}
+        />
         {/* Inne elementy */}
         <Borders allBordersBS={allBordersBS} />
         <Trees noEntryOnTree={noEntryOnTree} />
