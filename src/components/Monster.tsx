@@ -94,6 +94,7 @@ const Monster = ({
           if (newHp === 0) {
             console.log("monster has killed");
             setIsMonsterAlive(false);
+            setIsPlayerAttacking(false);
             // Tu możesz dodać, że potwór zginął
           }
           return newHp;
