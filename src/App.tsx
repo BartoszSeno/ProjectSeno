@@ -28,7 +28,7 @@ import Monster from "./components/Monster.tsx";
 
 const App = () => {
   // Sprawdź localStorage i ustaw pozycję początkową gracza
-  const monsterPosition = { x: 2000, y: 2000 };
+  const [monsterPosition, setMonsterPosition] = useState({ x: 3000, y: 3000 });
   const [building, setBuilding] = useState(buildings);
   const [activeStructure, setActiveStructure] = useState<string | null>(null);
   const isMoving = useRef<boolean>(false);
@@ -49,7 +49,9 @@ const App = () => {
   const [position, setPosition] = useState(
     savedPosition || defaultInitialPosition
   );
-  const [backgroundColor, setBackgroundColor] = useState("blue");
+  const [backgroundColor, setBackgroundColor] = useState(
+    "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Idle/DownIdle.gif"
+  );
   const [isKeyPressed, setIsKeyPressed] = useState(false);
   const keysPressed = useRef(new Set<string>());
   const lastCombination = useRef("");
@@ -817,6 +819,7 @@ const App = () => {
           setPlayerAttack={setPlayerAttack}
           currentHP={currentHP}
           setCurrentHP={setCurrentHP}
+          setMonsterPosition={setMonsterPosition}
         />
         {/* Inne elementy */}
         <Borders allBordersBS={allBordersBS} />
