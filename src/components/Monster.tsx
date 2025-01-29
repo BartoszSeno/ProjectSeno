@@ -2,304 +2,170 @@ import React, { useState, useEffect } from "react";
 
 const Monster = ({
   position,
-  monsterPosition,
   setIsPlayerAttacking,
   setPlayerAttack,
+  areaPosition,
+  setAreaPosition,
   currentHP,
   setCurrentHP,
-  setMonsterPosition,
-}: {
-  position: { x: number; y: number };
-  monsterPosition: { x: number; y: number };
-  setIsPlayerAttacking: any;
-  setPlayerAttack: any;
-  currentHP: any;
-  setCurrentHP: any;
-  setMonsterPosition: any;
 }) => {
-  const [color, setColor] = useState("grey"); // Domyślny kolor
-  const [isWithinTolerance, setIsWithinTolerance] = useState(false); // Czy gracz jest w tolerancji
-  const [isAttackActivated, setIsAttackActivated] = useState(false); // Czy atak został aktywowany kliknięciem
-  const [hp, setHp] = useState(10); // Punkty życia potwora
-  const [attackInterval, setAttackInterval] = useState(1); // Interwał atakowania w sekundach
-  const [isMonsterAlive, setIsMonsterAlive] = useState<boolean>(true);
-  const [currentMonsterPosition, setCurrentMonsterPosition] = useState({
-    x: monsterPosition.x,
-    y: monsterPosition.y,
-  });
+  const [monsters, setMonsters] = useState(
+    Array.from({ length: 3 }).map(() => ({
+      id: Math.random(),
+      color: "grey",
+      isWithinTolerance: false,
+      isAttackActivated: false,
+      hp: 10,
+      currentMonsterPosition: {
+        x: areaPosition.x + (Math.random() * 400 - 200),
+        y: areaPosition.y + (Math.random() * 400 - 200),
+      },
+    }))
+  );
 
-  const tolerance = 200; // Tolerancja dla detekcji osi
-  const movementAreaSize = { x: 1000, y: 1000 }; // Rozmiar obszaru poruszania się potwora
+  const tolerance = 200;
+  const movementAreaSize = { x: 1000, y: 1000 };
 
-  // Obserwowanie pozycji gracza w stosunku do potwora
   useEffect(() => {
-    const dx = currentMonsterPosition.x - position.x;
-    const dy = currentMonsterPosition.y - position.y;
+    setMonsters((prevMonsters) =>
+      prevMonsters.map((monster) => {
+        const dx = monster.currentMonsterPosition.x - position.x;
+        const dy = monster.currentMonsterPosition.y - position.y;
+        const withinTolerance =
+          Math.abs(dx) <= tolerance && Math.abs(dy) <= tolerance;
 
-    const withinTolerance =
-      Math.abs(dx) <= tolerance && Math.abs(dy) <= tolerance;
+        return {
+          ...monster,
+          isWithinTolerance: withinTolerance,
+          isAttackActivated: withinTolerance
+            ? monster.isAttackActivated
+            : false,
+        };
+      })
+    );
+  }, [position]);
 
-    setIsWithinTolerance(withinTolerance);
-
-    // Jeśli gracz wyjdzie poza tolerancję, resetujemy atak
-    if (!withinTolerance) {
-      setPlayerAttack(""); // Usunięcie ataku
-      setIsAttackActivated(false); // Reset aktywacji ataku
-      setIsPlayerAttacking(false); // Resetujemy atak gracza
-    } else if (withinTolerance && isAttackActivated) {
-      // Automatyczna zmiana ataku, gdy gracz zmienia pozycję w tolerancji i atak jest aktywowany
-      if (
-        position.x < currentMonsterPosition.x &&
-        position.y < currentMonsterPosition.y
-      ) {
-        setColor("red"); // Lewy górny róg
-        setPlayerAttack(
-          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightDownAttack.gif"
-        );
-      } else if (
-        position.x > currentMonsterPosition.x &&
-        position.y < currentMonsterPosition.y
-      ) {
-        setColor("green"); // Prawy górny róg
-        setPlayerAttack(
-          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/leftDownAttack.gif"
-        );
-      } else if (
-        position.x < currentMonsterPosition.x &&
-        position.y > currentMonsterPosition.y
-      ) {
-        setColor("purple"); // Lewy dolny róg
-        setPlayerAttack(
-          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightUpAttack.gif"
-        );
-      } else if (
-        position.x > currentMonsterPosition.x &&
-        position.y > currentMonsterPosition.y
-      ) {
-        setColor("orange"); // Prawy dolny róg
-        setPlayerAttack(
-          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/LeftUpAttack.gif"
-        );
-      }
-    }
-  }, [
-    position,
-    currentMonsterPosition,
-    tolerance,
-    setPlayerAttack,
-    setIsPlayerAttacking,
-    isAttackActivated,
-  ]);
-
-  // Zadawanie obrażeń co określony interwał czasu, gdy gracz jest w tolerancji i atak jest aktywny
   useEffect(() => {
-    let monsterDamageInterval: NodeJS.Timeout | null = null;
-    let playerDamageInterval: NodeJS.Timeout | null = null;
-
-    // Sprawdzamy, czy gracz jest w tolerancji i atak jest aktywowany
-    if (isWithinTolerance && isAttackActivated && hp > 0) {
-      monsterDamageInterval = setInterval(() => {
-        setHp((prevHp) => {
-          const newHp = Math.max(prevHp - 1, 0);
-          if (newHp === 0) {
-            console.log("monster has killed");
-            setIsMonsterAlive(false);
-            // Tu możesz dodać, że potwór zginął
-          }
-          return newHp;
-        });
-      }, attackInterval * 1000); // Co atakInterval sekund
-
-      // Atak potwora na gracza
-      playerDamageInterval = setInterval(() => {
-        setCurrentHP((prevHP) => {
-          const newHP = prevHP - 10; // Potwór zadaje 10 obrażeń na sekundę
-          if (newHP <= 0) {
-            console.log("Player has died");
-            // Tu możesz dodać, że gracz zginął
-          }
-          return newHP;
-        });
-      }, 1000); // Co sekundę atak potwora na gracza
-    } else {
-      // Gdy gracz nie jest w tolerancji lub atak nie jest aktywowany
-      if (monsterDamageInterval) clearInterval(monsterDamageInterval);
-      if (playerDamageInterval) clearInterval(playerDamageInterval);
-    }
-
-    // Czyszczenie interwałów przy zakończeniu
-    return () => {
-      if (monsterDamageInterval) clearInterval(monsterDamageInterval);
-      if (playerDamageInterval) clearInterval(playerDamageInterval);
-    };
-  }, [isWithinTolerance, isAttackActivated, attackInterval, hp, currentHP]);
-
-  // Losowe poruszanie się potwora w wyznaczonym obszarze
-  useEffect(() => {
-    const moveMonster = () => {
-      setCurrentMonsterPosition((prevPosition) => {
-        const newX = Math.max(
-          Math.min(
-            prevPosition.x + (Math.random() * 200 - 100),
-            monsterPosition.x + movementAreaSize.x / 2
-          ),
-          monsterPosition.x - movementAreaSize.x / 2
-        );
-        const newY = Math.max(
-          Math.min(
-            prevPosition.y + (Math.random() * 200 - 100),
-            monsterPosition.y + movementAreaSize.y / 2
-          ),
-          monsterPosition.y - movementAreaSize.y / 2
-        );
-        return { x: newX, y: newY };
-      });
+    const moveMonsters = () => {
+      setMonsters((prevMonsters) =>
+        prevMonsters.map((monster) => ({
+          ...monster,
+          currentMonsterPosition: {
+            x: Math.max(
+              Math.min(
+                monster.currentMonsterPosition.x + (Math.random() * 200 - 100),
+                areaPosition.x + movementAreaSize.x / 2
+              ),
+              areaPosition.x - movementAreaSize.x / 2
+            ),
+            y: Math.max(
+              Math.min(
+                monster.currentMonsterPosition.y + (Math.random() * 200 - 100),
+                areaPosition.y + movementAreaSize.y / 2
+              ),
+              areaPosition.y - movementAreaSize.y / 2
+            ),
+          },
+        }))
+      );
     };
 
-    const interval = setInterval(moveMonster, 1000); // Potwór porusza się co sekundę
+    const interval = setInterval(moveMonsters, 1000);
+    return () => clearInterval(interval);
+  }, [areaPosition]);
 
-    return () => clearInterval(interval); // Czyszczenie interwału przy odmontowaniu komponentu
-  }, [movementAreaSize, monsterPosition]);
+  const handleClick = (id) => {
+    setMonsters((prevMonsters) =>
+      prevMonsters.map((monster) => {
+        if (monster.id === id && monster.isWithinTolerance) {
+          setIsPlayerAttacking(true);
+          let attackUrl = "";
+          let attackColor = "grey";
 
-  // Funkcja wywoływana po kliknięciu
-  const handleClick = () => {
-    if (isWithinTolerance) {
-      setIsAttackActivated(true); // Aktywujemy atak po kliknięciu
-      setIsPlayerAttacking(true); // Atak ustawiony na true po kliknięciu
+          if (
+            position.x < monster.currentMonsterPosition.x &&
+            position.y < monster.currentMonsterPosition.y
+          ) {
+            attackColor = "red";
+            attackUrl =
+              "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightDownAttack.gif";
+          } else if (
+            position.x > monster.currentMonsterPosition.x &&
+            position.y < monster.currentMonsterPosition.y
+          ) {
+            attackColor = "green";
+            attackUrl =
+              "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/leftDownAttack.gif";
+          } else if (
+            position.x < monster.currentMonsterPosition.x &&
+            position.y > monster.currentMonsterPosition.y
+          ) {
+            attackColor = "purple";
+            attackUrl =
+              "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightUpAttack.gif";
+          } else if (
+            position.x > monster.currentMonsterPosition.x &&
+            position.y > monster.currentMonsterPosition.y
+          ) {
+            attackColor = "orange";
+            attackUrl =
+              "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/LeftUpAttack.gif";
+          }
 
-      // Ustawienie koloru i animacji ataku
-      if (
-        position.x < currentMonsterPosition.x &&
-        position.y < currentMonsterPosition.y
-      ) {
-        setColor("red"); // Lewy górny róg
-        setPlayerAttack(
-          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightDownAttack.gif"
-        );
-      } else if (
-        position.x > currentMonsterPosition.x &&
-        position.y < currentMonsterPosition.y
-      ) {
-        setColor("green"); // Prawy górny róg
-        setPlayerAttack(
-          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/leftDownAttack.gif"
-        );
-      } else if (
-        position.x < currentMonsterPosition.x &&
-        position.y > currentMonsterPosition.y
-      ) {
-        setColor("purple"); // Lewy dolny róg
-        setPlayerAttack(
-          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightUpAttack.gif"
-        );
-      } else if (
-        position.x > currentMonsterPosition.x &&
-        position.y > currentMonsterPosition.y
-      ) {
-        setColor("orange"); // Prawy dolny róg
-        setPlayerAttack(
-          "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/LeftUpAttack.gif"
-        );
-      }
-    }
+          setPlayerAttack(attackUrl);
+          return { ...monster, isAttackActivated: true, color: attackColor };
+        }
+        return monster;
+      })
+    );
   };
-
-  // Obliczanie szerokości zielonej i czerwonej części paska życia
-  const greenWidth = (hp / 10) * 100; // Szerokość zielonej części (w %)
-  const redWidth = 100 - greenWidth; // Szerokość czerwonej części (w %)
 
   return (
     <div
       style={{
         position: "absolute",
-        top: monsterPosition.y - movementAreaSize.y / 2,
-        left: monsterPosition.x - movementAreaSize.x / 2,
+        top: areaPosition.y - movementAreaSize.y / 2,
+        left: areaPosition.x - movementAreaSize.x / 2,
         width: `${movementAreaSize.x}px`,
         height: `${movementAreaSize.y}px`,
-        border: "2px dashed rgba(0, 0, 0, 0.5)", // Obszar poruszania się potwora
+        border: "2px dashed rgba(0, 0, 0, 0.5)",
         overflow: "hidden",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: `${
-            currentMonsterPosition.y -
-            monsterPosition.y +
-            movementAreaSize.y / 2
-          }px`,
-          left: `${
-            currentMonsterPosition.x -
-            monsterPosition.x +
-            movementAreaSize.x / 2
-          }px`,
-          transform: "translate(-50%, -50%)",
-          borderRadius: "8px",
-        }}
-      >
-        {/* Obramowanie przeniesione do osobnego div */}
+      {monsters.map((monster) => (
         <div
-          style={{
-            width: `${50 + tolerance * 2}px`, // Dostosowanie szerokości do tolerancji
-            height: `${50 + tolerance * 2}px`, // Dostosowanie wysokości do tolerancji
-            border: `2px solid rgba(0, 0, 0, 0.2)`,
-            borderRadius: "8px",
-          }}
-        ></div>
-
-        <div
+          key={monster.id}
           style={{
             position: "absolute",
-            top: "50%",
-            left: "50%",
-            display: `${isMonsterAlive ? "flex" : "none"}`,
+            top: `${
+              monster.currentMonsterPosition.y -
+              areaPosition.y +
+              movementAreaSize.y / 2
+            }px`,
+            left: `${
+              monster.currentMonsterPosition.x -
+              areaPosition.x +
+              movementAreaSize.x / 2
+            }px`,
             transform: "translate(-50%, -50%)",
+            borderRadius: "8px",
           }}
         >
-          {/* Pasek życia */}
           <div
-            style={{
-              width: "80px", // Szerokość paska życia
-              height: "6px", // Wysokość paska życia
-              marginBottom: "80px", // Odstęp od głównego diva
-              display: "flex",
-            }}
-          >
-            {/* Zielona część paska */}
-            <div
-              style={{
-                width: `${greenWidth}%`,
-                height: "100%",
-                backgroundColor: "green",
-                transition: "width 0.5s ease", // Animacja zmniejszania paska
-              }}
-            ></div>
-            {/* Czerwona część paska */}
-            <div
-              style={{
-                width: `${redWidth}%`,
-                height: "100%",
-                backgroundColor: "red",
-                transition: "width 0.5s ease", // Animacja zwiększania czerwonej części
-              }}
-            ></div>
-          </div>
-          {/* Główny div z kolorowaniem */}
-          <div
-            onClick={handleClick}
             style={{
               width: "50px",
               height: "50px",
-              backgroundColor: color,
+              backgroundColor: monster.color,
               position: "absolute",
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              cursor: isWithinTolerance ? "pointer" : "not-allowed",
+              cursor: monster.isWithinTolerance ? "pointer" : "not-allowed",
             }}
+            onClick={() => handleClick(monster.id)}
           ></div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

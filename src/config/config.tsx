@@ -199,7 +199,7 @@ export const BordersWS = Interiors.flatMap(
 
 function BlackSmith(): InteriorStructures[] {
   const baseX = 40;
-  const baseY = 100;
+  const baseY = 2000;
 
   return [
     {

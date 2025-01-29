@@ -29,6 +29,8 @@ import Monster from "./components/Monster.tsx";
 const App = () => {
   // Sprawdź localStorage i ustaw pozycję początkową gracza
   const [monsterPosition, setMonsterPosition] = useState({ x: 3000, y: 3000 });
+  const [areaPosition, setAreaPosition] = useState({ x: 3000, y: 3000 });
+
   const [building, setBuilding] = useState(buildings);
   const [activeStructure, setActiveStructure] = useState<string | null>(null);
   const isMoving = useRef<boolean>(false);
@@ -814,12 +816,12 @@ const App = () => {
         />
         <Monster
           position={position}
-          monsterPosition={monsterPosition}
           setIsPlayerAttacking={setIsPlayerAttacking}
           setPlayerAttack={setPlayerAttack}
           currentHP={currentHP}
           setCurrentHP={setCurrentHP}
-          setMonsterPosition={setMonsterPosition}
+          areaPosition={areaPosition}
+          setAreaPosition={setAreaPosition}
         />
         {/* Inne elementy */}
         <Borders allBordersBS={allBordersBS} />
