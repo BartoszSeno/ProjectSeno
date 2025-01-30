@@ -65,6 +65,7 @@ const Monster = ({
   const [monsters, setMonsters] = useState(generateMonsters(areaPosition));
   const [damageTimer, setDamageTimer] = useState(null);
   const [playerDamageTimer, setPlayerDamageTimer] = useState(null);
+  const [idMonster, setIdMonster] = useState<any>(null);
 
   const tolerance = 200;
   const movementAreaSize = { x: 1000, y: 1000 };
@@ -160,6 +161,7 @@ const Monster = ({
     setMonsters((prevMonsters) =>
       prevMonsters.map((monster) => {
         if (monster.id === id && monster.isWithinTolerance && !monster.isDead) {
+          setIdMonster(monster.id);
           setIsPlayerAttacking(true);
           let attackUrl = "";
           let attackColor = "grey";
@@ -245,7 +247,7 @@ const Monster = ({
                 style={{
                   width: "60px",
                   height: "6px",
-                  backgroundColor: "#ddd",
+                  backgroundColor: "red",
                   position: "absolute",
                   top: "-52px",
                   left: "50%",
@@ -258,9 +260,7 @@ const Monster = ({
                   style={{
                     width: `${(monster.hp / monster.maxHp) * 100}%`,
                     height: "100%",
-                    backgroundColor: `rgb(${
-                      255 - (monster.hp / monster.maxHp) * 255
-                    }, ${(monster.hp / monster.maxHp) * 255}, 0)`,
+                    backgroundColor: `green`,
                     transition: "width 0.3s",
                   }}
                 ></div>
