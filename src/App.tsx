@@ -821,7 +821,6 @@ const App = () => {
           currentHP={currentHP}
           setCurrentHP={setCurrentHP}
           areaPosition={areaPosition}
-          setAreaPosition={setAreaPosition}
         />
         {/* Inne elementy */}
         <Borders allBordersBS={allBordersBS} />
