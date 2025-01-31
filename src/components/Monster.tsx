@@ -128,14 +128,19 @@ const Monster = ({
         return (
           prevHP -
           monsters.reduce((totalDmg, monster) => {
-            if (monster.isWithinTolerance && !monster.isDead) {
+            // Nowy warunek: Potwór musi być atakowany przez gracza!
+            if (
+              monster.isWithinTolerance &&
+              monster.isAttackActivated &&
+              !monster.isDead
+            ) {
               return totalDmg + monster.dmg;
             }
             return totalDmg;
           }, 0)
-        ); // Potwór zadaje obrażenia graczowi na podstawie monster.dmg
+        );
       });
-    }, 1000); // Potwór zadaje obrażenia co 1 sekundę
+    }, 1000); // Obrażenia co sekundę
 
     return () => clearInterval(timer);
   }, [monsters, currentHP, setCurrentHP]);
