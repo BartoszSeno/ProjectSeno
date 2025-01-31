@@ -87,11 +87,7 @@ const Monster = ({
 
   // Zadaj obrażenia potworowi co sekundę, gdy gracz wchodzi w zasięg
   useEffect(() => {
-    if (damageTimer) {
-      clearInterval(damageTimer);
-    }
-
-    const timer = setInterval(() => {
+    const damageInterval = setInterval(() => {
       setMonsters((prevMonsters) =>
         prevMonsters.map((monster) => {
           if (
@@ -111,18 +107,14 @@ const Monster = ({
           return monster;
         })
       );
-    }, 1000); // Gracz zadaje obrażenia co 1 sekundę
+    }, 1000); // Obrażenia co 1 sekundę
 
-    return () => clearInterval(timer);
-  }, [monsters]);
+    return () => clearInterval(damageInterval);
+  }, [idMonster]); // Atak działa, dopóki gracz atakuje jakiegokolwiek potwora
 
   // Zadaj obrażenia graczowi przez potwora
   useEffect(() => {
-    if (playerDamageTimer) {
-      clearInterval(playerDamageTimer);
-    }
-
-    const timer = setInterval(() => {
+    const monsterDamageInterval = setInterval(() => {
       setCurrentHP((prevHP) => {
         if (prevHP <= 1) {
           console.log("Gracz umarł");
@@ -132,22 +124,17 @@ const Monster = ({
         return (
           prevHP -
           monsters.reduce((totalDmg, monster) => {
-            // Nowy warunek: Potwór musi być atakowany przez gracza!
-            if (
-              monster.isWithinTolerance &&
-              monster.isAttackActivated &&
-              !monster.isDead
-            ) {
+            if (monster.isWithinTolerance && !monster.isDead) {
               return totalDmg + monster.dmg;
             }
             return totalDmg;
           }, 0)
-        );
+        ); // Potwory zadają obrażenia co sekundę
       });
-    }, 1000); // Obrażenia co sekundę
+    }, 1000);
 
-    return () => clearInterval(timer);
-  }, [monsters, currentHP, setCurrentHP]);
+    return () => clearInterval(monsterDamageInterval);
+  }, [monsters]); // Obrażenia działają ciągle, nawet gdy gracz się porusza
 
   useEffect(() => {
     const moveMonsters = () => {
