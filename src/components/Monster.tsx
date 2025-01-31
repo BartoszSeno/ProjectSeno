@@ -141,6 +141,41 @@ const Monster = ({
   }, [monsters, currentHP, setCurrentHP]);
 
   useEffect(() => {
+    const moveMonsters = () => {
+      setMonsters((prevMonsters) =>
+        prevMonsters.map((monster) => {
+          if (!monster.isMoving || monster.isDead) return monster; // Nie ruszaj martwych lub atakujących potworów
+
+          // Nowa losowa pozycja w zakresie areny
+          const newX =
+            monster.currentMonsterPosition.x + (Math.random() * 100 - 50); // Przesunięcie o max 50px
+          const newY =
+            monster.currentMonsterPosition.y + (Math.random() * 100 - 50); // Przesunięcie o max 50px
+
+          // Zapewnienie, że potwór pozostanie w arenie
+          const boundedX = Math.max(
+            areaPosition.x - movementAreaSize.x / 2,
+            Math.min(newX, areaPosition.x + movementAreaSize.x / 2)
+          );
+          const boundedY = Math.max(
+            areaPosition.y - movementAreaSize.y / 2,
+            Math.min(newY, areaPosition.y + movementAreaSize.y / 2)
+          );
+
+          return {
+            ...monster,
+            currentMonsterPosition: { x: boundedX, y: boundedY },
+          };
+        })
+      );
+    };
+
+    const movementInterval = setInterval(moveMonsters, 1000); // Ruch co 1 sekundę
+
+    return () => clearInterval(movementInterval);
+  }, [monsters]); // Odpala się przy zmianie stanu potworów
+
+  useEffect(() => {
     setMonsters((prevMonsters) =>
       prevMonsters.map((monster) => {
         const dx = monster.currentMonsterPosition.x - position.x;
