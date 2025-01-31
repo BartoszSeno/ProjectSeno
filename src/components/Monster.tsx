@@ -66,6 +66,10 @@ const Monster = ({
   const [damageTimer, setDamageTimer] = useState(null);
   const [playerDamageTimer, setPlayerDamageTimer] = useState(null);
   const [idMonster, setIdMonster] = useState<any>(null);
+  const [attackDirection, setAttackDirection] = useState<{
+    color: string;
+    url: string;
+  } | null>(null);
 
   const tolerance = 200;
   const movementAreaSize = { x: 1000, y: 1000 };
@@ -197,11 +201,54 @@ const Monster = ({
     );
   }, [position]);
 
+  useEffect(() => {
+    if (idMonster === null) return; // Jeśli żaden potwór nie jest atakowany, nic nie rób
+
+    const monster = monsters.find((m) => m.id === idMonster);
+    if (!monster) return; // Jeśli potwór nie istnieje, zakończ
+
+    let newAttackUrl = "";
+    let newAttackColor = "grey";
+
+    if (
+      position.x < monster.currentMonsterPosition.x &&
+      position.y < monster.currentMonsterPosition.y
+    ) {
+      newAttackColor = "red";
+      newAttackUrl =
+        "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightDownAttack.gif";
+    } else if (
+      position.x > monster.currentMonsterPosition.x &&
+      position.y < monster.currentMonsterPosition.y
+    ) {
+      newAttackColor = "green";
+      newAttackUrl =
+        "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/leftDownAttack.gif";
+    } else if (
+      position.x < monster.currentMonsterPosition.x &&
+      position.y > monster.currentMonsterPosition.y
+    ) {
+      newAttackColor = "purple";
+      newAttackUrl =
+        "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/RightUpAttack.gif";
+    } else if (
+      position.x > monster.currentMonsterPosition.x &&
+      position.y > monster.currentMonsterPosition.y
+    ) {
+      newAttackColor = "orange";
+      newAttackUrl =
+        "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/LeftUpAttack.gif";
+    }
+
+    setAttackDirection({ color: newAttackColor, url: newAttackUrl });
+    setPlayerAttack(newAttackUrl);
+  }, [position, idMonster, monsters]); // Uruchamia się, gdy zmienia się pozycja gracza, ID potwora lub lista potworów
+
   const handleClick = (id) => {
     setMonsters((prevMonsters) =>
       prevMonsters.map((monster) => {
         if (monster.id === id && monster.isWithinTolerance && !monster.isDead) {
-          setIdMonster(monster.id);
+          setIdMonster(id);
           setIsPlayerAttacking(true);
           let attackUrl = "";
           let attackColor = "grey";
