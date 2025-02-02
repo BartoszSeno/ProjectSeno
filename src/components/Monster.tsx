@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export interface MonsterData {
   id: number;
@@ -9,12 +9,21 @@ export interface MonsterData {
   maxHp: number;
   isMoving: boolean;
   dmg: number;
-  currentMonsterPosition: any;
+  currentMonsterPosition: { x: number; y: number };
   attackInterval: number;
-  isDead: boolean; // Dodajemy stan martwego potwora
+  isDead: boolean;
 }
 
-const Monster = ({
+interface MonsterProps {
+  position: { x: number; y: number };
+  setIsPlayerAttacking: (value: boolean) => void;
+  setPlayerAttack: (url: string) => void;
+  areaPosition: { x: number; y: number };
+  currentHP: number;
+  setCurrentHP: any;
+}
+
+const Monster: React.FC<MonsterProps> = ({
   position,
   setIsPlayerAttacking,
   setPlayerAttack,
@@ -22,6 +31,10 @@ const Monster = ({
   currentHP,
   setCurrentHP,
 }) => {
+  const tolerance = 200;
+  const movementAreaSize = { x: 1000, y: 1000 };
+
+  // Inicjalizacja potworów
   const generateMonsters = (areaPosition: {
     x: number;
     y: number;
@@ -35,13 +48,13 @@ const Monster = ({
         hp: 10,
         maxHp: 10,
         isMoving: true,
-        dmg: 2, // Przykładowe obrażenia potwora
+        dmg: 2,
         currentMonsterPosition: {
           x: areaPosition.x + (Math.random() * 400 - 200),
           y: areaPosition.y + (Math.random() * 400 - 200),
         },
         attackInterval: 1,
-        isDead: false, // Potwór nie jest martwy na początku
+        isDead: false,
       },
       {
         id: 2,
@@ -51,30 +64,33 @@ const Monster = ({
         hp: 10,
         maxHp: 10,
         isMoving: true,
-        dmg: 2, // Przykładowe obrażenia potwora
+        dmg: 2,
         currentMonsterPosition: {
           x: areaPosition.x + (Math.random() * 400 - 200),
           y: areaPosition.y + (Math.random() * 400 - 200),
         },
         attackInterval: 1,
-        isDead: false, // Potwór nie jest martwy na początku
+        isDead: false,
       },
     ];
   };
 
-  const [monsters, setMonsters] = useState(generateMonsters(areaPosition));
-  const [damageTimer, setDamageTimer] = useState(null);
-  const [playerDamageTimer, setPlayerDamageTimer] = useState(null);
-  const [idMonster, setIdMonster] = useState<any>(null);
+  const [monsters, setMonsters] = useState<MonsterData[]>(
+    generateMonsters(areaPosition)
+  );
+  // Ref do aktualnego stanu potworów – przydatny w interwałach aby mieć najnowszy stan
+  const monstersRef = useRef(monsters);
+  useEffect(() => {
+    monstersRef.current = monsters;
+  }, [monsters]);
+
+  const [idMonster, setIdMonster] = useState<number | null>(null);
   const [attackDirection, setAttackDirection] = useState<{
     color: string;
     url: string;
   } | null>(null);
 
-  const tolerance = 200;
-  const movementAreaSize = { x: 1000, y: 1000 };
-
-  // Nowy stan dla obrażeń gracza
+  // Ustalanie czy gracz atakuje – sprawdzamy, czy którykolwiek potwór w zasięgu ataku
   useEffect(() => {
     const isAnyMonsterWithinTolerance = monsters.some(
       (monster) =>
@@ -85,11 +101,11 @@ const Monster = ({
     setIsPlayerAttacking(isAnyMonsterWithinTolerance);
   }, [monsters, setIsPlayerAttacking]);
 
-  // Zadaj obrażenia potworowi co sekundę, gdy gracz wchodzi w zasięg
+  // *** INTERWAŁ - GRACZ ZADAJE OBRAŻENIA POTWOROM ***
   useEffect(() => {
     const damageInterval = setInterval(() => {
-      setMonsters((prevMonsters) =>
-        prevMonsters.map((monster) => {
+      setMonsters((prevMonsters) => {
+        const updatedMonsters = prevMonsters.map((monster) => {
           if (
             monster.isWithinTolerance &&
             monster.isAttackActivated &&
@@ -97,58 +113,56 @@ const Monster = ({
           ) {
             if (monster.hp <= 1) {
               console.log("Potwór umarł");
-              return { ...monster, hp: 0, isMoving: false, isDead: true }; // Potwór umiera
+              return { ...monster, hp: 0, isMoving: false, isDead: true };
             }
-            return {
-              ...monster,
-              hp: monster.hp - 1, // Gracz zadaje 1 obrażenie na sekundę
-            };
+            return { ...monster, hp: monster.hp - 1 };
           }
           return monster;
-        })
-      );
-    }, 1000); // Obrażenia co 1 sekundę
-
+        });
+        monstersRef.current = updatedMonsters;
+        return updatedMonsters;
+      });
+    }, 1000);
     return () => clearInterval(damageInterval);
-  }, [idMonster]); // Atak działa, dopóki gracz atakuje jakiegokolwiek potwora
+  }, []); // Uruchom tylko raz
 
-  // Zadaj obrażenia graczowi przez potwora
+  // *** INTERWAŁ - POTWORY ZADAJĄ OBRAŻENIA GRACZOWI ***
   useEffect(() => {
     const monsterDamageInterval = setInterval(() => {
       setCurrentHP((prevHP) => {
-        if (prevHP <= 1) {
+        const totalDamage = monstersRef.current.reduce((total, monster) => {
+          // Gracz otrzymuje obrażenia tylko od aktywnych potworów
+          if (
+            monster.isWithinTolerance &&
+            monster.isAttackActivated &&
+            !monster.isDead
+          ) {
+            return total + monster.dmg;
+          }
+          return total;
+        }, 0);
+        if (prevHP - totalDamage <= 0) {
           console.log("Gracz umarł");
-          return 0; // Gracz umiera
+          return 0;
         }
-
-        return (
-          prevHP -
-          monsters.reduce((totalDmg, monster) => {
-            if (monster.isWithinTolerance && !monster.isDead) {
-              return totalDmg + monster.dmg;
-            }
-            return totalDmg;
-          }, 0)
-        ); // Potwory zadają obrażenia co sekundę
+        return prevHP - totalDamage;
       });
     }, 1000);
-
     return () => clearInterval(monsterDamageInterval);
-  }, [monsters]); // Obrażenia działają ciągle, nawet gdy gracz się porusza
+  }, [setCurrentHP]);
 
+  // *** INTERWAŁ - RUCH POTWORÓW ***
   useEffect(() => {
-    const moveMonsters = () => {
-      setMonsters((prevMonsters) =>
-        prevMonsters.map((monster) => {
-          if (!monster.isMoving || monster.isDead) return monster; // Nie ruszaj martwych lub atakujących potworów
-
-          // Nowa losowa pozycja w zakresie areny
+    const movementInterval = setInterval(() => {
+      setMonsters((prevMonsters) => {
+        const updatedMonsters = prevMonsters.map((monster) => {
+          if (!monster.isMoving || monster.isDead) return monster;
+          // Oblicz nową pozycję z losowym przesunięciem
           const newX =
-            monster.currentMonsterPosition.x + (Math.random() * 100 - 50); // Przesunięcie o max 50px
+            monster.currentMonsterPosition.x + (Math.random() * 100 - 50);
           const newY =
-            monster.currentMonsterPosition.y + (Math.random() * 100 - 50); // Przesunięcie o max 50px
-
-          // Zapewnienie, że potwór pozostanie w arenie
+            monster.currentMonsterPosition.y + (Math.random() * 100 - 50);
+          // Upewnij się, że potwór pozostaje w obrębie areny
           const boundedX = Math.max(
             areaPosition.x - movementAreaSize.x / 2,
             Math.min(newX, areaPosition.x + movementAreaSize.x / 2)
@@ -157,43 +171,42 @@ const Monster = ({
             areaPosition.y - movementAreaSize.y / 2,
             Math.min(newY, areaPosition.y + movementAreaSize.y / 2)
           );
-
           return {
             ...monster,
             currentMonsterPosition: { x: boundedX, y: boundedY },
           };
-        })
-      );
-    };
-
-    const movementInterval = setInterval(moveMonsters, 1000); // Ruch co 1 sekundę
-
+        });
+        monstersRef.current = updatedMonsters;
+        return updatedMonsters;
+      });
+    }, 1000);
     return () => clearInterval(movementInterval);
-  }, [monsters]); // Odpala się przy zmianie stanu potworów
+  }, [areaPosition]);
 
+  // *** AKTUALIZACJA ZASIĘGU POTWORA WZGLĘDEM POZYCJI GRACZA ***
   useEffect(() => {
-    setMonsters((prevMonsters) =>
-      prevMonsters.map((monster) => {
+    setMonsters((prevMonsters) => {
+      const updatedMonsters = prevMonsters.map((monster) => {
         const dx = monster.currentMonsterPosition.x - position.x;
         const dy = monster.currentMonsterPosition.y - position.y;
         const withinTolerance =
           Math.abs(dx) <= tolerance && Math.abs(dy) <= tolerance;
-
         return {
           ...monster,
           isWithinTolerance: withinTolerance,
           isMoving: withinTolerance ? !monster.isAttackActivated : true,
         };
-      })
-    );
+      });
+      monstersRef.current = updatedMonsters;
+      return updatedMonsters;
+    });
   }, [position]);
 
+  // *** USTAWIENIE KIERUNKU ATAKU GRACZA WZGLĘDEM WYBRANEGO POTWORA ***
   useEffect(() => {
-    if (idMonster === null) return; // Jeśli żaden potwór nie jest atakowany, nic nie rób
-
+    if (idMonster === null) return;
     const monster = monsters.find((m) => m.id === idMonster);
-    if (!monster) return; // Jeśli potwór nie istnieje, zakończ
-
+    if (!monster) return;
     let newAttackUrl = "";
     let newAttackColor = "grey";
 
@@ -226,12 +239,12 @@ const Monster = ({
       newAttackUrl =
         "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/LeftUpAttack.gif";
     }
-
     setAttackDirection({ color: newAttackColor, url: newAttackUrl });
     setPlayerAttack(newAttackUrl);
-  }, [position, idMonster, monsters]); // Uruchamia się, gdy zmienia się pozycja gracza, ID potwora lub lista potworów
+  }, [position, idMonster, monsters, setPlayerAttack]);
 
-  const handleClick = (id) => {
+  // *** OBSŁUGA KLIKU NA POTWORA ***
+  const handleClick = (id: number) => {
     setMonsters((prevMonsters) =>
       prevMonsters.map((monster) => {
         if (monster.id === id && monster.isWithinTolerance && !monster.isDead) {
@@ -269,7 +282,6 @@ const Monster = ({
             attackUrl =
               "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/LeftUpAttack.gif";
           }
-
           setPlayerAttack(attackUrl);
           return {
             ...monster,
@@ -297,7 +309,7 @@ const Monster = ({
     >
       {monsters.map(
         (monster) =>
-          !monster.isDead && ( // Ukryj martwego potwora
+          !monster.isDead && (
             <div
               key={monster.id}
               style={{
@@ -334,7 +346,7 @@ const Monster = ({
                   style={{
                     width: `${(monster.hp / monster.maxHp) * 100}%`,
                     height: "100%",
-                    backgroundColor: `green`,
+                    backgroundColor: "green",
                     transition: "width 0.3s",
                   }}
                 ></div>
