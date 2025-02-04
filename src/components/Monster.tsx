@@ -12,6 +12,7 @@ export interface MonsterData {
   currentMonsterPosition: { x: number; y: number };
   attackInterval: number;
   isDead: boolean;
+  targetPosition: any;
 }
 
 interface MonsterProps {
@@ -41,14 +42,18 @@ const Monster: React.FC<MonsterProps> = ({
   const tolerance = 250;
   const movementAreaSize = { x: 1000, y: 1000 };
 
-  // Funkcja generująca potwory
+  // Generowanie potworów – dodatkowo ustawiamy targetPosition na początkową pozycję
   const generateMonsters = (areaPos: {
     x: number;
     y: number;
   }): MonsterData[] => {
-    return [
-      {
-        id: 1,
+    const createMonster = (id: number): MonsterData => {
+      const initialPos = {
+        x: areaPos.x + (Math.random() * 400 - 200),
+        y: areaPos.y + (Math.random() * 400 - 200),
+      };
+      return {
+        id,
         color: "grey",
         isWithinTolerance: false,
         isAttackActivated: false,
@@ -56,30 +61,13 @@ const Monster: React.FC<MonsterProps> = ({
         maxHp: 10,
         isMoving: true,
         dmg: 2,
-        currentMonsterPosition: {
-          x: areaPos.x + (Math.random() * 400 - 200),
-          y: areaPos.y + (Math.random() * 400 - 200),
-        },
+        currentMonsterPosition: initialPos,
+        targetPosition: initialPos, // na początku target to aktualna pozycja
         attackInterval: 1,
         isDead: false,
-      },
-      {
-        id: 2,
-        color: "grey",
-        isWithinTolerance: false,
-        isAttackActivated: false,
-        hp: 10,
-        maxHp: 10,
-        isMoving: true,
-        dmg: 2,
-        currentMonsterPosition: {
-          x: areaPos.x + (Math.random() * 400 - 200),
-          y: areaPos.y + (Math.random() * 400 - 200),
-        },
-        attackInterval: 1,
-        isDead: false,
-      },
-    ];
+      };
+    };
+    return [createMonster(1), createMonster(2)];
   };
 
   const [monsters, setMonsters] = useState<MonsterData[]>(
@@ -237,34 +225,94 @@ const Monster: React.FC<MonsterProps> = ({
     return () => clearInterval(damageInterval);
   }, []);
 
+  // Funkcja pomocnicza do generowania nowego celu dla potwora w obrębie areny
+  // Funkcja pomocnicza do generowania nowego celu dla potwora w obrębie areny
+  const generateNewTarget = (currentPos: {
+    x: number;
+    y: number;
+  }): { x: number; y: number } => {
+    const randomOffsetX = Math.random() * 400 - 200;
+    const randomOffsetY = Math.random() * 400 - 200;
+    const newX = currentPos.x + randomOffsetX;
+    const newY = currentPos.y + randomOffsetY;
+    const boundedX = Math.max(
+      areaPosition.x - movementAreaSize.x / 2,
+      Math.min(newX, areaPosition.x + movementAreaSize.x / 2)
+    );
+    const boundedY = Math.max(
+      areaPosition.y - movementAreaSize.y / 2,
+      Math.min(newY, areaPosition.y + movementAreaSize.y / 2)
+    );
+    return { x: boundedX, y: boundedY };
+  };
+
+  // Funkcja pomocnicza do wyliczania koloru na podstawie kąta ruchu (0-360°)
+  const getColorByAngle = (angle: number): string => {
+    // Przykładowe przypisania – dostosuj według swoich upodobań:
+    if (angle >= 337.5 || angle < 22.5) return "red"; // ruch w prawo
+    if (angle >= 22.5 && angle < 67.5) return "orange"; // prawy dół (dolnoprawy)
+    if (angle >= 67.5 && angle < 112.5) return "yellow"; // ruch w dół
+    if (angle >= 112.5 && angle < 157.5) return "green"; // lewy dół (dolnolewy)
+    if (angle >= 157.5 && angle < 202.5) return "blue"; // ruch w lewo
+    if (angle >= 202.5 && angle < 247.5) return "indigo"; // lewy góra (górnolewy)
+    if (angle >= 247.5 && angle < 292.5) return "violet"; // ruch w górę
+    if (angle >= 292.5 && angle < 337.5) return "magenta"; // prawy góra (górnoprawy)
+    return "grey";
+  };
+
   // Ruch potworów
   useEffect(() => {
-    const movementInterval = setInterval(() => {
+    let animationFrameId: number;
+    const speed = 1.2; // Prędkość ruchu – możesz dostosować tę wartość
+
+    const animate = () => {
       setMonsters((prevMonsters) => {
         const updatedMonsters = prevMonsters.map((monster) => {
           if (!monster.isMoving || monster.isDead) return monster;
-          const newX =
-            monster.currentMonsterPosition.x + (Math.random() * 100 - 50);
-          const newY =
-            monster.currentMonsterPosition.y + (Math.random() * 100 - 50);
-          const boundedX = Math.max(
-            areaPosition.x - movementAreaSize.x / 2,
-            Math.min(newX, areaPosition.x + movementAreaSize.x / 2)
-          );
-          const boundedY = Math.max(
-            areaPosition.y - movementAreaSize.y / 2,
-            Math.min(newY, areaPosition.y + movementAreaSize.y / 2)
-          );
+
+          const { x: currX, y: currY } = monster.currentMonsterPosition;
+          const { x: targetX, y: targetY } = monster.targetPosition;
+
+          const dx = targetX - currX;
+          const dy = targetY - currY;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          // Jeśli jesteśmy blisko celu, generujemy nowy cel
+          if (distance < 1) {
+            return {
+              ...monster,
+              targetPosition: generateNewTarget(monster.currentMonsterPosition),
+            };
+          }
+
+          // Obliczamy krok ruchu
+          const stepX = (dx / distance) * speed;
+          const stepY = (dy / distance) * speed;
+
+          // Obliczamy kąt ruchu w stopniach (0° oznacza ruch w prawo, 90° - w dół, itd.)
+          let angle = Math.atan2(stepY, stepX) * (180 / Math.PI);
+          if (angle < 0) angle += 360;
+
+          // Pobieramy kolor w zależności od kąta
+          const newColor = getColorByAngle(angle);
+
           return {
             ...monster,
-            currentMonsterPosition: { x: boundedX, y: boundedY },
+            currentMonsterPosition: {
+              x: currX + stepX,
+              y: currY + stepY,
+            },
+            color: newColor, // aktualizujemy kolor na bieżąco
           };
         });
         monstersRef.current = updatedMonsters;
         return updatedMonsters;
       });
-    }, 1000);
-    return () => clearInterval(movementInterval);
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrameId);
   }, [areaPosition]);
 
   // Aktualizacja informacji, czy potwory znajdują się w zasięgu gracza
@@ -406,11 +454,9 @@ const Monster: React.FC<MonsterProps> = ({
                   top: "50%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
-                  cursor:
-                    monster.isWithinTolerance && !monster.isDead
-                      ? "pointer"
-                      : "not-allowed",
+                  cursor: "pointer",
                 }}
+                // Przykładowa obsługa kliknięcia – możesz tu zachować swoją logikę ataku
                 onClick={() => handleClick(monster.id)}
               ></div>
             </div>
