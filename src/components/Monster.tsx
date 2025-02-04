@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { generateMonsters } from "../config/MonsterConfig.tsx";
 
 export interface MonsterData {
   id: number;
@@ -41,34 +42,6 @@ const Monster: React.FC<MonsterProps> = ({
 }) => {
   const tolerance = 250;
   const movementAreaSize = { x: 1000, y: 1000 };
-
-  // Generowanie potworów – dodatkowo ustawiamy targetPosition na początkową pozycję
-  const generateMonsters = (areaPos: {
-    x: number;
-    y: number;
-  }): MonsterData[] => {
-    const createMonster = (id: number): MonsterData => {
-      const initialPos = {
-        x: areaPos.x + (Math.random() * 400 - 200),
-        y: areaPos.y + (Math.random() * 400 - 200),
-      };
-      return {
-        id,
-        color: "grey",
-        isWithinTolerance: false,
-        isAttackActivated: false,
-        hp: 10,
-        maxHp: 10,
-        isMoving: true,
-        dmg: 2,
-        currentMonsterPosition: initialPos,
-        targetPosition: initialPos, // na początku target to aktualna pozycja
-        attackInterval: 1,
-        isDead: false,
-      };
-    };
-    return [createMonster(1), createMonster(2)];
-  };
 
   const [monsters, setMonsters] = useState<MonsterData[]>(
     generateMonsters(areaPosition)
@@ -147,20 +120,26 @@ const Monster: React.FC<MonsterProps> = ({
 
     // Mapa regionów na kolory
     const regionColorMapping: { [key: string]: string } = {
-      "top-left": "blue",
-      top: "red",
-      "top-right": "green",
-      left: "purple",
-      center: "grey",
-      right: "orange",
-      "bottom-left": "brown",
-      bottom: "pink",
-      "bottom-right": "yellow",
+      "top-left":
+        "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeLeftIdle.gif",
+      top: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeUpIdle.gif",
+      "top-right":
+        "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeRightIdle.gif",
+      left: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeLeftIdle.gif",
+      center: "transparent",
+      right:
+        "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeRightIdle.gif",
+      "bottom-left":
+        "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeLeftIdle.gif",
+      bottom:
+        "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeDownIdle.gif",
+      "bottom-right":
+        "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeRightIdle.gif",
     };
 
     // Jeśli region "center" – np. gracz znajduje się blisko środka potwora – nie wykonujemy animacji ataku
     const url = region === "center" ? "" : regionMap[region] || "";
-    const color = regionColorMapping[region] || "grey";
+    const color = regionColorMapping[region] || "transparent";
 
     return { url, color };
   };
@@ -269,7 +248,7 @@ const Monster: React.FC<MonsterProps> = ({
       return "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeLeft.gif"; // ruch w lewo
     if (angle >= 225 && angle < 315)
       return "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeUp.gif"; // ruch w górę
-    return "grey";
+    return "transparent";
   };
 
   // Ruch potworów
@@ -439,7 +418,7 @@ const Monster: React.FC<MonsterProps> = ({
                   height: "6px",
                   backgroundColor: "red",
                   position: "absolute",
-                  top: "-52px",
+                  top: "-62px",
                   left: "50%",
                   transform: "translateX(-50%)",
                   borderRadius: "3px",
@@ -468,6 +447,7 @@ const Monster: React.FC<MonsterProps> = ({
                   left: "50%",
                   transform: "translate(-50%, -50%)",
                   cursor: "pointer",
+                  transition: "0.3s",
                 }}
                 // Przykładowa obsługa kliknięcia – możesz tu zachować swoją logikę ataku
                 onClick={() => handleClick(monster.id)}
