@@ -25,6 +25,7 @@ interface MonsterProps {
 }
 
 interface AttackDirection {
+  color: any | string;
   url: string;
   // Możesz dodać inne pola, np. width/height, jeśli zajdzie potrzeba
 }
@@ -156,9 +157,24 @@ const Monster: React.FC<MonsterProps> = ({
         "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/LeftUpAttack.gif", // 3rząd, prawo-dół (100x100)
     };
 
+    // Mapa regionów na kolory
+    const regionColorMapping: { [key: string]: string } = {
+      "top-left": "blue",
+      top: "red",
+      "top-right": "green",
+      left: "purple",
+      center: "grey",
+      right: "orange",
+      "bottom-left": "brown",
+      bottom: "pink",
+      "bottom-right": "yellow",
+    };
+
     // Jeśli region "center" – np. gracz znajduje się blisko środka potwora – nie wykonujemy animacji ataku
     const url = region === "center" ? "" : regionMap[region] || "";
-    return { url };
+    const color = regionColorMapping[region] || "grey";
+
+    return { url, color };
   };
 
   // Ustalanie, czy gracz atakuje – aktywny atak, gdy któryś potwór jest w zasięgu i aktywowany
@@ -270,6 +286,26 @@ const Monster: React.FC<MonsterProps> = ({
     });
   }, [position]);
 
+  useEffect(() => {
+    // Aktualizujemy kolor dla potworów, które są aktywowane (czyli atakowanych)
+    setMonsters((prevMonsters) =>
+      prevMonsters.map((monster) => {
+        if (
+          monster.isAttackActivated &&
+          !monster.isDead &&
+          monster.isWithinTolerance
+        ) {
+          const attackData = computeAttackData(monster, position);
+          return {
+            ...monster,
+            color: attackData.color, // nowy kolor wynikający z aktualnej pozycji gracza
+          };
+        }
+        return monster;
+      })
+    );
+  }, [position]); // uruchamia się przy każdej zmianie pozycji gracza
+
   // useEffect – aktualizacja animacji ataku (przy zmianie pozycji)
   useEffect(() => {
     if (idMonster === null) return;
@@ -288,11 +324,13 @@ const Monster: React.FC<MonsterProps> = ({
           setIdMonster(id);
           setIsPlayerAttacking(true);
           const attackData = computeAttackData(monster, position);
+          // Przekazujemy tylko URL do setPlayerAttack
           setPlayerAttack(attackData.url);
           return {
             ...monster,
             isAttackActivated: true,
-            color: "red",
+            // Ustawiamy kolor potwora zgodnie z obliczeniem
+            color: attackData.color,
             isMoving: false,
           };
         }
