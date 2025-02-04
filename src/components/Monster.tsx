@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import { generateMonsters, areaPosition } from "../config/MonsterConfig.tsx";
+import {
+  generateMonsters,
+  areaPosition,
+  MonsterTimeRespawn,
+} from "../config/SkeletonConfig.tsx";
 
 export interface MonsterData {
   id: number;
@@ -44,6 +48,7 @@ const Monster: React.FC<MonsterProps> = ({
   const [monsters, setMonsters] = useState<MonsterData[]>(
     generateMonsters(areaPosition)
   );
+
   const monstersRef = useRef(monsters);
   useEffect(() => {
     monstersRef.current = monsters;
@@ -124,7 +129,8 @@ const Monster: React.FC<MonsterProps> = ({
       "top-right":
         "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeRightIdle.gif",
       left: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeLeftIdle.gif",
-      center: "transparent",
+      center:
+        "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeDownIdle.gif",
       right:
         "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeRightIdle.gif",
       "bottom-left":
@@ -136,7 +142,10 @@ const Monster: React.FC<MonsterProps> = ({
     };
 
     // Jeśli region "center" – np. gracz znajduje się blisko środka potwora – nie wykonujemy animacji ataku
-    const url = region === "center" ? "" : regionMap[region] || "";
+    const url =
+      region === "center"
+        ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Player/Attack/UpAttack.gif"
+        : regionMap[region] || "";
     const color = regionColorMapping[region] || "transparent";
 
     return { url, color };
@@ -189,20 +198,74 @@ const Monster: React.FC<MonsterProps> = ({
           ) {
             if (monster.hp <= 1) {
               console.log("Potwór umarł");
+
+              // Ustal czas odrodzenia (10 sekund)
+              const respawnTime = Date.now() + 10000;
+              localStorage.setItem(
+                `monsterRespawn_${monster.id}`,
+                String(respawnTime)
+              );
+
+              // Ustaw timeout odrodzenia, jeśli potwór umiera teraz
+              setTimeout(() => {
+                setMonsters((prev) =>
+                  prev.map((m) =>
+                    m.id === monster.id
+                      ? { ...m, hp: m.maxHp, isDead: false, isMoving: true }
+                      : m
+                  )
+                );
+                localStorage.removeItem(`monsterRespawn_${monster.id}`);
+              }, MonsterTimeRespawn.Respawn * 1000);
+
               return { ...monster, hp: 0, isMoving: false, isDead: true };
             }
             return { ...monster, hp: monster.hp - 1 };
           }
           return monster;
         });
-        monstersRef.current = updatedMonsters;
         return updatedMonsters;
       });
     }, 1000);
     return () => clearInterval(damageInterval);
   }, []);
 
-  // Funkcja pomocnicza do generowania nowego celu dla potwora w obrębie areny
+  useEffect(() => {
+    monsters.forEach((monster) => {
+      if (monster.isDead) {
+        const storedRespawn = localStorage.getItem(
+          `monsterRespawn_${monster.id}`
+        );
+        if (storedRespawn) {
+          const respawnTimestamp = parseInt(storedRespawn, 10);
+          const remainingTime = respawnTimestamp - Date.now();
+          if (remainingTime > 0) {
+            setTimeout(() => {
+              setMonsters((prev) =>
+                prev.map((m) =>
+                  m.id === monster.id
+                    ? { ...m, hp: m.maxHp, isDead: false, isMoving: true }
+                    : m
+                )
+              );
+              localStorage.removeItem(`monsterRespawn_${monster.id}`);
+            }, remainingTime);
+          } else {
+            // Czas minął, potwór powinien być żywy
+            setMonsters((prev) =>
+              prev.map((m) =>
+                m.id === monster.id
+                  ? { ...m, hp: m.maxHp, isDead: false, isMoving: true }
+                  : m
+              )
+            );
+            localStorage.removeItem(`monsterRespawn_${monster.id}`);
+          }
+        }
+      }
+    });
+  }, []);
+
   // Funkcja pomocnicza do generowania nowego celu dla potwora w obrębie areny
   const generateNewTarget = (currentPos: {
     x: number;

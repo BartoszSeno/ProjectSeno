@@ -805,6 +805,16 @@ const App = () => {
           setClose={setClose}
           position={position}
         />
+        <div
+          style={{
+            position: "absolute",
+            height: "200px",
+            width: "200px",
+            zIndex: 10000,
+            backgroundColor: "red",
+          }}
+          onClick={() => clearLocalStorage()}
+        ></div>
         <Player
           position={position}
           movment={backgroundColor}
