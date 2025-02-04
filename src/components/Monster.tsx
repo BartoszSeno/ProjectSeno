@@ -247,16 +247,28 @@ const Monster: React.FC<MonsterProps> = ({
   };
 
   // Funkcja pomocnicza do wyliczania koloru na podstawie kąta ruchu (0-360°)
+  // const getColorByAngle = (angle: number): string => {
+  // Przykładowe przypisania – dostosuj według swoich upodobań:
+  //   if (angle >= 337.5 || angle < 22.5) return "red"; // ruch w prawo
+  //   if (angle >= 22.5 && angle < 67.5) return "orange"; // prawy dół (dolnoprawy)
+  //   if (angle >= 67.5 && angle < 112.5) return "yellow"; // ruch w dół
+  //   if (angle >= 112.5 && angle < 157.5) return "green"; // lewy dół (dolnolewy)
+  //   if (angle >= 157.5 && angle < 202.5) return "blue"; // ruch w lewo
+  //   if (angle >= 202.5 && angle < 247.5) return "indigo"; // lewy góra (górnolewy)
+  //   if (angle >= 247.5 && angle < 292.5) return "violet"; // ruch w górę
+  //   if (angle >= 292.5 && angle < 337.5) return "magenta"; // prawy góra (górnoprawy)
+  //   return "grey";
+  // };
+
   const getColorByAngle = (angle: number): string => {
-    // Przykładowe przypisania – dostosuj według swoich upodobań:
-    if (angle >= 337.5 || angle < 22.5) return "red"; // ruch w prawo
-    if (angle >= 22.5 && angle < 67.5) return "orange"; // prawy dół (dolnoprawy)
-    if (angle >= 67.5 && angle < 112.5) return "yellow"; // ruch w dół
-    if (angle >= 112.5 && angle < 157.5) return "green"; // lewy dół (dolnolewy)
-    if (angle >= 157.5 && angle < 202.5) return "blue"; // ruch w lewo
-    if (angle >= 202.5 && angle < 247.5) return "indigo"; // lewy góra (górnolewy)
-    if (angle >= 247.5 && angle < 292.5) return "violet"; // ruch w górę
-    if (angle >= 292.5 && angle < 337.5) return "magenta"; // prawy góra (górnoprawy)
+    if (angle >= 315 || angle < 45)
+      return "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeRight.gif"; // ruch w prawo
+    if (angle >= 45 && angle < 135)
+      return "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeDown.gif"; // ruch w dół
+    if (angle >= 135 && angle < 225)
+      return "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeLeft.gif"; // ruch w lewo
+    if (angle >= 225 && angle < 315)
+      return "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Monster/Skeleton/SkeUp.gif"; // ruch w górę
     return "grey";
   };
 
@@ -447,9 +459,10 @@ const Monster: React.FC<MonsterProps> = ({
               {/* Potwór */}
               <div
                 style={{
-                  width: "50px",
-                  height: "50px",
+                  width: "60px",
+                  height: "93px",
                   backgroundColor: monster.color,
+                  backgroundImage: `url(${monster.color})`,
                   position: "absolute",
                   top: "50%",
                   left: "50%",
