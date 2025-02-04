@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { generateMonsters } from "../config/MonsterConfig.tsx";
+import { generateMonsters, areaPosition } from "../config/MonsterConfig.tsx";
 
 export interface MonsterData {
   id: number;
@@ -21,7 +21,6 @@ interface MonsterProps {
   setIsPlayerAttacking: (value: boolean) => void;
   // Uwaga: setPlayerAttack oczekuje tylko URL (string)
   setPlayerAttack: (attackUrl: string) => void;
-  areaPosition: { x: number; y: number };
   currentHP: number;
   setCurrentHP: any;
 }
@@ -36,7 +35,6 @@ const Monster: React.FC<MonsterProps> = ({
   position,
   setIsPlayerAttacking,
   setPlayerAttack,
-  areaPosition,
   currentHP,
   setCurrentHP,
 }) => {

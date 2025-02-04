@@ -13,6 +13,16 @@ export interface MonsterData {
   targetPosition: any;
 }
 
+export interface Position {
+  x: number;
+  y: number;
+}
+
+export const areaPosition: Position = {
+  x: 3000,
+  y: 3000,
+};
+
 export const generateMonsters = (areaPos: {
   x: number;
   y: number;
