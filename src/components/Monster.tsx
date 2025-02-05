@@ -172,7 +172,7 @@ const Monster: React.FC<MonsterProps> = ({
             monster.isAttackActivated &&
             !monster.isDead
           ) {
-            return total + monster.dmg;
+            return total + monster.dmg; // tutaj dodać lvl postaci
           }
           return total;
         }, 0);
