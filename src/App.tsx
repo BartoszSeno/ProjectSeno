@@ -25,6 +25,7 @@ import { FishArray } from "./data/fish.tsx";
 import MainEq from "./components/Equipment/index.tsx";
 import WeaponShop from "./components/Shop/WeaponShop/WShop.tsx";
 import Monster from "./components/Monster.tsx";
+import Lvl from "./components/PlayerLevel.tsx";
 
 const App = () => {
   // Sprawdź localStorage i ustaw pozycję początkową gracza
@@ -735,6 +736,47 @@ const App = () => {
   //=================================================================================
   const [Close, setClose] = useState(false);
 
+  //===============================LEVELING==================================================
+  const expRequirements: { [level: number]: number } = {
+    1: 50,
+    2: 100,
+    3: 180,
+    // Kolejne poziomy możesz dodać lub obliczać dynamicznie
+  };
+  interface PlayerState {
+    level: number;
+    exp: number;
+  }
+  const [playerLevel, setPlayerLevel] = useState<number>(1);
+  const [playerExp, setPlayerExp] = useState<number>(0);
+  const [playerState, setPlayerState] = useState<PlayerState>({
+    level: 1,
+    exp: 0,
+  });
+
+  // Funkcja dodająca EXP; przy osiągnięciu wymaganego progu następuje level up
+  const addExp = (expGained: number) => {
+    setPlayerState((prevState) => {
+      let totalExp = prevState.exp + expGained;
+      let newLevel = prevState.level;
+
+      // Dopóki mamy określony próg dla aktualnego poziomu
+      // i zgromadzony EXP przekracza lub równo wynosi wymagany próg,
+      // odejmujemy wymagany EXP i zwiększamy poziom.
+      while (
+        expRequirements[newLevel] !== undefined &&
+        totalExp >= expRequirements[newLevel]
+      ) {
+        totalExp -= expRequirements[newLevel];
+        newLevel++;
+      }
+
+      return { level: newLevel, exp: totalExp };
+    });
+  };
+
+  // Pobieramy wymagane EXP dla aktualnego poziomu (lub ustawiamy domyślnie np. 9999, jeśli nie ma)
+  const requiredExp = expRequirements[playerLevel] || 9999;
   return (
     <div
       style={{
@@ -827,10 +869,17 @@ const App = () => {
           setPlayerAttack={setPlayerAttack}
           currentHP={currentHP}
           setCurrentHP={setCurrentHP}
+          addExp={addExp}
         />
         {/* Inne elementy */}
         <Borders allBordersBS={allBordersBS} />
         <Trees noEntryOnTree={noEntryOnTree} />
+        <Lvl
+          playerLevel={playerLevel}
+          playerExp={playerExp}
+          requiredExp={requiredExp}
+          playerState={playerState}
+        />
         <MainEq
           SellFishByCat={SellFishByCat}
           setfishId={setfishId}

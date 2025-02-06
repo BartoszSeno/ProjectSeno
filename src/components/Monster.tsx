@@ -18,6 +18,7 @@ export interface MonsterData {
   attackInterval: number;
   isDead: boolean;
   targetPosition: any;
+  exp: number;
 }
 
 interface MonsterProps {
@@ -27,6 +28,7 @@ interface MonsterProps {
   setPlayerAttack: (attackUrl: string) => void;
   currentHP: number;
   setCurrentHP: any;
+  addExp: any;
 }
 
 interface AttackDirection {
@@ -41,6 +43,7 @@ const Monster: React.FC<MonsterProps> = ({
   setPlayerAttack,
   currentHP,
   setCurrentHP,
+  addExp,
 }) => {
   const tolerance = 250;
   const movementAreaSize = { x: 1000, y: 1000 };
@@ -198,7 +201,7 @@ const Monster: React.FC<MonsterProps> = ({
           ) {
             if (monster.hp <= 1) {
               console.log("Potwór umarł");
-
+              addExp(monster.exp);
               // Ustal czas odrodzenia (10 sekund)
               const respawnTime = Date.now() + 10000;
               localStorage.setItem(
