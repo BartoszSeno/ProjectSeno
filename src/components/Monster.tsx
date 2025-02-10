@@ -3,23 +3,8 @@ import {
   generateMonsters,
   areaPosition,
   MonsterTimeRespawn,
+  MonsterData,
 } from "../config/SkeletonConfig.tsx";
-
-export interface MonsterData {
-  id: number;
-  color: string;
-  isWithinTolerance: boolean;
-  isAttackActivated: boolean;
-  hp: number;
-  maxHp: number;
-  isMoving: boolean;
-  dmg: number;
-  currentMonsterPosition: { x: number; y: number };
-  attackInterval: number;
-  isDead: boolean;
-  targetPosition: any;
-  exp: number;
-}
 
 interface MonsterProps {
   position: { x: number; y: number };
@@ -199,9 +184,14 @@ const Monster: React.FC<MonsterProps> = ({
             monster.isAttackActivated &&
             !monster.isDead
           ) {
-            if (monster.hp <= 1) {
+            if (monster.hp <= 1 && !monster.expAdded) {
               console.log("Potwór umarł");
+              setIsPlayerAttacking(false);
+
               addExp(monster.exp);
+              // Ustaw flagę, że EXP zostało już dodane
+              monster.expAdded = true;
+
               // Ustal czas odrodzenia (10 sekund)
               const respawnTime = Date.now() + 10000;
               localStorage.setItem(
@@ -214,14 +204,27 @@ const Monster: React.FC<MonsterProps> = ({
                 setMonsters((prev) =>
                   prev.map((m) =>
                     m.id === monster.id
-                      ? { ...m, hp: m.maxHp, isDead: false, isMoving: true }
+                      ? {
+                          ...m,
+                          hp: m.maxHp,
+                          isDead: false,
+                          isMoving: true,
+                          isAttackActivated: false,
+                          expAdded: false, // resetujemy flagę przy respawnie
+                        }
                       : m
                   )
                 );
                 localStorage.removeItem(`monsterRespawn_${monster.id}`);
               }, MonsterTimeRespawn.Respawn * 1000);
 
-              return { ...monster, hp: 0, isMoving: false, isDead: true };
+              return {
+                ...monster,
+                hp: 0,
+                isMoving: false,
+                isDead: true,
+                expAdded: true,
+              };
             }
             return { ...monster, hp: monster.hp - 1 };
           }

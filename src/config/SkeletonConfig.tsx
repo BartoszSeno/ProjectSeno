@@ -12,6 +12,7 @@ export interface MonsterData {
   attackInterval: number;
   isDead: boolean;
   exp: number;
+  expAdded?: boolean;
 }
 
 export interface Position {
@@ -61,6 +62,7 @@ export const generateMonsters = (areaPos: {
       id: 1,
       isDead: checkMonsterIsDead(1),
       color: "transparent",
+      expAdded: false,
       isWithinTolerance: false,
       isAttackActivated: false,
       isMoving: true,
@@ -76,6 +78,7 @@ export const generateMonsters = (areaPos: {
       id: 2,
       isDead: checkMonsterIsDead(2),
       color: "transparent",
+      expAdded: false,
       isWithinTolerance: false,
       isAttackActivated: false,
       isMoving: true,
@@ -91,6 +94,7 @@ export const generateMonsters = (areaPos: {
       id: 3,
       isDead: checkMonsterIsDead(3),
       color: "transparent",
+      expAdded: false,
       isWithinTolerance: false,
       isAttackActivated: false,
       isMoving: true,
@@ -106,6 +110,7 @@ export const generateMonsters = (areaPos: {
       id: 4,
       isDead: checkMonsterIsDead(4),
       color: "transparent",
+      expAdded: false,
       isWithinTolerance: false,
       isAttackActivated: false,
       isMoving: true,
