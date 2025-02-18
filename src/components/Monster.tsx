@@ -148,7 +148,7 @@ const Monster: React.FC<MonsterProps> = ({
         !monster.isDead
     );
     setIsPlayerAttacking(isAnyMonsterActive);
-  }, [monsters, setIsPlayerAttacking]);
+  }, [setIsPlayerAttacking]);
 
   // Potwory zadają obrażenia graczowi tylko, gdy atak są aktywne
   useEffect(() => {
@@ -187,7 +187,7 @@ const Monster: React.FC<MonsterProps> = ({
             if (monster.hp <= 1 && !monster.expAdded) {
               console.log("Potwór umarł");
               setIsPlayerAttacking(false);
-
+              setIdMonster(null); // Resetujemy identyfikator atakowanego potwora
               addExp(monster.exp);
               // Ustaw flagę, że EXP zostało już dodane
               monster.expAdded = true;
@@ -321,7 +321,7 @@ const Monster: React.FC<MonsterProps> = ({
   // Ruch potworów
   useEffect(() => {
     let animationFrameId: number;
-    const speed = 1.2; // Prędkość ruchu – możesz dostosować tę wartość
+    const speed = 1; // Prędkość ruchu – możesz dostosować tę wartość
 
     const animate = () => {
       setMonsters((prevMonsters) => {
@@ -375,22 +375,24 @@ const Monster: React.FC<MonsterProps> = ({
 
   // Aktualizacja informacji, czy potwory znajdują się w zasięgu gracza
   useEffect(() => {
-    setMonsters((prevMonsters) => {
-      const updatedMonsters = prevMonsters.map((monster) => {
-        const dx = monster.currentMonsterPosition.x - position.x;
-        const dy = monster.currentMonsterPosition.y - position.y;
-        const withinTolerance =
-          Math.abs(dx) <= tolerance && Math.abs(dy) <= tolerance;
-        return {
-          ...monster,
-          isWithinTolerance: withinTolerance,
-          isMoving: withinTolerance ? !monster.isAttackActivated : true,
-        };
+    const toleranceInterval = setInterval(() => {
+      setMonsters((prevMonsters) => {
+        const updatedMonsters = prevMonsters.map((monster) => {
+          const dx = monster.currentMonsterPosition.x - position.x;
+          const dy = monster.currentMonsterPosition.y - position.y;
+          const withinTolerance =
+            Math.abs(dx) <= tolerance && Math.abs(dy) <= tolerance;
+          return {
+            ...monster,
+            isWithinTolerance: withinTolerance,
+            isMoving: withinTolerance ? !monster.isAttackActivated : true,
+          };
+        });
+        return updatedMonsters;
       });
-      monstersRef.current = updatedMonsters;
-      return updatedMonsters;
-    });
-  }, [position]);
+    }, 500); // Aktualizuj co 500 ms
+    return () => clearInterval(toleranceInterval);
+  }, [position, tolerance]);
 
   useEffect(() => {
     // Aktualizujemy kolor dla potworów, które są aktywowane (czyli atakowanych)
@@ -459,7 +461,7 @@ const Monster: React.FC<MonsterProps> = ({
     >
       {monsters.map(
         (monster) =>
-          !monster.isDead && (
+          !(monster.isDead || monster.hp === 0) && (
             <div
               key={monster.id}
               style={{
@@ -501,7 +503,6 @@ const Monster: React.FC<MonsterProps> = ({
                   }}
                 ></div>
               </div>
-
               {/* Potwór */}
               <div
                 style={{
