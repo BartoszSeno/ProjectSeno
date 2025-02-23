@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WeaponShop from "./WeaponShop.tsx";
 import BlackSmith from "./BlackSmith.tsx";
+import Inn from "./Inn.tsx";
 
 export interface Structures {
   id: number;
@@ -78,6 +79,7 @@ const Structuress = ({
   Close,
   setClose,
   position,
+  InnInterior,
 }: {
   building: any;
   activeStructure: string | null;
@@ -140,6 +142,7 @@ const Structuress = ({
   Close: any;
   setClose: any;
   position: any;
+  InnInterior: any;
 }) => {
   const [SelectedOption] = useState<string>("");
 
@@ -207,6 +210,7 @@ const Structuress = ({
         setClose={setClose}
         position={position}
       />
+      <Inn InnInterior={InnInterior} position={position} />
     </>
   );
 };

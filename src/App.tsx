@@ -4,6 +4,7 @@ import Player from "./components/Player.tsx";
 import Structuress from "./components/Structure.tsx";
 import Borders from "./components/Border.tsx";
 import Trees from "./components/Tree.tsx";
+import Inn from "./components/Inn.tsx";
 import {
   initialPosition as defaultInitialPosition,
   buildings,
@@ -12,6 +13,7 @@ import {
   Interiors,
   BlackSmithInteriors,
   keysToColors,
+  InnInteriors,
 } from "./config/config.tsx";
 import { BordersWS } from "./config/config.tsx";
 import HealthBar from "./components/hpBar.tsx";
@@ -36,6 +38,8 @@ const App = () => {
   const [interior, setInterior] = useState(Interiors);
   const [BlackSmithInterior, setBlackSmithInterior] =
     useState(BlackSmithInteriors);
+
+  const [InnInterior, setInnInterior] = useState(InnInteriors);
 
   const [isPlayerAttacking, setIsPlayerAttacking] = useState<boolean | any>(
     false
@@ -238,6 +242,50 @@ const App = () => {
     );
   };
 
+  // Inn  ================================
+
+  const allInnBorders = InnInteriors.flatMap(
+    (InnInterior) => InnInterior.borders || []
+  );
+
+  const isInnColliding = (playerX: number, playerY: number) =>
+    isColliding(playerX, playerY, allInnBorders);
+
+  const checkInnInteriorsCollisions = (playerX: number, playerY: number) => {
+    setInnInterior((prevDivs) =>
+      prevDivs.map((div) => {
+        let isColliding = false;
+
+        if (div.polygon) {
+          // Przelicz punkty zapisane w procentach na rzeczywiste współrzędne
+          const absolutePolygon = div.polygon.map((point) => {
+            const [px, py] = point.split(" ").map((p) => parseFloat(p) / 100);
+            return {
+              x: div.x + px * div.width,
+              y: div.y + py * div.height,
+            };
+          });
+
+          // Sprawdź, czy gracz jest wewnątrz wielokąta
+          isColliding = isPointInPolygon(
+            { x: playerX, y: playerY },
+            absolutePolygon
+          );
+        } else {
+          // Sprawdzanie kolizji dla prostokąta
+          isColliding =
+            playerX + 25 > div.x &&
+            playerX - 25 < div.x + div.width &&
+            playerY + 50 > div.y &&
+            playerY + 20 < div.y + div.height;
+        }
+
+        return { ...div, isColliding }; // Zwróć zaktualizowaną strukturę
+      })
+    );
+  };
+  //==================================
+
   const isPointInPolygon = (
     point: { x: number; y: number },
     polygon: { x: number; y: number }[]
@@ -267,7 +315,8 @@ const App = () => {
         !isCollidingWithBorder(x, y) &&
         !isCollidingWithTree(x, y) &&
         !isCollidingTest(x, y) &&
-        !isCollidingBS(x, y);
+        !isCollidingBS(x, y) &&
+        !isInnColliding(x, y);
 
       let moved = false;
 
@@ -293,6 +342,7 @@ const App = () => {
         checkStructureCollisions(newX, newY);
         checkInteriorsCollisions(newX, newY);
         checkBSInteriorsCollisions(newX, newY);
+        checkInnInteriorsCollisions(newX, newY);
         isMoving.current = true;
         const newPosition = { x: newX, y: newY };
         localStorage.setItem("playerPosition", JSON.stringify(newPosition));
@@ -846,6 +896,7 @@ const App = () => {
           Close={Close}
           setClose={setClose}
           position={position}
+          InnInterior={InnInterior}
         />
         <div
           style={{
@@ -872,7 +923,7 @@ const App = () => {
           addExp={addExp}
         />
         {/* Inne elementy */}
-        <Borders allBordersBS={allBordersBS} />
+        <Borders allInnBorders={allInnBorders} />
         <Trees noEntryOnTree={noEntryOnTree} />
         <Lvl
           playerLevel={playerLevel}

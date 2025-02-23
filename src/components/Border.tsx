@@ -9,13 +9,13 @@ export interface Border {
 }
 
 interface BordersProps {
-  allBordersBS: Border[];
+  allInnBorders: Border[];
 }
 
-const Borders: React.FC<BordersProps> = ({ allBordersBS }) => {
+const Borders: React.FC<BordersProps> = ({ allInnBorders }) => {
   return (
     <>
-      {allBordersBS.map((div) => (
+      {allInnBorders.map((div) => (
         <div
           key={div.id}
           style={{
@@ -24,7 +24,7 @@ const Borders: React.FC<BordersProps> = ({ allBordersBS }) => {
             position: "absolute",
             top: `${div.y}px`,
             left: `${div.x}px`,
-            //  zIndex: 10000,
+            zIndex: 10000,
             border: "2px solid red",
             opacity: 0.5,
             // backgroundColor: "red",

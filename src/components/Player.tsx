@@ -22,7 +22,7 @@ const Player: React.FC<PlayerProps> = ({
         top: `${position.y}px`,
         left: `${position.x}px`,
         transform: "translate(-50%, -50%)",
-        zIndex: `${position.y}`, // Wyższy indeks dla nadrzędnego diva
+        zIndex: 500, // Wyższy indeks dla nadrzędnego diva
         backgroundImage: `url(${IsPlayerAttacking ? PlayerAttack : movment})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "contain",
