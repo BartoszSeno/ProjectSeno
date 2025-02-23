@@ -7,15 +7,12 @@ import Trees from "./components/Tree.tsx";
 import Inn from "./components/Inn.tsx";
 import {
   initialPosition as defaultInitialPosition,
-  buildings,
-  noEntry,
   noEntryOnTree,
   Interiors,
   BlackSmithInteriors,
   keysToColors,
   InnInteriors,
 } from "./config/config.tsx";
-import { BordersWS } from "./config/config.tsx";
 import HealthBar from "./components/hpBar.tsx";
 import { ShieldAndDaggerImageAndNameAndCost } from "./data/SubWeapon.tsx";
 import { GlovesImageAndNameAndCost } from "./data/Gloves.tsx";
@@ -31,7 +28,6 @@ import Lvl from "./components/PlayerLevel.tsx";
 
 const App = () => {
   // Sprawdź localStorage i ustaw pozycję początkową gracza
-  const [building, setBuilding] = useState(buildings);
   const [activeStructure, setActiveStructure] = useState<string | null>(null);
   const isMoving = useRef<boolean>(false);
   // const [isKeyPressed, setIsKeyPressed] = useState(false); // Stan do śledzenia, czy klawisz jest wciśnięty
@@ -129,9 +125,6 @@ const App = () => {
         playerY + 20 < div.y + div.height
     );
 
-  const isCollidingWithBorder = (playerX: number, playerY: number) =>
-    isColliding(playerX, playerY, noEntry);
-
   const isCollidingWithTree = (playerX: number, playerY: number) =>
     isColliding(playerX, playerY, noEntryOnTree);
 
@@ -139,31 +132,6 @@ const App = () => {
 
   const isCollidingTest = (playerX: number, playerY: number) =>
     isColliding(playerX, playerY, allBorders);
-
-  const checkStructureCollisions = (playerX: number, playerY: number) => {
-    let collisionDetected = false;
-    setBuilding((prevDivs) => {
-      return prevDivs.map((div) => {
-        const isColliding =
-          playerX + 25 > div.x &&
-          playerX - 25 < div.x + div.width &&
-          playerY + 50 > div.y &&
-          playerY + 20 < div.y + div.height;
-
-        // Jeśli kolizja, zaktualizuj isColliding i ustaw aktywną strukturę
-        if (isColliding && !collisionDetected) {
-          setActiveStructure(div.name); // Ustawienie aktywnej struktury
-          collisionDetected = true;
-        }
-
-        return { ...div, isColliding }; // Zwróć zaktualizowaną strukturę
-      });
-    });
-
-    // Jeśli nie ma kolizji, ustaw aktywną strukturę na null
-    if (!collisionDetected) {
-    }
-  };
 
   const checkInteriorsCollisions = (playerX: number, playerY: number) => {
     setInterior((prevDivs) =>
@@ -312,7 +280,6 @@ const App = () => {
       let newY = prev.y;
 
       const canMove = (x: number, y: number) =>
-        !isCollidingWithBorder(x, y) &&
         !isCollidingWithTree(x, y) &&
         !isCollidingTest(x, y) &&
         !isCollidingBS(x, y) &&
@@ -339,7 +306,6 @@ const App = () => {
 
       // Jeśli gracz się porusza, sprawdzamy kolizję
       if (moved) {
-        checkStructureCollisions(newX, newY);
         checkInteriorsCollisions(newX, newY);
         checkBSInteriorsCollisions(newX, newY);
         checkInnInteriorsCollisions(newX, newY);
@@ -840,7 +806,6 @@ const App = () => {
     >
       <Map position={position}>
         <Structuress
-          building={building}
           activeStructure={activeStructure}
           interior={interior}
           BlackSmithInterior={BlackSmithInterior}

@@ -25,7 +25,7 @@ const Inn = ({
             <div
               style={{
                 clipPath:
-                  "polygon(8% 22%, 31% 22%, 31% 35%, 34% 35%, 34% 25%, 68% 25%, 68% 36%, 71% 36%, 71% 22%, 94% 22%,94% 62%, 71% 62%, 71% 55%, 31% 55%, 31% 95%, 8% 95%)",
+                  "polygon(8% 32%,18% 32%, 28% 23%, 31% 23%, 31% 35%, 34% 35%, 34% 25%, 68% 25%, 68% 36%, 71% 36%, 71% 22%,75% 22%, 82% 33%,94% 33%,94% 61%, 71% 61%, 71% 55%, 31% 55%, 31% 95%, 8% 95%)",
 
                 position: "absolute",
                 width: `${div.width}px`,
@@ -36,6 +36,7 @@ const Inn = ({
                 zIndex: `${position.y} `, // Specjalny div będzie nad innymis
                 opacity: 0.5,
                 pointerEvents: "none",
+                //backgroundColor: "yellow",
               }}
             ></div>
             {/* Pierwszy obrazek z wnętrzem*/}
@@ -45,7 +46,7 @@ const Inn = ({
                   ? div.url
                   : "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopExterior4.png"
               }
-              alt="WeaponShop"
+              alt="Inn"
               style={{
                 display: "block", // Usuwa odstępy wynikające z inline
                 top: `${div.y}px`,
@@ -65,7 +66,7 @@ const Inn = ({
                   ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/InnInteriorWall.png"
                   : undefined
               }
-              alt="WeaponShop"
+              alt="Inn"
               style={{
                 position: "absolute", // Ustawienie pozycji
                 top: `${div.y}px`,
@@ -91,7 +92,7 @@ const Inn = ({
                   ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/InnInteriorShadow.png"
                   : undefined
               }
-              alt="WeaponShop"
+              alt="Inn"
               style={{
                 opacity: 0.5,
                 position: "absolute", // Ustawienie pozycji

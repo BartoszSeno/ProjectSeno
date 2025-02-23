@@ -1,23 +1,5 @@
 export const initialPosition = { x: 2000, y: 2000 };
 
-export interface Structures {
-  id: number;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  isColliding: boolean;
-  name: string;
-}
-
-export interface BorderWs {
-  id: number;
-  xOffset: number; // Przesunięcie względem x wnętrza
-  yOffset: number; // Przesunięcie względem y wnętrza
-  width: number; // Szerokość granicy
-  height: number; // Wysokość granicy
-}
-
 export interface Border {
   id: number;
   x: number;
@@ -93,36 +75,6 @@ export const keysToColors: Record<
   },
 };
 
-export const buildings: Structures[] = [
-  {
-    id: 1,
-    x: 1800,
-    y: 1500,
-    width: 100,
-    height: 100,
-    isColliding: false,
-    name: "BlackSmith",
-  },
-  {
-    id: 2,
-    x: 2200,
-    y: 1700,
-    width: 100,
-    height: 100,
-    isColliding: false,
-    name: "Hotel",
-  },
-  {
-    id: 3,
-    x: 2500,
-    y: 2000,
-    width: 100,
-    height: 100,
-    isColliding: false,
-    name: "ArmorShop",
-  },
-];
-
 function createInteriors(): InteriorStructures[] {
   const baseX = 2540;
   const baseY = 300;
@@ -135,7 +87,7 @@ function createInteriors(): InteriorStructures[] {
       width: 1820,
       height: 1218,
       isColliding: false,
-      name: "BlackSmith",
+      name: "WeaponShop",
       url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopInterior3_1.gif",
       polygon: [
         "2% 42%",
@@ -182,20 +134,11 @@ function createInteriors(): InteriorStructures[] {
 
 export const Interiors = createInteriors();
 
-export const noEntry: Border[] = [
-  //{ id: 1, x: 1000, y: 1800, width: 200, height: 200 },
-  //{ id: 2, x: 2300, y: 2100, width: 150, height: 150 },
-];
-
 export const noEntryOnTree: Border[] = [
   { id: 1, x: 1300, y: 2000, width: 70, height: 50 },
   { id: 2, x: 2700, y: 2100, width: 70, height: 50 },
   { id: 3, x: 3000, y: 2100, width: 70, height: 50 },
 ];
-
-export const BordersWS = Interiors.flatMap(
-  (interior) => interior.borders || []
-);
 
 function BlackSmith(): InteriorStructures[] {
   const baseX = 40;
@@ -264,8 +207,8 @@ function BlackSmith(): InteriorStructures[] {
 export const BlackSmithInteriors = BlackSmith();
 
 function Inn(): InteriorStructures[] {
-  const baseX = 40;
-  const baseY = 400;
+  const baseX = 1500;
+  const baseY = 2000;
 
   return [
     {
@@ -278,8 +221,10 @@ function Inn(): InteriorStructures[] {
       name: "Inn",
       url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/InnInterior.png",
       polygon: [
-        "8% 22%",
-        "31% 22%",
+        "6% 32%",
+        "18% 32%",
+        "28% 23%",
+        "31% 23%",
         "31% 35%",
         "34% 35%",
         "34% 25%",
@@ -287,13 +232,15 @@ function Inn(): InteriorStructures[] {
         "68% 36%",
         "71% 36%",
         "71% 22%",
-        "94% 22%",
-        "94% 62%",
-        "71% 62%",
+        "75% 22%",
+        "82% 33%",
+        "94% 33%",
+        "94% 61%",
+        "71% 61%",
         "71% 55%",
         "31% 55%",
-        "31% 95%",
-        " 8% 95%",
+        "31% 94%",
+        "6% 94%",
       ],
       borders: [
         { id: 1, x: baseX + 175, y: baseY + 600, width: 45, height: 1210 },
@@ -308,7 +255,7 @@ function Inn(): InteriorStructures[] {
         { id: 10, x: baseX + 580, y: baseY + 465, width: 45, height: 45 }, //stairs - left
         { id: 11, x: baseX + 605, y: baseY + 447, width: 45, height: 45 }, //stairs - left
         { id: 12, x: baseX + 630, y: baseY + 420, width: 45, height: 45 }, //stairs - left
-        { id: 13, x: baseX + 655, y: baseY + 415, width: 120, height: 25 }, //stairs - left
+        { id: 13, x: baseX + 655, y: baseY + 415, width: 120, height: 40 }, //stairs - left
         { id: 14, x: baseX + 750, y: baseY + 415, width: 25, height: 310 }, //stairs - left
         { id: 15, x: baseX + 560, y: baseY + 685, width: 300, height: 20 }, //stairs - left
         { id: 16, x: baseX + 580, y: baseY + 660, width: 25, height: 25 }, //stairs - left
@@ -327,7 +274,7 @@ function Inn(): InteriorStructures[] {
         { id: 29, x: baseX + 1115, y: baseY + 1045, width: 680, height: 25 }, // mid room
         { id: 30, x: baseX + 860, y: baseY + 700, width: 345, height: 80 }, // mid room
         { id: 31, x: baseX + 1760, y: baseY + 1045, width: 40, height: 140 }, // right room
-        { id: 32, x: baseX + 1760, y: baseY + 1165, width: 605, height: 20 }, // right room
+        { id: 32, x: baseX + 1760, y: baseY + 1165, width: 605, height: 25 }, // right room
         { id: 33, x: baseX + 2330, y: baseY + 600, width: 35, height: 580 }, // right room
         { id: 34, x: baseX + 2035, y: baseY + 605, width: 310, height: 30 }, // right room
         { id: 35, x: baseX + 1765, y: baseY + 415, width: 35, height: 295 }, // stairs - right

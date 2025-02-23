@@ -13,10 +13,6 @@ export interface Structures {
   name: string;
 }
 
-interface StructuressProps {
-  building: Structures[];
-}
-
 const Structuress = ({
   activeStructure,
   interior,
@@ -81,7 +77,6 @@ const Structuress = ({
   position,
   InnInterior,
 }: {
-  building: any;
   activeStructure: string | null;
   interior: any;
   mainWeaponData: any;
