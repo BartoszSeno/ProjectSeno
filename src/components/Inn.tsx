@@ -45,7 +45,7 @@ const Inn = ({
               src={
                 div.isColliding
                   ? div.url
-                  : "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/innExterior.png"
+                  : "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/innExterior2.png"
               }
               alt="Inn"
               style={{
@@ -74,7 +74,7 @@ const Inn = ({
             <img
               src={
                 div.isColliding
-                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/InnInteriorWall.png"
+                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/InnInteriorWall2.png"
                   : undefined
               }
               alt="Inn"
@@ -100,7 +100,7 @@ const Inn = ({
             <img
               src={
                 div.isColliding
-                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/InnInteriorShadow.png"
+                  ? "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/InnInteriorShadow2.png"
                   : undefined
               }
               alt="Inn"

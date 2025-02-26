@@ -219,7 +219,7 @@ function Inn(): InteriorStructures[] {
       height: 1906,
       isColliding: false,
       name: "Inn",
-      url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/InnInterior.png",
+      url: "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/innInterior2.png",
       polygon: [
         "6% 32%",
         "18% 32%",
