@@ -207,8 +207,8 @@ function BlackSmith(): InteriorStructures[] {
 export const BlackSmithInteriors = BlackSmith();
 
 function Inn(): InteriorStructures[] {
-  const baseX = 1500;
-  const baseY = 2000;
+  const baseX = 40;
+  const baseY = 200;
 
   return [
     {
