@@ -7,6 +7,7 @@ const Inn = ({
   InnInterior: any;
   position: any;
 }) => {
+  console.log(position.x + " x");
   return (
     <>
       {InnInterior.map(
@@ -44,7 +45,7 @@ const Inn = ({
               src={
                 div.isColliding
                   ? div.url
-                  : "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/WeaponShop/WeaponShopExterior4.png"
+                  : "https://raw.githubusercontent.com/BartoszSeno/ProjectSeno/refs/heads/main/src/assets/img/Inn/innExterior.png"
               }
               alt="Inn"
               style={{
@@ -54,7 +55,17 @@ const Inn = ({
                 width: `${div.width}px`,
                 height: `${div.height}px`,
                 position: "absolute", // Ustawienie pozycji
-                zIndex: div.isColliding ? 100 : 1000, // Niższy z-index dla pierwszego obrazka
+                zIndex: `${
+                  div.isColliding
+                    ? 100
+                    : position.y < div.y + 1040 ||
+                      position.x < div.x + 170 ||
+                      position.x > div.x + 2370 // 1290.y
+                    ? 10000
+                    : position.y > div.y + 1040
+                    ? 100
+                    : 1000
+                }`, // Niższy z-index dla pierwszego obrazka
                 pointerEvents: "none",
               }}
               draggable="false"
