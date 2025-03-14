@@ -306,6 +306,17 @@ function Inn(): InteriorStructures[] {
         { id: 59, x: baseX + 2110, y: baseY + 620, width: 220, height: 60 }, // right room furnuture
         { id: 60, x: baseX + 1960, y: baseY + 780, width: 205, height: 320 }, // right room furnuture
         { id: 61, x: baseX + 1920, y: baseY + 830, width: 295, height: 200 }, // right room furnuture
+
+        { id: 62, x: baseX + 760, y: baseY + 1050, width: 100, height: 180 }, // exterior
+        { id: 63, x: baseX + 760, y: baseY + 1350, width: 70, height: 380 }, // exterior
+        { id: 64, x: baseX + 1660, y: baseY + 1050, width: 80, height: 80 }, // exterior
+        { id: 65, x: baseX + 2020, y: baseY + 1170, width: 180, height: 60 }, // exterior
+        { id: 66, x: baseX + 1360, y: baseY + 1050, width: 180, height: 50 }, // exterior
+        { id: 67, x: baseX + 1130, y: baseY + 1050, width: 50, height: 50 }, // exterior
+        { id: 68, x: baseX + 820, y: baseY + 1220, width: 230, height: 180 }, // exterior
+        { id: 69, x: baseX + 820, y: baseY + 1490, width: 230, height: 180 }, // exterior
+        { id: 70, x: baseX + 1145, y: baseY + 1510, width: 150, height: 220 }, // exterior
+        { id: 71, x: baseX + 1450, y: baseY + 1510, width: 150, height: 220 }, // exterior
       ],
     },
   ];

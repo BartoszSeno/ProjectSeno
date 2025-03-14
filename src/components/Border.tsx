@@ -27,7 +27,7 @@ const Borders: React.FC<BordersProps> = ({ allInnBorders }) => {
             zIndex: 10000,
             border: "2px solid red",
             opacity: 0.5,
-            // backgroundColor: "red",
+            //backgroundColor: "red",
           }}
         />
       ))}
